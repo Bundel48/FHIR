@@ -4,6 +4,8 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import org.hl7.fhir.r4.model.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Impfausweis {
@@ -55,7 +57,18 @@ public class Impfausweis {
 
         // Set birth date of the patient object
         patient.setBirthDateElement(new DateType("1995-05-17"));
-        
+
+
+        List<StringType> street = new ArrayList<StringType>();
+
+        patient.addAddress()
+                .setUse(Address.AddressUse.HOME)
+                .setType(Address.AddressType.BOTH)
+                .addLine("An der Obertrave 49")
+                .setCity("Lübeck")
+                .setPostalCode("23552")
+                .setCountry("DE");
+
         return patient;
 
     }
