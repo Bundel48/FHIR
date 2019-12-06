@@ -6,6 +6,7 @@ import org.hl7.fhir.r4.model.*;
 
 import java.util.UUID;
 
+
 public class Impfausweis {
 
     public static void main(String args[]){
@@ -55,6 +56,13 @@ public class Impfausweis {
 
         // Set birth date of the patient object
         patient.setBirthDateElement(new DateType("1995-05-17"));
+
+        Extension ext = new Extension();
+        ext.setUrl("http://hl7.org/fhir/StructureDefinition/patient-birthPlace");
+        Address birthplace = new Address();
+        birthplace.setCity("Kiel");
+        ext.setValue(birthplace);
+        patient.addExtension(ext);
         
         return patient;
 
