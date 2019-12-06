@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FHIR.iml" filepath="$PROJECT_DIR$/FHIR.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IntellijProject/MIOProjektImpfausweis/MIOProjektImpfausweis.iml" filepath="$PROJECT_DIR$/IntellijProject/MIOProjektImpfausweis/MIOProjektImpfausweis.iml" />
     </modules>
   </component>
 </project>
