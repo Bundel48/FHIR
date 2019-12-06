@@ -20,11 +20,12 @@ public class Impfausweis {
         //IGenericClient client = ctxR4.newRestfulGenericClient(serverBase);
 
 
-        Patient patient1 = createPatient();
+        Patient patient = createPatient();
+        Immunization vac1 = createVaccination(patient);
 
         Bundle bundle = new Bundle();
-        bundle.addEntry().setResource(patient1).getRequest().setUrl(patient1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-
+        bundle.addEntry().setResource(patient).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(vac1).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         // Parser to encode the resource into a string in json format
         String encoded = ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
         System.out.println(encoded);
@@ -77,9 +78,10 @@ public class Impfausweis {
 
     }
 
+    public static Immunization createVaccination(Patient patient){
+        Immunization vac = new Immunization();
 
-
-    public void addVaccenateRessources(){
-
+        return vac;
     }
+
 }
