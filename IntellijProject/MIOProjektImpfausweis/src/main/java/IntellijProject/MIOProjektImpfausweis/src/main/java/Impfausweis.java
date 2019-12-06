@@ -21,7 +21,7 @@ public class Impfausweis {
 
 
         Patient patient = createPatient();
-        Immunization vac1 = createVaccination(patient);
+        Immunization vac1 = createVaccination(patient, "IFPA", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix Penta","1997-08-26");
 
         Bundle bundle = new Bundle();
         bundle.addEntry().setResource(patient).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
@@ -78,8 +78,36 @@ public class Impfausweis {
 
     }
 
-    public static Immunization createVaccination(Patient patient){
+    public static Immunization createVaccination(Patient patient, String vacCode, String vacSystem, String vacDisplay, String date) {
         Immunization vac = new Immunization();
+
+        vac.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/vaccination")
+                .setValue(UUID.randomUUID().toString());
+
+        vac.setStatus(Immunization.ImmunizationStatus.COMPLETED);
+
+        vac.setVaccineCode(new CodeableConcept()
+            .addCoding(new Coding()
+                    .setCode(vacCode)
+                    .setSystem(vacSystem)
+                    .setDisplay(vacDisplay)
+            )
+        );
+
+        vac.setPatient(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType()+"/"+patient.getId()));
+        vac.setOccurrence(new DateTimeType(date));
+
+        //Location
+        //Manufacturer
+        //lotNumber
+        vac.setLotNumber("S2409F");
+        //*performer -> Practitioner
+        //*doseNumber
+
+
 
         return vac;
     }
