@@ -21,11 +21,14 @@ public class Impfausweis {
 
 
         Patient patient = createPatient();
+        Encounter encounter1 = createEncounter(patient);
         Immunization vac1 = createVaccination(patient, "IFPA", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix Penta","1997-08-26");
 
         Bundle bundle = new Bundle();
         bundle.addEntry().setResource(patient).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(vac1).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(vac1).getRequest().setUrl(vac1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+
         // Parser to encode the resource into a string in json format
         String encoded = ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
         System.out.println(encoded);
@@ -78,6 +81,8 @@ public class Impfausweis {
 
     }
 
+
+
     public static Immunization createVaccination(Patient patient, String vacCode, String vacSystem, String vacDisplay, String date) {
         Immunization vac = new Immunization();
 
@@ -110,6 +115,52 @@ public class Impfausweis {
 
 
         return vac;
+    }
+
+
+
+    public static Encounter createEncounter(Patient patient){
+        // Create an encounter object
+        Encounter encounter = new Encounter();
+
+        // Set Identifier of the encounter object
+        encounter.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/encounter")
+                .setValue(UUID.randomUUID().toString());
+
+        encounter.setStatus(Encounter.EncounterStatus.FINISHED);
+
+        //TODO Code eventuell auch AMB mit display value ambulatory
+        encounter.setClass_(new Coding()
+                .setCode("NONAC")
+                .setSystem("http://terminology.hl7.org/CodeSystem/v3-ActCode")
+                .setDisplay("inpatient non-acute"));
+
+        encounter.setServiceType(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("57")
+                        .setSystem("http://terminology.hl7.org/CodeSystem/service-type")
+                        .setDisplay("Immunization")));
+
+        encounter.setSubject(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" + patient.getId()));
+
+        //TODO Arzt und Zeit irgendwie hinzufügen
+
+        return encounter;
+    }
+
+
+
+    public static Practitioner createPractitioner(){
+        Practitioner practitioner  =  new Practitioner();
+
+        practitioner.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/practitioner")
+                .setValue(UUID.randomUUID().toString());
+
+        return practitioner;
     }
 
 }
