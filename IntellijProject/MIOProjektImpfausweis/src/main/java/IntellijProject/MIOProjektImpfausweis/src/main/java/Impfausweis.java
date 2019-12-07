@@ -22,17 +22,20 @@ public class Impfausweis {
 
         Patient patient = createPatient();
         Encounter encounter1 = createEncounter(patient);
-        Immunization vac1 = createVaccination(patient, encounter1, "IFPA", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix Penta","1997-08-12");
         Practitioner practitioner1 = createPractitioner();
+        Organization organization = createOrganization();
+        PractitionerRole practitionerRole = createPractitionerRole(organization, practitioner1);
+        Immunization vac1 = createVaccination(patient, encounter1, practitioner1, "IFPA", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix Penta","1997-08-12");
 
-        PractitionerRole practitionerRole = new PractitionerRole();
-        Organization organization = new Organization();
 
         Bundle bundle = new Bundle();
         bundle.addEntry().setResource(patient).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(vac1).getRequest().setUrl(vac1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(practitioner1).getRequest().setUrl(practitioner1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(organization).getRequest().setUrl(organization.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitionerRole).getRequest().setUrl(practitionerRole.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(vac1).getRequest().setUrl(vac1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+
 
         // Parser to encode the resource into a string in json format
         String encoded = ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
@@ -88,7 +91,7 @@ public class Impfausweis {
 
 
 
-    public static Immunization createVaccination(Patient patient, Encounter encounter, String vacCode, String vacSystem, String vacDisplay, String date) {
+    public static Immunization createVaccination(Patient patient, Encounter encounter, Practitioner practitioner, String vacCode, String vacSystem, String vacDisplay, String date) {
         Immunization vac = new Immunization();
 
         vac.addIdentifier()
@@ -107,7 +110,7 @@ public class Impfausweis {
 
         vac.setPatient(new Reference()
                 .setIdentifier(patient.getIdentifierFirstRep())
-                .setReference(patient.fhirType()+ "/" +patient.getId()));
+                .setReference(patient.fhirType() + "/" +patient.getId()));
 
         vac.setEncounter(new Reference()
                 .setIdentifier(encounter.getIdentifierFirstRep())
@@ -122,6 +125,9 @@ public class Impfausweis {
         vac.setLotNumber("S2409F");
 
         //*performer -> Practitioner
+        vac.addPerformer().setActor(new Reference()
+                .setIdentifier(practitioner.getIdentifierFirstRep())
+                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
 
 
 
@@ -185,6 +191,43 @@ public class Impfausweis {
 
         return practitioner;
     }
+
+
+
+    public static Organization createOrganization(){
+        // Krankenhaus
+        Organization organization= new Organization();
+
+        organization.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/organization")
+                .setValue(UUID.randomUUID().toString());
+
+        organization.setName("MIO Krankenhaus");
+
+        organization.addAddress()
+                .setCity("Lübeck")
+                .setCountry("Deutschland")
+                .setPostalCode("23562");
+
+        return organization;
+    }
+
+
+    
+    public static PractitionerRole createPractitionerRole(Organization organization, Practitioner practitioner){
+        // Rollenzuweisung
+        PractitionerRole practitionerRole =
+                new PractitionerRole()
+                        .setOrganization(new Reference()
+                                .setIdentifier(organization.getIdentifier().get(0))
+                                .setReference(organization.fhirType() + "/" + organization.getId()))
+                        .setPractitioner(new Reference()
+                                .setIdentifier(practitioner.getIdentifier().get(0))
+                                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
+
+        return practitionerRole;
+    }
+
 
 
 
