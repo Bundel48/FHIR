@@ -22,12 +22,17 @@ public class Impfausweis {
 
         Patient patient = createPatient();
         Encounter encounter1 = createEncounter(patient);
-        Immunization vac1 = createVaccination(patient, "IFPA", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix Penta","1997-08-26");
+        Immunization vac1 = createVaccination(patient, encounter1, "IFPA", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix Penta","1997-08-12");
+        Practitioner practitioner1 = createPractitioner();
+
+        PractitionerRole practitionerRole = new PractitionerRole();
+        Organization organization = new Organization();
 
         Bundle bundle = new Bundle();
         bundle.addEntry().setResource(patient).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(vac1).getRequest().setUrl(vac1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitioner1).getRequest().setUrl(practitioner1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
 
         // Parser to encode the resource into a string in json format
         String encoded = ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
@@ -83,7 +88,7 @@ public class Impfausweis {
 
 
 
-    public static Immunization createVaccination(Patient patient, String vacCode, String vacSystem, String vacDisplay, String date) {
+    public static Immunization createVaccination(Patient patient, Encounter encounter, String vacCode, String vacSystem, String vacDisplay, String date) {
         Immunization vac = new Immunization();
 
         vac.addIdentifier()
@@ -102,15 +107,21 @@ public class Impfausweis {
 
         vac.setPatient(new Reference()
                 .setIdentifier(patient.getIdentifierFirstRep())
-                .setReference(patient.fhirType()+"/"+patient.getId()));
+                .setReference(patient.fhirType()+ "/" +patient.getId()));
+
+        vac.setEncounter(new Reference()
+                .setIdentifier(encounter.getIdentifierFirstRep())
+                .setReference(encounter.fhirType() + "/" + encounter.getId()));
+
         vac.setOccurrence(new DateTimeType(date));
 
         //Location
         //Manufacturer
+
         //lotNumber
         vac.setLotNumber("S2409F");
+
         //*performer -> Practitioner
-        //*doseNumber
 
 
 
@@ -160,7 +171,22 @@ public class Impfausweis {
                 .setSystem("http://www.kh-uzl.de/fhir/practitioner")
                 .setValue(UUID.randomUUID().toString());
 
+        practitioner.addName()
+                .setUse(HumanName.NameUse.OFFICIAL)
+                .setFamily("Wolf")
+                .addGiven("Lucas")
+                .addPrefix("Dr");
+
+        practitioner.addQualification().setCode(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("MD")
+                        .setSystem("http://hl7.org/fhir/v2/0360/2.7")
+                        .setDisplay("Doctor of Medicine")));
+
         return practitioner;
     }
+
+
+
 
 }
