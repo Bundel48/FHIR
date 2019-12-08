@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author Leonie Basso, Natascha Koch, Finja Alexandra Ottink
  */
 public class Impfausweis {
-    
+
     public static void main(String args[]){
 
         // Create a context for R4
@@ -24,26 +24,111 @@ public class Impfausweis {
 
 
 
-        Patient patient = createPatient("Reid", "Erik", "MALE", "1997-05-17", "An der Obertrave 49", "Lübeck", "23552", "DE", "Kiel", "DE");
-        // TODO mehrere Organisationen: z.B. Krankenhaus oder Impfstelle, Kinderarztpraxis, vaccinationOrganization
-        Organization organization = createOrganization(true, "MIO Krankenhaus", "Lübeck" , "DE", "23562");
+        // ------------------------------Create Patient----------------------------------------------------------------
+        Patient patient = createPatient("Reid", "Erik", "MALE", "1997-05-17", "An der Obertrave 49", "Lübeck", "23552", "DE", "Lübeck", "DE");
+
+
+        // ------------------------------Create Organizations----------------------------------------------------------
+        // TODO vaccinationOrganization?
+        Organization organizationHospital = createOrganization(true, "Universitätsklinikum Schleswig-Holstein Campus Lübeck", "Ratzeburger Allee 160","Lübeck" , "23538", "DE");
+
+        Organization organizationInstitute = createOrganization(true, "Institut für Transfusionsmedizin", "Ratzeburger Allee 160, Haus 31", "Lübeck", "23538", "DE");
+        organizationInstitute.setPartOf(new Reference()
+                .setIdentifier(organizationHospital.getIdentifierFirstRep())
+                .setReference(organizationHospital.fhirType() + "/" + organizationHospital.getId()));
+
+        Organization organizationMedicalCenter = createOrganization(true, "Medizinisches Gesundheitszentrum", "Paul-Ehrlich-Straße 3", "Lübeck", "23562", "DE");
+
+
+        // ------------------------------Create Practitioners----------------------------------------------------------
         // TODO mehr practitioner: z.B. Kinderarzt und Arzt
-        Practitioner practitioner = createPractitioner("Lucas", "Wolf", "Dr.", "MD", "Doctor of Medicine");
+        Practitioner practitioner1 = createPractitioner("Lucas", "Wolf", "Prof. Dr.", "MD", "Doctor of Medicine");
+        Practitioner practitioner2 = createPractitioner("Frieda", "May", "Dr.", "MD", "Doctor of Medicine");
+        Practitioner practitioner3 = createPractitioner("Laura", "Adams", "Dr.", "MD", "Doctor of Medicine");
+        Practitioner practitioner4 = createPractitioner("Artur", "Beck", "Dr.", "MD", "Doctor of Medicine");
+
+
+        // ------------------------------Create PractitionerRoles------------------------------------------------------
         // TODO Rollen für jeden Practitioner
-        PractitionerRole practitionerRole = createPractitionerRole(organization, practitioner);
-        // TODO Encounter für jede einzelne Impfung anlegen
-        Encounter encounter = createEncounter(patient, practitioner, organization,"1997-08-12");
-        // TODO mehr Impfungen anlegen
-        Immunization immunization = createImmunization(patient, encounter, practitioner, "IFPA", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix Penta","1997-08-12","S2409F");
+        PractitionerRole practitionerRole1 = createPractitionerRole(organizationMedicalCenter, practitioner1);
+        PractitionerRole practitionerRole2 = createPractitionerRole(organizationMedicalCenter, practitioner2);
+        PractitionerRole practitionerRole3 = createPractitionerRole(organizationMedicalCenter, practitioner3);
+        PractitionerRole practitionerRole4 = createPractitionerRole(organizationInstitute, practitioner4);
+
+
+        // ------------------------------Create Encounters-------------------------------------------------------------
+        Encounter encounter1 = createEncounter(patient, practitioner1, organizationMedicalCenter,"1997-08-23");
+        Encounter encounter2 = createEncounter(patient, practitioner1, organizationMedicalCenter,"1997-09-20");
+        Encounter encounter3 = createEncounter(patient, practitioner2, organizationMedicalCenter,"1997-10-27");
+        Encounter encounter4 = createEncounter(patient, practitioner3, organizationMedicalCenter,"1998-09-12");
+        Encounter encounter5 = createEncounter(patient, practitioner1, organizationMedicalCenter,"1998-12-10");
+        Encounter encounter6 = createEncounter(patient, practitioner3, organizationMedicalCenter,"2000-02-10");
+        Encounter encounter7 = createEncounter(patient, practitioner3, organizationMedicalCenter,"2000-03-12");
+        Encounter encounter8 = createEncounter(patient, practitioner2, organizationMedicalCenter,"2000-08-06");
+        Encounter encounter9 = createEncounter(patient, practitioner1, organizationMedicalCenter,"2001-04-30");
+        Encounter encounter10 = createEncounter(patient, practitioner3, organizationMedicalCenter,"2006-08-28");
+        Encounter encounter11 = createEncounter(patient, practitioner2, organizationMedicalCenter,"2011-03-13");
+
+
+        // ------------------------------Create Immunizations----------------------------------------------------------
+        // IFIP for Tetanus, Diphththerie, Pertussis, Hib, Poliomyelitis ?
+        // ENGP for Hepatitis B
+        // MMRSKB for Measles, Mumps, Rubella
+        // IFX for Tetanus, Diphththerie, Pertussis
+        //TODO 2,10,11 IFIP right?, lotNumber anpassen
+        //TODO fragen, welche Impfungen hinter welchem Code stecken; was wenn es die entsprechende Impfung nicht mehr
+        // so gibt oder keinen Code dafür; ist das bei fhir die aktuelle Liste an Codes
+
+        Immunization immunization1 = createImmunization(patient, encounter1, practitioner1, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","1997-08-23","S2409F");
+        Immunization immunization2 = createImmunization(patient, encounter2, practitioner1, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","1997-09-20","S2409F");
+        Immunization immunization3 = createImmunization(patient, encounter3, practitioner2, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","1997-10-27","S2409F");
+        Immunization immunization4 = createImmunization(patient, encounter4, practitioner3, "MMRSKB", "urn:oid:1.2.36.1.2001.1005.17", "Priorix","1998-09-12","S2409F");
+        Immunization immunization5 = createImmunization(patient, encounter5, practitioner1, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","1998-12-10","S2409F");
+        Immunization immunization6 = createImmunization(patient, encounter6, practitioner3, "ENGP", "urn:oid:1.2.36.1.2001.1005.17", "Engerix B","2000-02-10","S2409F");
+        Immunization immunization7 = createImmunization(patient, encounter7, practitioner3, "ENGP", "urn:oid:1.2.36.1.2001.1005.17", "Engerix B","2000-03-12","S2409F");
+        Immunization immunization8 = createImmunization(patient, encounter8, practitioner2, "MMRSKB", "urn:oid:1.2.36.1.2001.1005.17", "Priorix","2000-08-06","S2409F");
+        Immunization immunization9 = createImmunization(patient, encounter9, practitioner1, "ENGP", "urn:oid:1.2.36.1.2001.1005.17", "Engerix B","2001-04-30","S2409F");
+        Immunization immunization10 = createImmunization(patient, encounter10, practitioner3, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","2006-08-28","S2409F");
+        Immunization immunization11 = createImmunization(patient, encounter11, practitioner2, "IFX", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix","2011-03-13","S2409F");
+
+
 
 
         Bundle bundle = new Bundle();
         bundle.addEntry().setResource(patient).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(organization).getRequest().setUrl(organization.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(practitioner).getRequest().setUrl(practitioner.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(practitionerRole).getRequest().setUrl(practitionerRole.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter).getRequest().setUrl(encounter.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization).getRequest().setUrl(immunization.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(organizationHospital).getRequest().setUrl(organizationHospital.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(organizationInstitute).getRequest().setUrl(organizationInstitute.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(organizationMedicalCenter).getRequest().setUrl(organizationMedicalCenter.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitioner1).getRequest().setUrl(practitioner1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitioner2).getRequest().setUrl(practitioner2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitioner3).getRequest().setUrl(practitioner3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitioner4).getRequest().setUrl(practitioner4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitionerRole1).getRequest().setUrl(practitionerRole1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitionerRole2).getRequest().setUrl(practitionerRole2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitionerRole3).getRequest().setUrl(practitionerRole3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitionerRole4).getRequest().setUrl(practitionerRole4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter2).getRequest().setUrl(encounter2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter3).getRequest().setUrl(encounter3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter4).getRequest().setUrl(encounter4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter5).getRequest().setUrl(encounter5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter6).getRequest().setUrl(encounter6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter7).getRequest().setUrl(encounter7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter8).getRequest().setUrl(encounter8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter9).getRequest().setUrl(encounter9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter10).getRequest().setUrl(encounter10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter11).getRequest().setUrl(encounter11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization1).getRequest().setUrl(immunization1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization2).getRequest().setUrl(immunization2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization3).getRequest().setUrl(immunization3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization4).getRequest().setUrl(immunization4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization5).getRequest().setUrl(immunization5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization6).getRequest().setUrl(immunization6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization7).getRequest().setUrl(immunization7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization8).getRequest().setUrl(immunization8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization9).getRequest().setUrl(immunization9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization10).getRequest().setUrl(immunization10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization11).getRequest().setUrl(immunization11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
 
 
         // Parser to encode the resource into a string in json format
@@ -141,7 +226,7 @@ public class Impfausweis {
      * @param organizationPostalCode The postalCode of the organization as String.
      * @return a new Organization object
      */
-    public static Organization createOrganization(Boolean active, String organizationName, String organizationCity, String organizationCountry, String organizationPostalCode){
+    public static Organization createOrganization(Boolean active, String organizationName, String organizationLine, String organizationCity, String organizationPostalCode, String organizationCountry){
         // Create an organization object
         Organization organization= new Organization();
 
@@ -165,10 +250,10 @@ public class Impfausweis {
 
         // Set address of the organization object
         organization.addAddress()
+                .addLine(organizationLine)
                 .setCity(organizationCity)
                 .setCountry(organizationCountry)
                 .setPostalCode(organizationPostalCode);
-        //TODO evtl. addLine
 
         return organization;
     }
