@@ -26,18 +26,22 @@ public class Impfausweis {
 
         // ------------------------------Create Patient----------------------------------------------------------------
         Patient patient = createPatient("Reid", "Erik", "MALE", "1997-05-17", "An der Obertrave 49", "Lübeck", "23552", "DE", "Lübeck", "DE");
+        //patient.setId("");
 
 
         // ------------------------------Create Organizations----------------------------------------------------------
         // TODO vaccinationOrganization?
         Organization organizationHospital = createOrganization(true, "Universitätsklinikum Schleswig-Holstein Campus Lübeck", "Ratzeburger Allee 160","Lübeck" , "23538", "DE");
+        //organizationHospital.setId("");
 
         Organization organizationInstitute = createOrganization(true, "Institut für Transfusionsmedizin", "Ratzeburger Allee 160, Haus 31", "Lübeck", "23538", "DE");
         organizationInstitute.setPartOf(new Reference()
                 .setIdentifier(organizationHospital.getIdentifierFirstRep())
                 .setReference(organizationHospital.fhirType() + "/" + organizationHospital.getId()));
+        //organizationInstitute.setId("");
 
         Organization organizationMedicalCenter = createOrganization(true, "Medizinisches Gesundheitszentrum", "Paul-Ehrlich-Straße 3", "Lübeck", "23562", "DE");
+        //organizationMedicalCenter.setId("");
 
 
         // ------------------------------Create Practitioners----------------------------------------------------------
@@ -46,6 +50,10 @@ public class Impfausweis {
         Practitioner practitioner2 = createPractitioner("Frieda", "May", "Dr.", "MD", "Doctor of Medicine");
         Practitioner practitioner3 = createPractitioner("Laura", "Adams", "Dr.", "MD", "Doctor of Medicine");
         Practitioner practitioner4 = createPractitioner("Artur", "Beck", "Dr.", "MD", "Doctor of Medicine");
+        //practitioner1.setId("");
+        //practitioner2.setId("");
+        //practitioner3.setId("");
+        //practitioner4.setId("");
 
 
         // ------------------------------Create PractitionerRoles------------------------------------------------------
@@ -54,6 +62,10 @@ public class Impfausweis {
         PractitionerRole practitionerRole2 = createPractitionerRole(organizationMedicalCenter, practitioner2);
         PractitionerRole practitionerRole3 = createPractitionerRole(organizationMedicalCenter, practitioner3);
         PractitionerRole practitionerRole4 = createPractitionerRole(organizationInstitute, practitioner4);
+        //practitionerRole1.setId("");
+        //practitionerRole2.setId("");
+        //practitionerRole3.setId("");
+        //practitionerRole4.setId("");
 
 
         // ------------------------------Create Encounters-------------------------------------------------------------
@@ -68,6 +80,17 @@ public class Impfausweis {
         Encounter encounter9 = createEncounter(patient, practitioner1, organizationMedicalCenter,"2001-04-30");
         Encounter encounter10 = createEncounter(patient, practitioner3, organizationMedicalCenter,"2006-08-28");
         Encounter encounter11 = createEncounter(patient, practitioner2, organizationMedicalCenter,"2011-03-13");
+        //encounter1.setId("");
+        //encounter2.setId("");
+        //encounter3.setId("");
+        //encounter4.setId("");
+        //encounter5.setId("");
+        //encounter6.setId("");
+        //encounter7.setId("");
+        //encounter8.setId("");
+        //encounter9.setId("");
+        //encounter10.setId("");
+        //encounter11.setId("");
 
 
         // ------------------------------Create Immunizations----------------------------------------------------------
@@ -90,6 +113,17 @@ public class Impfausweis {
         Immunization immunization9 = createImmunization(patient, encounter9, practitioner1, "ENGP", "urn:oid:1.2.36.1.2001.1005.17", "Engerix B","2001-04-30","S2409F");
         Immunization immunization10 = createImmunization(patient, encounter10, practitioner3, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","2006-08-28","S2409F");
         Immunization immunization11 = createImmunization(patient, encounter11, practitioner2, "IFX", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix","2011-03-13","S2409F");
+        //immunization1.setId("");
+        //immunization2.setId("");
+        //immunization3.setId("");
+        //immunization4.setId("");
+        //immunization5.setId("");
+        //immunization6.setId("");
+        //immunization7.setId("");
+        //immunization8.setId("");
+        //immunization9.setId("");
+        //immunization10.setId("");
+        //immunization11.setId("");
 
 
 
