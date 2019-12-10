@@ -6,24 +6,18 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from "@angular/common/http";
 //InMemory kann spaeter wieder entfernt werden. Nur fuer Offline versuche benoetigt
-//import { InMemoryWebApiModule } from "angular-in-memory-web-api";
-//import { DataService } from "./data.service";
-//import { ProductListComponent } from './product-list/product-list.component';
-//import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { OverviewPageComponent } from './overview-page/overview-page.component';
+import { InMemoryWebApiModule } from "angular-in-memory-web-api";
+import { DataService } from "./data.service";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    //ProductListComponent,
-    //ProductDetailComponent,
-    OverviewPageComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    //InMemoryWebApiModule.forRoot(DataService),
+    InMemoryWebApiModule.forRoot(DataService),
     AppRoutingModule
   ],
   providers: [],

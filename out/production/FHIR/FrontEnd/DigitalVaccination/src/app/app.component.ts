@@ -7,8 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DigitalVaccination';
+  toDoArray:Array<string>=["test"];
 
     addToDo(item:string){
       console.log("hallo welt!");
+      this.toDoArray.push(item);
     }
 }
