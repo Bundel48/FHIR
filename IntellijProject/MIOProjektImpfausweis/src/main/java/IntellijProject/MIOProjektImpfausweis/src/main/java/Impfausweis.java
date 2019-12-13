@@ -4,6 +4,10 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import org.hl7.fhir.r4.model.*;
 
+import java.sql.Ref;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -25,38 +29,52 @@ public class Impfausweis {
 
 
         // ------------------------------Create Patient----------------------------------------------------------------
-        Patient patient = createPatient("Reid", "Erik", "MALE", "1997-05-17", "An der Obertrave 49", "Lübeck", "23552", "DE", "Lübeck", "DE");
+        Patient patient = createPatient("Reid", "Erik", "MALE", "1997-05-17",
+                "An der Obertrave 49", "Lübeck", "23552", "DE", "Lübeck",
+                "DE");
         //patient.setId("");
 
 
         // ------------------------------Create Organizations----------------------------------------------------------
         // TODO vaccinationOrganization?
-        Organization organizationHospital = createOrganization(true, "Universitätsklinikum Schleswig-Holstein Campus Lübeck", "Ratzeburger Allee 160","Lübeck" , "23538", "DE");
+        Organization organizationHospital = createOrganization(true,
+                "Universitätsklinikum Schleswig-Holstein Campus Lübeck",
+                "Ratzeburger Allee 160","Lübeck" , "23538",
+                "DE");
         //organizationHospital.setId("#OrganizationID");
         // Reference: Organization/#OrganizationID
 
-        Organization organizationInstitute = createOrganization(true, "Institut für Transfusionsmedizin", "Ratzeburger Allee 160, Haus 31", "Lübeck", "23538", "DE");
+        Organization organizationInstitute = createOrganization(true,
+                "Institut für Transfusionsmedizin", "Ratzeburger Allee 160, Haus 31",
+                "Lübeck", "23538", "DE");
         organizationInstitute.setPartOf(new Reference()
                 .setIdentifier(organizationHospital.getIdentifierFirstRep())
                 .setReference(organizationHospital.fhirType() + "/" + organizationHospital.getId()));
         //organizationInstitute.setId("");
 
-        Organization organizationMedicalCenter = createOrganization(true, "Medizinisches Gesundheitszentrum", "Paul-Ehrlich-Straße 3", "Lübeck", "23562", "DE");
+        Organization organizationMedicalCenter = createOrganization(true,
+                "Medizinisches Gesundheitszentrum", "Paul-Ehrlich-Straße 3",
+                "Lübeck", "23562", "DE");
         //organizationMedicalCenter.setId("");
 
 
         // ------------------------------Create Practitioners----------------------------------------------------------
         // TODO mehr practitioner: z.B. Kinderarzt und Arzt
-        Practitioner practitioner1 = createPractitioner("Lucas", "Wolf", "Prof. Dr.", "MD", "Doctor of Medicine");
-        Practitioner practitioner2 = createPractitioner("Frieda", "May", "Dr.", "MD", "Doctor of Medicine");
-        Practitioner practitioner3 = createPractitioner("Laura", "Adams", "Dr.", "MD", "Doctor of Medicine");
-        Practitioner practitioner4 = createPractitioner("Artur", "Beck", "Dr.", "MD", "Doctor of Medicine");
+        Practitioner practitioner1 = createPractitioner("Lucas", "Wolf", "Prof. Dr.",
+                "MD", "Doctor of Medicine");
+        Practitioner practitioner2 = createPractitioner("Frieda", "May", "Dr.",
+                "MD", "Doctor of Medicine");
+        Practitioner practitioner3 = createPractitioner("Laura", "Adams", "Dr.",
+                "MD", "Doctor of Medicine");
+        Practitioner practitioner4 = createPractitioner("Artur", "Beck", "Dr.",
+                "MD", "Doctor of Medicine");
         //practitioner1.setId("");
         //practitioner2.setId("");
         //practitioner3.setId("");
         //practitioner4.setId("");
 
 
+        /*
         // ------------------------------Create PractitionerRoles------------------------------------------------------
         // TODO Rollen für jeden Practitioner
         PractitionerRole practitionerRole1 = createPractitionerRole(organizationMedicalCenter, practitioner1);
@@ -67,6 +85,7 @@ public class Impfausweis {
         //practitionerRole2.setId("");
         //practitionerRole3.setId("");
         //practitionerRole4.setId("");
+        */
 
 
         // ------------------------------Create Encounters-------------------------------------------------------------
@@ -103,17 +122,39 @@ public class Impfausweis {
         //TODO fragen, welche Impfungen hinter welchem Code stecken; was wenn es die entsprechende Impfung nicht mehr
         // so gibt oder keinen Code dafür; ist das bei fhir die aktuelle Liste an Codes
 
-        Immunization immunization1 = createImmunization(patient, encounter1, practitioner1, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","1997-08-23","S2409F");
-        Immunization immunization2 = createImmunization(patient, encounter2, practitioner1, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","1997-09-20","S2409F");
-        Immunization immunization3 = createImmunization(patient, encounter3, practitioner2, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","1997-10-27","S2409F");
-        Immunization immunization4 = createImmunization(patient, encounter4, practitioner3, "MMRSKB", "urn:oid:1.2.36.1.2001.1005.17", "Priorix","1998-09-12","S2409F");
-        Immunization immunization5 = createImmunization(patient, encounter5, practitioner1, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","1998-12-10","S2409F");
-        Immunization immunization6 = createImmunization(patient, encounter6, practitioner3, "ENGP", "urn:oid:1.2.36.1.2001.1005.17", "Engerix B","2000-02-10","S2409F");
-        Immunization immunization7 = createImmunization(patient, encounter7, practitioner3, "ENGP", "urn:oid:1.2.36.1.2001.1005.17", "Engerix B","2000-03-12","S2409F");
-        Immunization immunization8 = createImmunization(patient, encounter8, practitioner2, "MMRSKB", "urn:oid:1.2.36.1.2001.1005.17", "Priorix","2000-08-06","S2409F");
-        Immunization immunization9 = createImmunization(patient, encounter9, practitioner1, "ENGP", "urn:oid:1.2.36.1.2001.1005.17", "Engerix B","2001-04-30","S2409F");
-        Immunization immunization10 = createImmunization(patient, encounter10, practitioner3, "IFIP", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV","2006-08-28","S2409F");
-        Immunization immunization11 = createImmunization(patient, encounter11, practitioner2, "IFX", "urn:oid:1.2.36.1.2001.1005.17", "Infanrix","2011-03-13","S2409F");
+        Immunization immunization1 = createImmunization(patient, encounter1, "IFIP",
+                "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV",
+                "1997-08-23","S2409F");
+        Immunization immunization2 = createImmunization(patient, encounter2, "IFIP",
+                "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV",
+                "1997-09-20","S2409F");
+        Immunization immunization3 = createImmunization(patient, encounter3, "IFIP",
+                "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV",
+                "1997-10-27","S2409F");
+        Immunization immunization4 = createImmunization(patient, encounter4, "MMRSKB",
+                "urn:oid:1.2.36.1.2001.1005.17", "Priorix",
+                "1998-09-12","S2409F");
+        Immunization immunization5 = createImmunization(patient, encounter5, "IFIP",
+                "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV",
+                "1998-12-10","S2409F");
+        Immunization immunization6 = createImmunization(patient, encounter6, "ENGP",
+                "urn:oid:1.2.36.1.2001.1005.17", "Engerix B",
+                "2000-02-10","S2409F");
+        Immunization immunization7 = createImmunization(patient, encounter7, "ENGP",
+                "urn:oid:1.2.36.1.2001.1005.17", "Engerix B",
+                "2000-03-12","S2409F");
+        Immunization immunization8 = createImmunization(patient, encounter8, "MMRSKB",
+                "urn:oid:1.2.36.1.2001.1005.17", "Priorix",
+                "2000-08-06","S2409F");
+        Immunization immunization9 = createImmunization(patient, encounter9, "ENGP",
+                "urn:oid:1.2.36.1.2001.1005.17", "Engerix B",
+                "2001-04-30","S2409F");
+        Immunization immunization10 = createImmunization(patient, encounter10, "IFIP",
+                "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV",
+                "2006-08-28","S2409F");
+        Immunization immunization11 = createImmunization(patient, encounter11, "IFX",
+                "urn:oid:1.2.36.1.2001.1005.17", "Infanrix",
+                "2011-03-13","S2409F");
         //immunization1.setId("");
         //immunization2.setId("");
         //immunization3.setId("");
@@ -128,12 +169,61 @@ public class Impfausweis {
 
 
         // ------------------------------Create Observations----------------------------------------------------------
-        Observation observation1 = createObservation(patient, encounter1,"39263-9", "Tuberculin screen test status CPHS", "1997-08-23");
+        Observation observation1 = createObservation(patient, encounter1,"39263-9",
+                "Tuberculin screen test status CPHS", "1997-08-23");
 
 
         // ------------------------------Create Conditions------------------------------------------------------------
-        Condition condition1 = createCondition(patient, encounter1,  "77465005", " Transplantation (procedure)", "1997-08-23");
+        Condition condition1 = createCondition(patient, encounter1,  "77465005",
+                " Transplantation (procedure)", "1997-08-23");
 
+
+        // ------------------------------Create Array Lists needed for Composition------------------------------------
+        ArrayList<Immunization> ArrayListYellowFever = new ArrayList<Immunization>();
+
+        ArrayList<Immunization> ArrayListStandardVaccinations = new ArrayList<Immunization>();
+        ArrayListStandardVaccinations.add(immunization1);
+        ArrayListStandardVaccinations.add(immunization2);
+
+        ArrayList<Immunization> ArrayListOtherVaccinations = new ArrayList<Immunization>();
+
+        ArrayList<Immunization> ArrayListInfluenza = new ArrayList<Immunization>();
+
+        ArrayList<Immunization> ArrayListTuberculosis = new ArrayList<Immunization>();
+
+        ArrayList<Observation> ArrayListTuberculinTests = new ArrayList<Observation>();
+
+        ArrayList<Observation> ArrayListAntibodyAssays = new ArrayList<Observation>();
+
+        ArrayList<Observation> ArrayListHepatitisB = new ArrayList<Observation>();
+
+        ArrayList<Observation> ArrayListRubella = new ArrayList<Observation>();
+
+        ArrayList<Immunization> ArrayListPassiveImmunizations = new ArrayList<Immunization>();
+
+        ArrayList<Immunization> ArrayListSerumInjection = new ArrayList<Immunization>();
+
+        ArrayList<Condition> ArrayListCondition = new ArrayList<Condition>();
+
+        ArrayList<Observation> ArrayListBlood = new ArrayList<Observation>();
+
+        LocalDate currentDate = java.time.LocalDate.now();
+
+        // ------------------------------Create Composition-----------------------------------------------------------
+        Composition composition = createComposition(patient, practitioner1, currentDate.toString(),
+                ArrayListYellowFever,
+                ArrayListStandardVaccinations,
+                ArrayListOtherVaccinations,
+                ArrayListInfluenza,
+                ArrayListTuberculosis,
+                ArrayListTuberculinTests,
+                ArrayListAntibodyAssays,
+                ArrayListHepatitisB,
+                ArrayListRubella,
+                ArrayListPassiveImmunizations,
+                ArrayListSerumInjection,
+                ArrayListCondition,
+                ArrayListBlood);
 
 
 
@@ -146,10 +236,6 @@ public class Impfausweis {
         bundle.addEntry().setResource(practitioner2).getRequest().setUrl(practitioner2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(practitioner3).getRequest().setUrl(practitioner3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(practitioner4).getRequest().setUrl(practitioner4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(practitionerRole1).getRequest().setUrl(practitionerRole1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(practitionerRole2).getRequest().setUrl(practitionerRole2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(practitionerRole3).getRequest().setUrl(practitionerRole3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(practitionerRole4).getRequest().setUrl(practitionerRole4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(encounter2).getRequest().setUrl(encounter2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(encounter3).getRequest().setUrl(encounter3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
@@ -174,6 +260,7 @@ public class Impfausweis {
         bundle.addEntry().setResource(immunization11).getRequest().setUrl(immunization11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(observation1).getRequest().setUrl(observation1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(condition1).getRequest().setUrl(condition1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(composition).getRequest().setUrl(composition.fhirType()).setMethod(Bundle.HTTPVerb.POST);
 
 
         // Parser to encode the resource into a string in json format
@@ -205,7 +292,9 @@ public class Impfausweis {
      * @param birthplaceCountry The country code as String where the patient was born. For example: DE for Germany.
      * @return the patient object
      */
-    public static Patient createPatient(String givenName, String familyName, String gender, String birthdate, String line, String city, String postalCode, String country, String birthplaceCity, String birthplaceCountry){
+    public static Patient createPatient(String givenName, String familyName, String gender, String birthdate,
+                                        String line, String city, String postalCode, String country,
+                                        String birthplaceCity, String birthplaceCountry){
         // Create a patient object
         Patient patient = new Patient();
 
@@ -270,7 +359,9 @@ public class Impfausweis {
      * @param organizationPostalCode The postalCode of the organization as String.
      * @return a new Organization object
      */
-    public static Organization createOrganization(Boolean active, String organizationName, String organizationLine, String organizationCity, String organizationPostalCode, String organizationCountry){
+    public static Organization createOrganization(Boolean active, String organizationName, String organizationLine,
+                                                  String organizationCity, String organizationPostalCode,
+                                                  String organizationCountry){
         // Create an organization object
         Organization organization= new Organization();
 
@@ -316,7 +407,8 @@ public class Impfausweis {
      * @param qualificationDisplay The String that belongs to the qualification code and that is displayed.
      * @return a practitioner object
      */
-    public static Practitioner createPractitioner(String givenName, String familiyName, String prefix, String qualificationCode, String qualificationDisplay){
+    public static Practitioner createPractitioner(String givenName, String familiyName, String prefix,
+                                                  String qualificationCode, String qualificationDisplay){
         // Create a practitioner object
         Practitioner practitioner  =  new Practitioner();
 
@@ -371,15 +463,6 @@ public class Impfausweis {
                                 .setIdentifier(practitioner.getIdentifier().get(0))
                                 .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
 
-        // add role the practitioner may perform
-        /*
-        practitionerRole.addCode(new CodeableConcept()
-                .addCoding(new Coding()
-                        .setCode("doctor")
-                        .setSystem("http://hl7.org/fhir/ValueSet/practitioner-role")
-                        .setDisplay("Doctor")));
-         */
-
         return practitionerRole;
     }
 
@@ -396,7 +479,8 @@ public class Impfausweis {
      * @param date The date when the encounter took place as String.
      * @return returns an Encounter object.
      */
-    public static Encounter createEncounter(Patient patient, Practitioner practitioner, Organization organization, String date){
+    public static Encounter createEncounter(Patient patient, Practitioner practitioner, Organization organization,
+                                            String date){
         // Create an encounter object
         Encounter encounter = new Encounter();
 
@@ -455,14 +539,15 @@ public class Impfausweis {
      *
      * @param patient The patient object that has been immunized.
      * @param encounter The encounter object for this immunization.
-     * @param practitioner The practitioner who was performing the immunization.
      * @param immunizationCode The code of the vaccine product.
      * @param immunizationSystem The system used can be found here http://hl7.org/fhir/valueset-vaccine-code.html
      * @param immunizationDisplay The display infromation that belongs to the immunizationCode.
      * @param date The date when the immunization took place.
      * @return a new Immunization object
      */
-    public static Immunization createImmunization(Patient patient, Encounter encounter, Practitioner practitioner, String immunizationCode, String immunizationSystem, String immunizationDisplay, String date, String lotNumber) {
+    public static Immunization createImmunization(Patient patient, Encounter encounter, String immunizationCode,
+                                                  String immunizationSystem, String immunizationDisplay, String date,
+                                                  String lotNumber) {
         // Create an immunization object
         Immunization immunization = new Immunization();
 
@@ -502,17 +587,24 @@ public class Impfausweis {
         //Set lotNumber
         immunization.setLotNumber(lotNumber);
 
-        // Set reference to the actor(practitioner) who performed the immunization
-        immunization.addPerformer().setActor(new Reference()
-                .setIdentifier(practitioner.getIdentifierFirstRep())
-                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
-
         return immunization;
     }
 
 
-
-    public static Observation createObservation(Patient patient, Encounter encounter, String observationTypeCode, String observationTypeDisplay, String date){
+    /**
+     * The method createObservation() creates a new observation. That observation references a patient the observation
+     * belongs to and an encounter that belongs to this observation. The Observation can be used for tuberculin-tests,
+     * antibody assays, Hepatitis B, Rubella antibody assays.
+     *
+     * @param patient The patient object that the observation belongs to.
+     * @param encounter The encounter this observation was part of.
+     * @param observationTypeCode The code of the type of observation (a Loinc Code).
+     * @param observationTypeDisplay The displaytext of the type of the observation.
+     * @param date The date when the Observation took place.
+     * @return a new Observation object.
+     */
+    public static Observation createObservation(Patient patient, Encounter encounter, String observationTypeCode,
+                                                String observationTypeDisplay, String date){
         // Create an observation object
         Observation observation = new Observation();
 
@@ -521,28 +613,34 @@ public class Impfausweis {
                 .setSystem("http://www.kh-uzl.de/fhir/observation")
                 .setValue(UUID.randomUUID().toString());
 
+        // Set status of the observation object
         observation.setStatus(Observation.ObservationStatus.FINAL);
 
+        // Set classification type of observation
         observation.addCategory(new CodeableConcept()
                 .addCoding(new Coding()
                         .setCode("laboratory")
                         .setSystem("http://terminology.hl7.org/CodeSystem/observation-category")
                         .setDisplay("Laboratory")));
 
+        // Set type of observation
         observation.setCode(new CodeableConcept()
                 .addCoding(new Coding()
                         .setCode(observationTypeCode)
                         .setSystem("http://loinc.org")
                         .setDisplay(observationTypeDisplay)));
 
+        // Set reference to a patient as a subject of the observation
         observation.setSubject(new Reference()
                 .setIdentifier(patient.getIdentifierFirstRep())
                 .setReference(patient.fhirType() + "/" + patient.getId()));
 
+        // Set reference to an encounter
         observation.setEncounter(new Reference()
                 .setIdentifier(encounter.getIdentifierFirstRep())
                 .setReference(encounter.fhirType() + "/" + encounter.getId()));
 
+        // Set time of the observation
         observation.setEffective(new DateTimeType(date));
 
         // TODO  value, interpretation, note, reference range?
@@ -551,8 +649,19 @@ public class Impfausweis {
     }
 
 
-
-    public static Condition createCondition(Patient patient, Encounter encounter, String conditionTypeCode, String conditionTypeDisplay, String date){
+    /**
+     * The method createCondition() creates a new condition object. This can be used to represent medical comments on
+     * risk factors concerning vaccinations (for example Haemophilia, Diabetes, etc)
+     *
+     * @param patient The patient object that the condition belongs to.
+     * @param encounter The encounter this condition was part of.
+     * @param conditionTypeCode Identification of the condition, problem or diagnosis. The code for this (Loinc code).
+     * @param conditionTypeDisplay The display text for the code of the condition.
+     * @param date The date when the condition was first recorded.
+     * @return a new Condition object.
+     */
+    public static Condition createCondition(Patient patient, Encounter encounter, String conditionTypeCode,
+                                            String conditionTypeDisplay, String date){
         // Create a condition object
         Condition condition = new Condition();
 
@@ -561,12 +670,14 @@ public class Impfausweis {
                 .setSystem("http://www.kh-uzl.de/fhir/condition")
                 .setValue(UUID.randomUUID().toString());
 
+        // Set clinical status of the condition
         condition.setClinicalStatus(new CodeableConcept()
                 .addCoding(new Coding()
                         .setCode("active")
                         .setSystem("http://terminology.hl7.org/CodeSystem/condition-clinical")
                         .setDisplay("Active")));
 
+        // Set verification status of the condition
         condition.setVerificationStatus(new CodeableConcept()
                 .addCoding(new Coding()
                         .setCode("confirmed")
@@ -574,23 +685,240 @@ public class Impfausweis {
                         .setDisplay("Confirmed")));
 
         // TODO oder hier ICD-10?
+        // Set Identification of the condition, problem or diagnosis
         condition.setCode(new CodeableConcept()
                 .addCoding(new Coding()
                         .setCode(conditionTypeCode)
                         .setSystem("http://snomed.info/sct")
                         .setDisplay(conditionTypeDisplay)));
 
+        // Set reference to a patient, that the condition belongs to
         condition.setSubject(new Reference()
                 .setIdentifier(patient.getIdentifierFirstRep())
                 .setReference(patient.fhirType() + "/" + patient.getId()));
 
+        // Set reference to an encounter, the condition was part of
         condition.setEncounter(new Reference()
                 .setIdentifier(encounter.getIdentifierFirstRep())
                 .setReference(encounter.fhirType() + "/" + encounter.getId()));
 
+        // Set date when the condition was first recorded
         condition.setRecordedDateElement(new DateTimeType(date));
 
         return condition;
+    }
+
+
+    /**
+     * The method createComposition() creates a new composition object that contains all the information that is
+     * included in a Certificate of Vaccinations
+     *
+     * @param patient The patient the Certificate of Vaccinations belongs to.
+     * @param practitioner The doctor who issued the Certificate of Vaccinations.
+     * @param date The composition editing time.
+     * @param ArrayListYellowFever List containing all vaccinations against yellow fever.
+     * @param ArrayListStandardVaccinations List containing all standard vaccinations.
+     * @param ArrayListOtherVaccinations List containing all other vaccinations.
+     * @param ArrayListInfluenza List containing all vaccinations against influenza.
+     * @param ArrayListTuberculosis List containing all vaccinations against tuberculosis.
+     * @param ArrayListTuberculinTests List containing all tuberculin-tests.
+     * @param ArrayListAntibodyAssays List containing all antibody assays.
+     * @param ArrayListHepatitisB List containing all antibody assays for hepatitis B.
+     * @param ArrayListRubella List containing all rubella antibody assays.
+     * @param ArrayListPassiveImmunizations List containing all passive immunizations with human immunoglobulins.
+     * @param ArrayListSerumInjection List containing all serum injections.
+     * @param ArrayListCondition List containing all medical comments on risk factors concerning vaccinations.
+     * @param ArrayListBlood List containing an Observation with the blood group.
+     * @return a new Composition object
+     */
+    public static Composition createComposition(Patient patient, Practitioner practitioner, String date,
+                                                ArrayList<Immunization> ArrayListYellowFever,
+                                                ArrayList<Immunization> ArrayListStandardVaccinations,
+                                                ArrayList<Immunization> ArrayListOtherVaccinations,
+                                                ArrayList<Immunization> ArrayListInfluenza,
+                                                ArrayList<Immunization> ArrayListTuberculosis,
+                                                ArrayList<Observation> ArrayListTuberculinTests,
+                                                ArrayList<Observation> ArrayListAntibodyAssays,
+                                                ArrayList<Observation> ArrayListHepatitisB,
+                                                ArrayList<Observation> ArrayListRubella,
+                                                ArrayList<Immunization> ArrayListPassiveImmunizations,
+                                                ArrayList<Immunization> ArrayListSerumInjection,
+                                                ArrayList<Condition> ArrayListCondition,
+                                                ArrayList<Observation> ArrayListBlood){
+        // Create a new Composition object
+        Composition composition = new Composition();
+
+        // Set Identifier of the composition object
+        composition.setIdentifier(new Identifier()
+                .setSystem("http://www.kh-uzl.de/fhir/composition")
+                .setValue(UUID.randomUUID().toString()));
+
+        // Set status of composition
+        composition.setStatus(Composition.CompositionStatus.FINAL);
+
+        // Set kind of composition
+        composition.setType(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("11369-6")
+                        .setSystem("http://loinc.org")
+                        .setDisplay("History of Immunization Narrative")));
+
+        // Set reference to a patient, all the data in the composition belongs to
+        composition.setSubject(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" + patient.getId()));
+
+        // Set composition editing time
+        composition.setDateElement(new DateTimeType(date));
+
+        // Set author of the composition
+        composition.addAuthor(new Reference()
+                .setIdentifier(practitioner.getIdentifierFirstRep())
+                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
+
+        // Set title of the composition
+        composition.setTitle("Internationale Bescheinigungen über Impfungen und Impfbuch");
+
+
+        // Section for the owner of the certificate of vaccinations
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Impfausweisinhaber")
+                .addEntry(new Reference()
+                        .setIdentifier(patient.getIdentifierFirstRep())
+                        .setReference(patient.fhirType() + "/" + patient.getId())));
+
+
+        // Section for yellow fever
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Gelbfieber"));
+
+        for(int i = 0; i < ArrayListYellowFever.size(); i++){
+            composition.getSection().get(1).addEntry(new Reference()
+                    .setReference(ArrayListYellowFever.get(i).fhirType() + "/" + ArrayListYellowFever.get(i).getId()));
+        }
+
+
+        // Section for standard vaccinations
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Standardimpfungen"));
+
+        for(int i = 0; i < ArrayListStandardVaccinations.size(); i++){
+            composition.getSection().get(2).addEntry(new Reference()
+                    .setReference(ArrayListStandardVaccinations.get(i).fhirType() + "/" + ArrayListStandardVaccinations.get(i).getId()));
+        }
+
+
+        // Section for other vaccinations
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Sonstige Schutzimpfungen"));
+
+        for(int i = 0; i < ArrayListOtherVaccinations.size(); i++){
+            composition.getSection().get(3).addEntry(new Reference()
+                    .setReference(ArrayListOtherVaccinations.get(i).fhirType() + "/" + ArrayListOtherVaccinations.get(i).getId()));
+        }
+
+
+        // Section for vaccinations against influenza
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Schutzimpfungen gegen Influenza"));
+
+        for(int i = 0; i < ArrayListInfluenza.size(); i++){
+            composition.getSection().get(4).addEntry(new Reference()
+                    .setReference(ArrayListInfluenza.get(i).fhirType() + "/" + ArrayListInfluenza.get(i).getId()));
+        }
+
+
+        // Section for vaccinations against tuberculosis
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)"));
+
+        for(int i = 0; i < ArrayListTuberculosis.size(); i++){
+            composition.getSection().get(5).addEntry(new Reference()
+                    .setReference(ArrayListTuberculosis.get(i).fhirType() + "/" + ArrayListTuberculosis.get(i).getId()));
+        }
+
+
+        // Section for Tuberculin-tests
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Ergebnis von Tuberkulinproben"));
+
+        for(int i = 0; i < ArrayListTuberculinTests.size(); i++){
+            composition.getSection().get(6).addEntry(new Reference()
+                    .setReference(ArrayListTuberculinTests.get(i).fhirType() + "/" + ArrayListTuberculinTests.get(i).getId()));
+        }
+
+
+        // Section for antibody assays
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Ergebnisse von Antikörperuntersuchungen"));
+
+        for(int i = 0; i < ArrayListAntibodyAssays.size(); i++){
+            composition.getSection().get(7).addEntry(new Reference()
+                    .setReference(ArrayListAntibodyAssays.get(i).fhirType() + "/" + ArrayListAntibodyAssays.get(i).getId()));
+        }
+
+
+        // Section for Hepatitis B
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Virushepatitis B"));
+
+        for(int i = 0; i < ArrayListHepatitisB.size(); i++){
+            composition.getSection().get(8).addEntry(new Reference()
+                    .setReference(ArrayListHepatitisB.get(i).fhirType() + "/" + ArrayListHepatitisB.get(i).getId()));
+        }
+
+
+        // Section for Rubella antibody assays
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Röteln-Antikörper-Bestimmungen"));
+
+        for(int i = 0; i < ArrayListRubella.size(); i++){
+            composition.getSection().get(9).addEntry(new Reference()
+                    .setReference(ArrayListRubella.get(i).fhirType() + "/" + ArrayListRubella.get(i).getId()));
+        }
+
+
+        // Section for Passive immunizations with human immunoglobulins
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Passive Immunisierungen mit humanen Immunoglobulinen"));
+
+        for(int i = 0; i < ArrayListPassiveImmunizations.size(); i++){
+            composition.getSection().get(10).addEntry(new Reference()
+                    .setReference(ArrayListPassiveImmunizations.get(i).fhirType() + "/" + ArrayListPassiveImmunizations.get(i).getId()));
+        }
+
+
+        // Section for serum injections
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Serum-Injektion"));
+
+        for(int i = 0; i < ArrayListSerumInjection.size(); i++){
+            composition.getSection().get(11).addEntry(new Reference()
+                    .setReference(ArrayListSerumInjection.get(i).fhirType() + "/" + ArrayListSerumInjection.get(i).getId()));
+        }
+
+
+        // Section for medical comments on risk factors concerning vaccinations
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen"));
+
+        for(int i = 0; i < ArrayListCondition.size(); i++){
+            composition.getSection().get(12).addEntry(new Reference()
+                    .setReference(ArrayListCondition.get(i).fhirType() + "/" + ArrayListCondition.get(i).getId()));
+        }
+
+
+        // Section for blood group and rhesus factor
+        composition.addSection(new Composition.SectionComponent()
+                .setTitle("Blutgruppe und Rh-Faktor"));
+
+        for(int i = 0; i < ArrayListBlood.size(); i++){
+            composition.getSection().get(13).addEntry(new Reference()
+                    .setReference(ArrayListBlood.get(i).fhirType() + "/" + ArrayListBlood.get(i).getId()));
+        }
+
+
+        return composition;
     }
 
 }
