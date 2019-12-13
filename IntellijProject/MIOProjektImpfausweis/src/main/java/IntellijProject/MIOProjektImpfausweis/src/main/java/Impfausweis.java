@@ -32,7 +32,8 @@ public class Impfausweis {
         // ------------------------------Create Organizations----------------------------------------------------------
         // TODO vaccinationOrganization?
         Organization organizationHospital = createOrganization(true, "Universitätsklinikum Schleswig-Holstein Campus Lübeck", "Ratzeburger Allee 160","Lübeck" , "23538", "DE");
-        //organizationHospital.setId("");
+        //organizationHospital.setId("#OrganizationID");
+        // Reference: Organization/#OrganizationID
 
         Organization organizationInstitute = createOrganization(true, "Institut für Transfusionsmedizin", "Ratzeburger Allee 160, Haus 31", "Lübeck", "23538", "DE");
         organizationInstitute.setPartOf(new Reference()
@@ -126,6 +127,14 @@ public class Impfausweis {
         //immunization11.setId("");
 
 
+        // ------------------------------Create Observations----------------------------------------------------------
+        Observation observation1 = createObservation(patient, encounter1,"39263-9", "Tuberculin screen test status CPHS", "1997-08-23");
+
+
+        // ------------------------------Create Conditions------------------------------------------------------------
+        Condition condition1 = createCondition(patient, encounter1,  "77465005", " Transplantation (procedure)", "1997-08-23");
+
+
 
 
         Bundle bundle = new Bundle();
@@ -163,12 +172,13 @@ public class Impfausweis {
         bundle.addEntry().setResource(immunization9).getRequest().setUrl(immunization9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(immunization10).getRequest().setUrl(immunization10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(immunization11).getRequest().setUrl(immunization11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(observation1).getRequest().setUrl(observation1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(condition1).getRequest().setUrl(condition1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
 
 
         // Parser to encode the resource into a string in json format
         String encoded = ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
         System.out.println(encoded);
-
 
         // for pushing upon server !
         //Bundle resp = client.transaction().withBundle(bundle).execute();
@@ -458,7 +468,7 @@ public class Impfausweis {
 
         // Set Identifier of the immunization object
         immunization.addIdentifier()
-                .setSystem("http://www.kh-uzl.de/fhir/vaccination")
+                .setSystem("http://www.kh-uzl.de/fhir/immunization")
                 .setValue(UUID.randomUUID().toString());
 
         // Set status of the immunization object
@@ -487,7 +497,6 @@ public class Impfausweis {
         // Set vaccine administration date
         immunization.setOccurrence(new DateTimeType(date));
 
-        //TODO Location???
         //TODO Manufacturer???
 
         //Set lotNumber
@@ -499,6 +508,89 @@ public class Impfausweis {
                 .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
 
         return immunization;
+    }
+
+
+
+    public static Observation createObservation(Patient patient, Encounter encounter, String observationTypeCode, String observationTypeDisplay, String date){
+        // Create an observation object
+        Observation observation = new Observation();
+
+        // Set Identifier of the observation object
+        observation.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/observation")
+                .setValue(UUID.randomUUID().toString());
+
+        observation.setStatus(Observation.ObservationStatus.FINAL);
+
+        observation.addCategory(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("laboratory")
+                        .setSystem("http://terminology.hl7.org/CodeSystem/observation-category")
+                        .setDisplay("Laboratory")));
+
+        observation.setCode(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode(observationTypeCode)
+                        .setSystem("http://loinc.org")
+                        .setDisplay(observationTypeDisplay)));
+
+        observation.setSubject(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" + patient.getId()));
+
+        observation.setEncounter(new Reference()
+                .setIdentifier(encounter.getIdentifierFirstRep())
+                .setReference(encounter.fhirType() + "/" + encounter.getId()));
+
+        observation.setEffective(new DateTimeType(date));
+
+        // TODO  value, interpretation, note, reference range?
+
+        return observation;
+    }
+
+
+
+    public static Condition createCondition(Patient patient, Encounter encounter, String conditionTypeCode, String conditionTypeDisplay, String date){
+        // Create a condition object
+        Condition condition = new Condition();
+
+        // Set Identifier of the condition object
+        condition.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/condition")
+                .setValue(UUID.randomUUID().toString());
+
+        condition.setClinicalStatus(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("active")
+                        .setSystem("http://terminology.hl7.org/CodeSystem/condition-clinical")
+                        .setDisplay("Active")));
+
+        condition.setVerificationStatus(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("confirmed")
+                        .setSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status")
+                        .setDisplay("Confirmed")));
+
+        // TODO oder hier ICD-10?
+        condition.setCode(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode(conditionTypeCode)
+                        .setSystem("http://snomed.info/sct")
+                        .setDisplay(conditionTypeDisplay)));
+
+        condition.setSubject(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" + patient.getId()));
+
+        condition.setEncounter(new Reference()
+                .setIdentifier(encounter.getIdentifierFirstRep())
+                .setReference(encounter.fhirType() + "/" + encounter.getId()));
+
+        condition.setRecordedDateElement(new DateTimeType(date));
+
+        return condition;
     }
 
 }
