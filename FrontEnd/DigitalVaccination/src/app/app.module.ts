@@ -11,6 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 //import { ProductListComponent } from './product-list/product-list.component';
 //import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
+import { MainVacPageComponent } from './main-vac-page/main-vac-page.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
     AppComponent,
     //ProductListComponent,
     //ProductDetailComponent,
-    OverviewPageComponent
+    OverviewPageComponent,
+    MainVacPageComponent
   ],
   imports: [
     BrowserModule,

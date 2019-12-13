@@ -11,12 +11,15 @@
   </h1>
 </div>
 <div class="outer_frame">
+  <div class="arrows">
+    <a [routerLink] = "prevLink">
+     <button class="pageSelect" [disabled]="prevLink==''"><</button>
+    </a>
+    <a [routerLink] = "nextLink">
+     <button class="pageSelect" [disabled]="nextLink==''"> > </button>
+    </a>
+  </div>
   <div id="vaccination_frame">
-    <script>
-    var vac_frame= document.getElementById("vaccination_frame");
-    vac_frame.setheight()
-</script>
-      Test Test
     <router-outlet></router-outlet>
   </div>
 </div>
