@@ -57,3 +57,10 @@ margin-left:auto;
 margin-right:auto;
 text-align:center;
 }
+.main_frame{
+  width:90%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+  padding-top:15px;
+}

@@ -1,0 +1,34 @@
+<div>
+  <b>Passive Immunisierung </b> mit <b>humanen Immunglobulinen</b> <br>
+  (z.B. Standard-Immunglobulin, Tetanus- oder andere spezielle Immunglobuline)*
+</div>
+
+<table mat-table [dataSource]="dataSource" class="customTable">
+
+  <ng-container matColumnDef="Datum">
+    <th mat-header-cell *matHeaderCellDef>Datum </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Chargennummer">
+    <th mat-header-cell *matHeaderCellDef> Typ/Chargen-Nr</th>
+    <td mat-cell *matCellDef="let element"> {{element.Handelsname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Dosis">
+    <th mat-header-cell *matHeaderCellDef> Dosis</th>
+    <td mat-cell *matCellDef="let element"> {{element.Chargennummer}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Arztinformation">
+    <th mat-header-cell *matHeaderCellDef> Unterschrift u. Stempel des Arztes</th>
+    <td mat-cell *matCellDef="let element"> {{element.Wirkstoffe}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>
+<div class="infoText">
+*Aktive Immunisierungen siehe entsprechende Seite dieses Ausweises
+</div>

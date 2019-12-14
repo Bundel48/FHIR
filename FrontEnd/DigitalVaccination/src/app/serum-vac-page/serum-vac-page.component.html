@@ -1,0 +1,85 @@
+<div class ="infoText">
+  <b>Serum-Injektion</b> Heterologe Sera (z.B. vom Pferd)
+</div>
+<table mat-table [dataSource]="dataSource" class="customTable">
+
+  <ng-container matColumnDef="Datum">
+    <th mat-header-cell *matHeaderCellDef>Datum </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Typ">
+    <th mat-header-cell *matHeaderCellDef> Typ </th>
+    <td mat-cell *matCellDef="let element"> {{element.Handelsname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Chargennummer">
+    <th mat-header-cell *matHeaderCellDef>Chargen-Nr. </th>
+    <td mat-cell *matCellDef="let element"> {{element.Chargennummer}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Dosis">
+    <th mat-header-cell *matHeaderCellDef> E/ml'<br> Dosis</th>
+    <td mat-cell *matCellDef="let element"> {{element.Wirkstoffe}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Arztinformation">
+    <th mat-header-cell *matHeaderCellDef> Unterschrift und Stempel des Arztes </th>
+    <td mat-cell *matCellDef="let element"> {{element.Wirkstoffe}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>
+<div class="infoText">
+  * E = Einheit
+</div>
+<div>
+  <b>Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen </b><br>
+  (Zutreffendes ankreuzen und erläutern)
+</div>
+<table>
+  <tr>
+    <td>1.</td><td>Bluter (Haemophilie)</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>6.</td><td>Immundefekt/-supression</td> <td><mat-checkbox></mat-checkbox></td>
+  </tr>
+  <tr>
+    <td>2.</td><td>Diabetes</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>7.</td><td>Allergien/Unverträglichkeiten</td> <td><mat-checkbox></mat-checkbox></td>
+  </tr>
+  <tr>
+    <td>3.</td><td>Dialysebehandlung</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>8.</td><td>Außergewöhntliche Impfreatkionen</td> <td><mat-checkbox></mat-checkbox></td>
+  </tr>
+  <tr>
+    <td>4.</td><td>Krämpfe, Nervenleiden</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>9.</td><td>Andere medizinische Risikofaktoren</td> <td><mat-checkbox></mat-checkbox></td>
+  </tr>
+  <tr>
+    <td>5.</td><td>Transplantation</td> <td><mat-checkbox></mat-checkbox></td>
+    <td></td><td></td> <td></td>
+  </tr>
+
+</table>
+
+<div class="infoText">
+  ____________________________________________________________________________<br>
+  ____________________________________________________________________________<br>
+</div>
+<div class="infoText">
+  <b>Blutgruppe und Rh-Faktor</b>
+  <table class="customTable">
+    <tr><td>AB0</td><td>Rh-pos(D+) / Rh-neg(D-)</td></tr>
+  </table>
+  <div class="infoText">
+    Rh-positiv bzw Rh-negativ wörtlich eintragen
+  </div>
+  <table class="customTable">
+    <tr><td>Rh-Formel</td><td>Antikörper</td></tr>
+  </table>
+  <div class="infoText">
+    Datum/Unterschrift und Stempel des Arztes:<br>
+  </div>
+</div>
+

@@ -15,7 +15,7 @@ export class AppComponent {
   currentPage: number;
   nextLink = "/1";
   prevLink = "/2";
-  maxPage = 2;
+  maxPage = 12;
 
 
   ngOnInit() {

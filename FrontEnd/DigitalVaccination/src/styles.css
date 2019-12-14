@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+div {padding-top:15px;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+table.customTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #000000;
+  border-style: solid;
+  color: #000000;
+   margin-top:15px;
+}
+
+table.customTable td, table.customTable th {
+  border-width: 2px;
+  border-color: #000000;
+  border-style: solid;
+  padding: 5px;
+  background-color: #f9d05a;
+  text-align:left;
+
+}

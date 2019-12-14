@@ -29,7 +29,7 @@ export class OverviewPageComponent implements OnInit {
           "given": [
             "Nachname"
           ]
-        }
+         }
       ],
       "birthDate": "1900-01-01",
       "address": [
@@ -40,7 +40,7 @@ export class OverviewPageComponent implements OnInit {
           "city": "Stadt",
           "postalCode": "PLZ",
           "country": "LAND"
-          }
+        }
           ]
     }
 
