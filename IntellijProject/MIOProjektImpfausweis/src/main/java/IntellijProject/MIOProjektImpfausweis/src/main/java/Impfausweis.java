@@ -4,6 +4,7 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import org.hl7.fhir.r4.model.*;
 
+import java.lang.reflect.Type;
 import java.sql.Ref;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,20 +90,32 @@ public class Impfausweis {
 
         Encounter encounter14 = createEncounter(patient, practitioner2, organizationMedicalCenter,"2004-01-15");
 
-        //encounter1.setId("");
-        //encounter2.setId("");
-        //encounter3.setId("");
-        //encounter4.setId("");
-        //encounter5.setId("");
-        //encounter6.setId("");
-        //encounter7.setId("");
-        //encounter8.setId("");
-        //encounter9.setId("");
-        //encounter10.setId("");
-        //encounter11.setId("");
-        //encounter12.setId("");
-        //encounter13.setId("");
-        //encounter14.setId("");
+        Encounter encounter15 = createEncounter(patient, practitioner4, organizationInstitute,"2016-09-04");
+
+        Encounter encounter16 = createEncounter(patient, practitioner4, organizationInstitute,"2018-04-17");
+
+        Encounter encounter17 = createEncounterImmunology(patient, practitioner4, organizationInstitute,"2015-01-22");
+
+        Encounter encounter18 = createEncounterImmunology(patient, practitioner1, organizationMedicalCenter,"2018-11-24");
+
+        encounter1.setId("146798");
+        encounter2.setId("146799");
+        encounter3.setId("146800");
+        encounter4.setId("146801");
+        encounter5.setId("146802");
+        encounter6.setId("146803");
+        encounter7.setId("146804");
+        encounter8.setId("146805");
+        encounter9.setId("146806");
+        encounter10.setId("146807");
+        encounter11.setId("146808");
+        encounter12.setId("146809");
+        encounter13.setId("146810");
+        encounter14.setId("146811");
+        encounter15.setId("146812");
+        encounter16.setId("146828");
+        encounter17.setId("146830");
+        encounter18.setId("146832");
 
 
         // ------------------------------Create Array Lists needed for Series of Vaccine------------------------------
@@ -169,23 +182,23 @@ public class Impfausweis {
 
         Immunization immunization_standard1 = createImmunizationSeries(patient,encounter1,"IFIP",
                 "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV", "1997-08-23",
-                "A20CB210A", targetDiseaseCode2, targetDiseaseDisplay2);
+                "A20CB210A", targetDiseaseCode2, targetDiseaseDisplay2, 1);
 
         Immunization immunization_standard2 = createImmunizationSeries(patient,encounter2,"IFIP",
                 "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV", "1997-09-20",
-                "A20CB347A", targetDiseaseCode2, targetDiseaseDisplay2);
+                "A20CB347A", targetDiseaseCode2, targetDiseaseDisplay2,2);
 
         Immunization immunization_standard3 = createImmunizationSeries(patient,encounter3,"IFIP",
                 "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV", "1997-10-27",
-                "A20CB549A", targetDiseaseCode2, targetDiseaseDisplay2);
+                "A20CB549A", targetDiseaseCode2, targetDiseaseDisplay2,3);
 
         Immunization immunization_standard4 = createImmunizationSeries(patient,encounter4,"MMRSKB",
                 "urn:oid:1.2.36.1.2001.1005.17", "Priorix", "1998-09-12",
-                "A69CC740A", targetDiseaseCode1, targetDiseaseDisplay1);
+                "A69CC740A", targetDiseaseCode1, targetDiseaseDisplay1,1);
 
         Immunization immunization_standard5 = createImmunizationSeries(patient,encounter5,"IFIP",
                 "urn:oid:1.2.36.1.2001.1005.17", "Infanrix-IPV", "1998-12-10",
-                "A20CB721A", targetDiseaseCode2, targetDiseaseDisplay2);
+                "A20CB721A", targetDiseaseCode2, targetDiseaseDisplay2,4);
 
         Immunization immunization_standard6 = createSingleImmunization(patient, encounter6, "ENGP",
                 "urn:oid:1.2.36.1.2001.1005.17", "Engerix B",
@@ -197,7 +210,7 @@ public class Impfausweis {
 
         Immunization immunization_standard8 = createImmunizationSeries(patient,encounter8,"MMRSKB",
                 "urn:oid:1.2.36.1.2001.1005.17", "Priorix", "2000-08-06",
-                "A69CC740A", targetDiseaseCode1, targetDiseaseDisplay1);
+                "A69CC740A", targetDiseaseCode1, targetDiseaseDisplay1,2);
 
         Immunization immunization_standard9 = createSingleImmunization(patient, encounter9, "ENGP",
                 "urn:oid:1.2.36.1.2001.1005.17", "Engerix B",
@@ -205,23 +218,23 @@ public class Impfausweis {
 
         Immunization immunization_standard10 = createImmunizationSeries(patient,encounter10,"QDCL",
                 "urn:oid:1.2.36.1.2001.1005.17", "Quadracel", "2006-08-28",
-                "AC39B008BC", targetDiseaseCode3, targetDiseaseDisplay3);
+                "AC39B008BC", targetDiseaseCode3, targetDiseaseDisplay3, 5);
 
         Immunization immunization_standard11 = createImmunizationSeries(patient,encounter11,"IFX",
                 "urn:oid:1.2.36.1.2001.1005.17", "Infanrix", "2011-03-13",
-                "A21CB172A", targetDiseaseCode4, targetDiseaseDisplay4);
+                "A21CB172A", targetDiseaseCode4, targetDiseaseDisplay4, 6);
 
-        //immunization_standard1.setId("");
-        //immunization_standard2.setId("");
-        //immunization_standard3.setId("");
-        //immunization_standard4.setId("");
-        //immunization_standard5.setId("");
-        //immunization_standard6.setId("");
-        //immunization_standard7.setId("");
-        //immunization_standard8.setId("");
-        //immunization_standard9.setId("");
-        //immunization_standard10.setId("");
-        //immunization_standard11.setId("");
+        immunization_standard1.setId("146813");
+        immunization_standard2.setId("146814");
+        immunization_standard3.setId("146815");
+        immunization_standard4.setId("146816");
+        immunization_standard5.setId("146817");
+        immunization_standard6.setId("146818");
+        immunization_standard7.setId("146819");
+        immunization_standard8.setId("146820");
+        immunization_standard9.setId("146821");
+        immunization_standard10.setId("146822");
+        immunization_standard11.setId("146823");
 
         // ------------------------------Other Immunizations-------------------------------------------------------
         Immunization immunization_others1 = createSingleImmunization(patient, encounter12, "MENTEC",
@@ -232,35 +245,52 @@ public class Impfausweis {
                 "urn:oid:1.2.36.1.2001.1005.17", "Japanese Encephalitis",
                 "2017-08-13","25858", "Japanische Enzephalitis");
 
-        //immunization_others1.setId("");
-        //immunization_others2.setId("");
+        immunization_others1.setId("146824");
+        immunization_others2.setId("146825");
 
         // ------------------------------Immunizations Influenza------------------------------------------------------
         Immunization immunization_influenza1 = createSingleImmunization(patient, encounter14, "INFLUV",
                 "urn:oid:1.2.36.1.2001.1005.17", "Influvac",
                 "2004-01-15","18858B9", "Influenza");
 
-        //immunization_influenza.setId("");
+        immunization_influenza1.setId("146826");
 
         // ------------------------------Immunizations Tuberculosis---------------------------------------------------
 
         // ------------------------------Passive Immunizations -------------------------------------------------------
+        Immunization immunization_passive = createImmunizationWithDose(patient, encounter15, "18",
+                "http://hl7.org/fhir/sid/cvx", "rabies, intramuscular injection",
+                "2016-09-04", "44307A", 5.0, "ml", "Tollwut");
+
+        immunization_passive.setId("146827");
 
         // ------------------------------Serum injection--------------------------------------------------------------
-        //TODO
 
 
 
         // ------------------------------Create Observations----------------------------------------------------------
         // ------------------------------Tuberculin-Tests-------------------------------------------------------------
-        Observation observation1 = createObservation(patient, encounter1,"39263-9",
-                "Tuberculin screen test status CPHS", "1997-08-23");
+        Observation observation_tuberculin1 = createObservationTuberculinTest(patient, encounter16, practitioner4,
+                "39263-9", "Tuberculin screen test status CPHS",
+                "2018-04-17", "NEG", "Negative", "Intrakutantest");
+
+        observation_tuberculin1.setId("146829");
 
         // ------------------------------Antibody Assays--------------------------------------------------------------
 
         // ------------------------------Hepatitis B antibody assays--------------------------------------------------
+        Observation observation_antibody1 = createObservationAntibodyAssays(patient, encounter17, practitioner4,
+                "22322-2", "Hepatitis B virus surface Ab [Presence] in Serum",
+                "2015-01-22", "N", "Normal");
+
+        observation_antibody1.setId("146831");
 
         // ------------------------------Rubella antibody assays------------------------------------------------------
+        Observation observation_rubella1 = createObservationRubella(patient, encounter18, practitioner1,
+                "13279-5", "Rubella virus IgG Ab [Units/volume]",
+                "2018-11-24", 12.0, "IU/ml", "ja");
+
+        observation_rubella1.setId("146833");
 
         // ------------------------------Blood Group-----------------------------------------------------------------
 
@@ -298,20 +328,25 @@ public class Impfausweis {
         ArrayList<Immunization> ArrayListTuberculosis = new ArrayList<Immunization>();
 
         ArrayList<Observation> ArrayListTuberculinTests = new ArrayList<Observation>();
+        ArrayListTuberculinTests.add(observation_tuberculin1);
 
         ArrayList<Observation> ArrayListAntibodyAssays = new ArrayList<Observation>();
 
         ArrayList<Observation> ArrayListHepatitisB = new ArrayList<Observation>();
+        ArrayListHepatitisB.add(observation_antibody1);
 
         ArrayList<Observation> ArrayListRubella = new ArrayList<Observation>();
+        ArrayListRubella.add(observation_rubella1);
 
         ArrayList<Immunization> ArrayListPassiveImmunizations = new ArrayList<Immunization>();
+        ArrayListPassiveImmunizations.add(immunization_passive);
 
         ArrayList<Immunization> ArrayListSerumInjection = new ArrayList<Immunization>();
 
         ArrayList<Condition> ArrayListCondition = new ArrayList<Condition>();
 
         ArrayList<Observation> ArrayListBlood = new ArrayList<Observation>();
+
 
         LocalDate currentDate = java.time.LocalDate.now();
 
@@ -342,38 +377,50 @@ public class Impfausweis {
         //bundle.addEntry().setResource(practitioner2).getRequest().setUrl(practitioner2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         //bundle.addEntry().setResource(practitioner3).getRequest().setUrl(practitioner3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         //bundle.addEntry().setResource(practitioner4).getRequest().setUrl(practitioner4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        /*
-        bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter2).getRequest().setUrl(encounter2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter3).getRequest().setUrl(encounter3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter4).getRequest().setUrl(encounter4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter5).getRequest().setUrl(encounter5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter6).getRequest().setUrl(encounter6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter7).getRequest().setUrl(encounter7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter8).getRequest().setUrl(encounter8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter9).getRequest().setUrl(encounter9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter10).getRequest().setUrl(encounter10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(encounter11).getRequest().setUrl(encounter11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        */
-        bundle.addEntry().setResource(immunization_standard1).getRequest().setUrl(immunization_standard1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard2).getRequest().setUrl(immunization_standard2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard3).getRequest().setUrl(immunization_standard3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard4).getRequest().setUrl(immunization_standard4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard5).getRequest().setUrl(immunization_standard5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard6).getRequest().setUrl(immunization_standard6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard7).getRequest().setUrl(immunization_standard7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard8).getRequest().setUrl(immunization_standard8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard9).getRequest().setUrl(immunization_standard9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard10).getRequest().setUrl(immunization_standard10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_standard11).getRequest().setUrl(immunization_standard11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_others1).getRequest().setUrl(immunization_others1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_others2).getRequest().setUrl(immunization_others2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        bundle.addEntry().setResource(immunization_influenza1).getRequest().setUrl(immunization_influenza1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter2).getRequest().setUrl(encounter2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter3).getRequest().setUrl(encounter3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter4).getRequest().setUrl(encounter4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter5).getRequest().setUrl(encounter5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter6).getRequest().setUrl(encounter6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter7).getRequest().setUrl(encounter7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter8).getRequest().setUrl(encounter8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter9).getRequest().setUrl(encounter9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter10).getRequest().setUrl(encounter10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter11).getRequest().setUrl(encounter11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter12).getRequest().setUrl(encounter12.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter13).getRequest().setUrl(encounter13.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter14).getRequest().setUrl(encounter14.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter15).getRequest().setUrl(encounter15.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter16).getRequest().setUrl(encounter16.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter17).getRequest().setUrl(encounter17.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(encounter18).getRequest().setUrl(encounter18.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard1).getRequest().setUrl(immunization_standard1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard2).getRequest().setUrl(immunization_standard2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard3).getRequest().setUrl(immunization_standard3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard4).getRequest().setUrl(immunization_standard4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard5).getRequest().setUrl(immunization_standard5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard6).getRequest().setUrl(immunization_standard6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard7).getRequest().setUrl(immunization_standard7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard8).getRequest().setUrl(immunization_standard8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard9).getRequest().setUrl(immunization_standard9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard10).getRequest().setUrl(immunization_standard10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_standard11).getRequest().setUrl(immunization_standard11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_others1).getRequest().setUrl(immunization_others1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_others2).getRequest().setUrl(immunization_others2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_influenza1).getRequest().setUrl(immunization_influenza1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(immunization_passive).getRequest().setUrl(immunization_passive.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(observation_tuberculin1).getRequest().setUrl(observation_tuberculin1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(observation_antibody1).getRequest().setUrl(observation_antibody1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        //bundle.addEntry().setResource(observation_rubella1).getRequest().setUrl(observation_rubella1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+
+
         /*
         bundle.addEntry().setResource(observation1).getRequest().setUrl(observation1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(condition1).getRequest().setUrl(condition1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(composition).getRequest().setUrl(composition.fhirType()).setMethod(Bundle.HTTPVerb.POST);
          */
+
 
         // example how to update something
         //bundle.addEntry().setResource(practitioner1).getRequest().setUrl("Practitioner/146792/_history/1").setMethod(Bundle.HTTPVerb.PUT);
@@ -381,15 +428,15 @@ public class Impfausweis {
 
         // Parser to encode the resource into a string in json format
         String encoded = ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
-        System.out.println(encoded);
+        //System.out.println(encoded);
 
 
 
         // for pushing upon server !
-        //Bundle resp = client.transaction().withBundle(bundle).execute();
+        Bundle resp = client.transaction().withBundle(bundle).execute();
 
         // Log the response
-        //System.out.println(ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
+        System.out.println(ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
 
     }
 
@@ -627,6 +674,69 @@ public class Impfausweis {
     }
 
 
+
+    /**
+     * The method createEncounterImmunology() creates a new Encounter object. This describes the date of the encounter
+     * and the participating patient and practitioner and the organization that is responsible for the encounter.
+     * The encounter is referenced by one observation.
+     *
+     * @param patient The patient object that was present at the encounter and got the immunization.
+     * @param practitioner The practitioner object that who was involved in the encounter.
+     * @param organization The organization object that is responsible for the encounter, for example a hospital.
+     * @param date The date when the encounter took place as String.
+     * @return returns an Encounter object.
+     */
+    public static Encounter createEncounterImmunology(Patient patient, Practitioner practitioner,
+                                                      Organization organization, String date){
+        // Create an encounter object
+        Encounter encounter = new Encounter();
+
+        // Set Identifier of the encounter object
+        encounter.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/encounter")
+                .setValue(UUID.randomUUID().toString());
+
+        // Set Status of the encounter object
+        encounter.setStatus(Encounter.EncounterStatus.FINISHED);
+
+        // Set classification of the encounter object
+        encounter.setClass_(new Coding()
+                .setCode("AMB")
+                .setSystem("http://terminology.hl7.org/CodeSystem/v3-ActCode")
+                .setDisplay("ambulatory"));
+
+        // Set specific type of service of the encounter object
+        encounter.setServiceType(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("172")
+                        .setSystem("http://terminology.hl7.org/CodeSystem/service-type")
+                        .setDisplay("Immunology & Allergy")));
+
+        // Set reference to the patient that was present at the encounter
+        encounter.setSubject(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" + patient.getId()));
+
+        // Set reference to the practitioner who was involved in the encounter
+        encounter.addParticipant().setIndividual(new Reference()
+                .setIdentifier(practitioner.getIdentifierFirstRep())
+                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
+
+        // Set period when the immunization took place
+        encounter.setPeriod(new Period()
+                .setStartElement(new DateTimeType(date))
+                .setEndElement(new DateTimeType(date)));
+
+        // Set reference to the organization that is responsible for the encounter
+        encounter.setServiceProvider(new Reference()
+                .setIdentifier(organization.getIdentifierFirstRep())
+                .setReference(organization.fhirType() + "/" + organization.getId()));
+
+        return encounter;
+    }
+
+
+
     /**
      * The method createSingleImmunization() creates a new immunization. That immunization references a patient, who has been
      * immunized and an encounter that belongs to this immunization.
@@ -692,8 +802,8 @@ public class Impfausweis {
     /**
      * The method createImmunizationSeries() creates a new immunization. That immunization references a patient, who has been
      * immunized and an encounter that belongs to this immunization.
-     * This method can only be used to create immunizations for immunization series like standard vaccinations liekly
-     * are (like tetanus, diphtheria, pertussis, Hib, Hepatitis B, Poliomyelitis, Measles, Mumps, Rubella),
+     * This method can only be used to create immunizations for immunization series like standard vaccinations likely
+     * are (like tetanus, diphtheria, pertussis, Hib, Hepatitis B, Poliomyelitis, Measles, Mumps, Rubella)
      *
      * @param patient The patient object that has been immunized.
      * @param encounter The encounter object for this immunization.
@@ -708,7 +818,8 @@ public class Impfausweis {
      */
     public static Immunization createImmunizationSeries(Patient patient, Encounter encounter, String immunizationCode,
                                                         String immunizationSystem, String immunizationDisplay, String date,
-                                                        String lotNumber, ArrayList<String> targetDiseaseCode, ArrayList<String> targetDiseaseDisplay) {
+                                                        String lotNumber, ArrayList<String> targetDiseaseCode,
+                                                        ArrayList<String> targetDiseaseDisplay, Integer doseNumberPosInt) {
         // Create an immunization object
         Immunization immunization = new Immunization();
 
@@ -755,26 +866,184 @@ public class Impfausweis {
                     .setDisplay(targetDiseaseDisplay.get(i)));
         }
 
-        immunization.addProtocolApplied().addTargetDisease(codeableConcept);
+        immunization.addProtocolApplied()
+                .addTargetDisease(codeableConcept)
+                .setDoseNumber(new PositiveIntType(doseNumberPosInt));
+
 
         return immunization;
     }
 
 
+
     /**
-     * The method createObservation() creates a new observation. That observation references a patient the observation
-     * belongs to and an encounter that belongs to this observation. The Observation can be used for tuberculin-tests,
-     * antibody assays, Hepatitis B, Rubella antibody assays.
+     * The method createImmunizationWithDose() creates a new immunization. That immunization references a patient, who
+     * has been immunized and an encounter that belongs to this immunization.
+     * This method can only be used to create immunizations for passive immunisations with human immunoglobulins and for
+     * serum injections.
+     *
+     * @param patient The patient object that has been immunized.
+     * @param encounter The encounter object for this immunization.
+     * @param immunizationCode The code of the vaccine product.
+     * @param immunizationSystem The system used can be found here http://hl7.org/fhir/valueset-vaccine-code.html
+     * @param immunizationDisplay The display information that belongs to the immunizationCode.
+     * @param date The date when the immunization took place.
+     * @param lotNumber The lot number of the vaccine product.
+     * @param doseQuantity A double value for the dose quantity of the vaccine that has been given to the patient.
+     * @param doseQuantityUnit The unit of the dose quantity.
+     * @param noteDisease String for the disease the vaccination is against.
+     * @return a new Immunization object
+     */
+    public static Immunization createImmunizationWithDose(Patient patient, Encounter encounter, String immunizationCode,
+                                                          String immunizationSystem, String immunizationDisplay,
+                                                          String date, String lotNumber, double doseQuantity,
+                                                          String doseQuantityUnit, String noteDisease) {
+        // Create an immunization object
+        Immunization immunization = new Immunization();
+
+        // Set Identifier of the immunization object
+        immunization.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/immunization")
+                .setValue(UUID.randomUUID().toString());
+
+        // Set status of the immunization object
+        immunization.setStatus(Immunization.ImmunizationStatus.COMPLETED);
+
+        // Set VaccineCode of the immunization object
+        immunization.setVaccineCode(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode(immunizationCode)
+                        .setSystem(immunizationSystem)
+                        .setDisplay(immunizationDisplay)
+                )
+        );
+
+        // Set reference to the patient belonging to the immunization
+        immunization.setPatient(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" +patient.getId()));
+
+        // Set reference to the encounter belonging to the immunization
+        immunization.setEncounter(new Reference()
+                .setIdentifier(encounter.getIdentifierFirstRep())
+                .setReference(encounter.fhirType() + "/" + encounter.getId()));
+
+        // Set vaccine administration date
+        immunization.setOccurrence(new DateTimeType(date));
+
+        //Set lotNumber
+        immunization.setLotNumber(lotNumber);
+
+        immunization.setDoseQuantity(new Quantity()
+                .setValue(doseQuantity)
+                .setUnit(doseQuantityUnit));
+
+        immunization.addNote(new Annotation().setText(noteDisease));
+
+        return immunization;
+    }
+
+
+
+    /**
+     * The method createObservationTuberculinTest() creates a new observation. That observation references a patient
+     * the observation belongs to and an encounter that belongs to this observation.
+     * The Observation can be used for tuberculin-tests.
      *
      * @param patient The patient object that the observation belongs to.
      * @param encounter The encounter this observation was part of.
+     * @param practitioner The practitioner who is responsible for the observation.
      * @param observationTypeCode The code of the type of observation (a Loinc Code).
      * @param observationTypeDisplay The displaytext of the type of the observation.
      * @param date The date when the Observation took place.
+     * @param interpretationCode Interpretation Code can only have the values NEG or POS.
+     * @param interpretationDisplay The display text belonging to the interpretation Code can only be Negative for code
+     *                              NEG and Positive for code POS
+     * @param kindOfTest A String that has one of the two values: Stempeltest or Intrakutantest
      * @return a new Observation object.
      */
-    public static Observation createObservation(Patient patient, Encounter encounter, String observationTypeCode,
-                                                String observationTypeDisplay, String date){
+    public static Observation createObservationTuberculinTest(Patient patient, Encounter encounter,
+                                                              Practitioner practitioner, String observationTypeCode,
+                                                              String observationTypeDisplay, String date,
+                                                              String interpretationCode, String interpretationDisplay,
+                                                              String kindOfTest){
+        // Create an observation object
+        Observation observation = new Observation();
+
+        // Set Identifier of the observation object
+        observation.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/observation")
+                .setValue(UUID.randomUUID().toString());
+
+        // Set status of the observation object
+        observation.setStatus(Observation.ObservationStatus.FINAL);
+
+        // Set classification type of observation
+        observation.addCategory(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("vital-signs")
+                        .setSystem("http://terminology.hl7.org/CodeSystem/observation-category")
+                        .setDisplay("Vital Signs")));
+
+        // Set type of observation
+        observation.setCode(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode(observationTypeCode)
+                        .setSystem("http://loinc.org")
+                        .setDisplay(observationTypeDisplay)));
+
+        // Set reference to a patient as a subject of the observation
+        observation.setSubject(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" + patient.getId()));
+
+        // Set reference to an encounter
+        observation.setEncounter(new Reference()
+                .setIdentifier(encounter.getIdentifierFirstRep())
+                .setReference(encounter.fhirType() + "/" + encounter.getId()));
+
+        // Set time of the observation
+        observation.setEffective(new DateTimeType(date));
+
+        // Set performer of the observation
+        observation.addPerformer(new Reference()
+                .setIdentifier(practitioner.getIdentifierFirstRep())
+                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
+
+        // Add interpretation/results of the observation
+        observation.addInterpretation(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode(interpretationCode)
+                        .setSystem("http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation")
+                        .setDisplay(interpretationDisplay)));
+
+        // Set text for the kind of test that has been used
+        observation.addNote(new Annotation().setText(kindOfTest));
+
+        return observation;
+    }
+
+
+
+    /**
+     * The method createObservationTuberculinTest() creates a new observation. That observation references a patient
+     * the observation belongs to and an encounter that belongs to this observation.
+     * The Observation can be used for Antibody assays (but not rubella antibody assays).
+     *
+     * @param patient The patient object that the observation belongs to.
+     * @param encounter The encounter this observation was part of.
+     * @param practitioner The practitioner who is responsible for the observation.
+     * @param observationTypeCode The code of the type of observation (a Loinc Code).
+     * @param observationTypeDisplay The displaytext of the type of the observation.
+     * @param date The date when the Observation took place.
+     * @param interpretationCode Interpretation Code from http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation
+     * @param interpretationDisplay The display text belonging to the interpretation Code
+     * @return a new Observation object.
+     */
+    public static Observation createObservationAntibodyAssays(Patient patient, Encounter encounter,
+                                                              Practitioner practitioner, String observationTypeCode,
+                                                              String observationTypeDisplay, String date,
+                                                              String interpretationCode, String interpretationDisplay){
         // Create an observation object
         Observation observation = new Observation();
 
@@ -813,10 +1082,95 @@ public class Impfausweis {
         // Set time of the observation
         observation.setEffective(new DateTimeType(date));
 
-        // TODO  value, interpretation, note, reference range?
+        // Set performer of the observation
+        observation.addPerformer(new Reference()
+                .setIdentifier(practitioner.getIdentifierFirstRep())
+                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
+
+        // Add interpretation/results of the observation
+        observation.addInterpretation(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode(interpretationCode)
+                        .setSystem("http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation")
+                        .setDisplay(interpretationDisplay)));
 
         return observation;
     }
+
+
+
+    /**
+     * The method createObservationTuberculinTest() creates a new observation. That observation references a patient
+     * the observation belongs to and an encounter that belongs to this observation.
+     * The Observation can be used for tuberculin-tests.
+     *
+     * @param patient The patient object that the observation belongs to.
+     * @param encounter The encounter this observation was part of.
+     * @param practitioner The practitioner who is responsible for the observation.
+     * @param observationTypeCode The code of the type of observation (a Loinc Code).
+     * @param observationTypeDisplay The displaytext of the type of the observation.
+     * @param date The date when the Observation took place.
+     * @param value The value as double of the observation.
+     * @param valueUnit The unit of the measured value.
+     * @param protection A String that has one of the two values: ja, nein
+     * @return a new Observation object.
+     */
+    public static Observation createObservationRubella(Patient patient, Encounter encounter, Practitioner practitioner,
+                                                       String observationTypeCode, String observationTypeDisplay,
+                                                       String date, double value, String valueUnit, String protection){
+        // Create an observation object
+        Observation observation = new Observation();
+
+        // Set Identifier of the observation object
+        observation.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/observation")
+                .setValue(UUID.randomUUID().toString());
+
+        // Set status of the observation object
+        observation.setStatus(Observation.ObservationStatus.FINAL);
+
+        // Set classification type of observation
+        observation.addCategory(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("laboratory")
+                        .setSystem("http://terminology.hl7.org/CodeSystem/observation-category")
+                        .setDisplay("Laboratory")));
+
+        // Set type of observation
+        observation.setCode(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode(observationTypeCode)
+                        .setSystem("http://loinc.org")
+                        .setDisplay(observationTypeDisplay)));
+
+        // Set reference to a patient as a subject of the observation
+        observation.setSubject(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" + patient.getId()));
+
+        // Set reference to an encounter
+        observation.setEncounter(new Reference()
+                .setIdentifier(encounter.getIdentifierFirstRep())
+                .setReference(encounter.fhirType() + "/" + encounter.getId()));
+
+        // Set time of the observation
+        observation.setEffective(new DateTimeType(date));
+
+        // Set performer of the observation
+        observation.addPerformer(new Reference()
+                .setIdentifier(practitioner.getIdentifierFirstRep())
+                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
+
+        observation.setValue(new Quantity()
+                .setValue(value)
+                .setUnit(valueUnit));
+
+        // Set text for the kind of test that has been used
+        observation.addNote(new Annotation().setText(protection));
+
+        return observation;
+    }
+
 
 
     /**
