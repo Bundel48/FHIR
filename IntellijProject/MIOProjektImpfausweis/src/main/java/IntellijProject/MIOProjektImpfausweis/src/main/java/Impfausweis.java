@@ -3,6 +3,7 @@ package IntellijProject.MIOProjektImpfausweis.src.main.java;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.utilities.xhtml.XhtmlNode;
 
 import java.lang.reflect.Type;
 import java.sql.Ref;
@@ -98,6 +99,8 @@ public class Impfausweis {
 
         Encounter encounter18 = createEncounterImmunology(patient, practitioner1, organizationMedicalCenter,"2018-11-24");
 
+        Encounter encounter19 = createEncounterDisease(patient, practitioner2, organizationMedicalCenter,"2004-11-18");
+
         encounter1.setId("146798");
         encounter2.setId("146799");
         encounter3.setId("146800");
@@ -116,6 +119,7 @@ public class Impfausweis {
         encounter16.setId("146828");
         encounter17.setId("146830");
         encounter18.setId("146832");
+        encounter19.setId("146834");
 
 
         // ------------------------------Create Array Lists needed for Series of Vaccine------------------------------
@@ -287,19 +291,22 @@ public class Impfausweis {
 
         // ------------------------------Rubella antibody assays------------------------------------------------------
         Observation observation_rubella1 = createObservationRubella(patient, encounter18, practitioner1,
-                "13279-5", "Rubella virus IgG Ab [Units/volume]",
+                "13279-5", "Rubella virus IgG Ab [Units/volume] in Serum --1st specimen",
                 "2018-11-24", 12.0, "IU/ml", "ja");
 
         observation_rubella1.setId("146833");
 
         // ------------------------------Blood Group-----------------------------------------------------------------
+        // prinzipiell wie mit createObservationAntibodyAssays()
 
 
 
         // ------------------------------Create Conditions------------------------------------------------------------
         // ------------------------------Medical comments on risk factors---------------------------------------------
-        Condition condition1 = createCondition(patient, encounter1,  "77465005",
-                " Transplantation (procedure)", "1997-08-23");
+        Condition condition1 = createCondition(patient, encounter19,  "46635009",
+                "Diabetes mellitus type 1 (disorder)", "2004-11-18");
+
+        condition1.setId("146835");
 
 
         // ------------------------------Create Array Lists needed for Composition------------------------------------
@@ -344,6 +351,7 @@ public class Impfausweis {
         ArrayList<Immunization> ArrayListSerumInjection = new ArrayList<Immunization>();
 
         ArrayList<Condition> ArrayListCondition = new ArrayList<Condition>();
+        ArrayListCondition.add(condition1);
 
         ArrayList<Observation> ArrayListBlood = new ArrayList<Observation>();
 
@@ -366,60 +374,58 @@ public class Impfausweis {
                 ArrayListCondition,
                 ArrayListBlood);
 
+        composition.setId("146836");
+
 
 
         Bundle bundle = new Bundle();
-        //bundle.addEntry().setResource(patient).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(organizationHospital).getRequest().setUrl(organizationHospital.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(organizationInstitute).getRequest().setUrl(organizationInstitute.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(organizationMedicalCenter).getRequest().setUrl(organizationMedicalCenter.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(practitioner1).getRequest().setUrl(practitioner1.fhirType()).setMethod(Bundle.HTTPVerb.PUT);
-        //bundle.addEntry().setResource(practitioner2).getRequest().setUrl(practitioner2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(practitioner3).getRequest().setUrl(practitioner3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(practitioner4).getRequest().setUrl(practitioner4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter2).getRequest().setUrl(encounter2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter3).getRequest().setUrl(encounter3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter4).getRequest().setUrl(encounter4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter5).getRequest().setUrl(encounter5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter6).getRequest().setUrl(encounter6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter7).getRequest().setUrl(encounter7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter8).getRequest().setUrl(encounter8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter9).getRequest().setUrl(encounter9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter10).getRequest().setUrl(encounter10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter11).getRequest().setUrl(encounter11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter12).getRequest().setUrl(encounter12.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter13).getRequest().setUrl(encounter13.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter14).getRequest().setUrl(encounter14.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter15).getRequest().setUrl(encounter15.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter16).getRequest().setUrl(encounter16.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter17).getRequest().setUrl(encounter17.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(encounter18).getRequest().setUrl(encounter18.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard1).getRequest().setUrl(immunization_standard1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard2).getRequest().setUrl(immunization_standard2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard3).getRequest().setUrl(immunization_standard3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard4).getRequest().setUrl(immunization_standard4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard5).getRequest().setUrl(immunization_standard5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard6).getRequest().setUrl(immunization_standard6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard7).getRequest().setUrl(immunization_standard7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard8).getRequest().setUrl(immunization_standard8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard9).getRequest().setUrl(immunization_standard9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard10).getRequest().setUrl(immunization_standard10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_standard11).getRequest().setUrl(immunization_standard11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_others1).getRequest().setUrl(immunization_others1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_others2).getRequest().setUrl(immunization_others2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_influenza1).getRequest().setUrl(immunization_influenza1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(immunization_passive).getRequest().setUrl(immunization_passive.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(observation_tuberculin1).getRequest().setUrl(observation_tuberculin1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(observation_antibody1).getRequest().setUrl(observation_antibody1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-        //bundle.addEntry().setResource(observation_rubella1).getRequest().setUrl(observation_rubella1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-
-
-        /*
-        bundle.addEntry().setResource(observation1).getRequest().setUrl(observation1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(patient).getRequest().setUrl(patient.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(organizationHospital).getRequest().setUrl(organizationHospital.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(organizationInstitute).getRequest().setUrl(organizationInstitute.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(organizationMedicalCenter).getRequest().setUrl(organizationMedicalCenter.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitioner1).getRequest().setUrl(practitioner1.fhirType()).setMethod(Bundle.HTTPVerb.PUT);
+        bundle.addEntry().setResource(practitioner2).getRequest().setUrl(practitioner2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitioner3).getRequest().setUrl(practitioner3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(practitioner4).getRequest().setUrl(practitioner4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter1).getRequest().setUrl(encounter1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter2).getRequest().setUrl(encounter2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter3).getRequest().setUrl(encounter3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter4).getRequest().setUrl(encounter4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter5).getRequest().setUrl(encounter5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter6).getRequest().setUrl(encounter6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter7).getRequest().setUrl(encounter7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter8).getRequest().setUrl(encounter8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter9).getRequest().setUrl(encounter9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter10).getRequest().setUrl(encounter10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter11).getRequest().setUrl(encounter11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter12).getRequest().setUrl(encounter12.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter13).getRequest().setUrl(encounter13.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter14).getRequest().setUrl(encounter14.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter15).getRequest().setUrl(encounter15.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter16).getRequest().setUrl(encounter16.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter17).getRequest().setUrl(encounter17.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter18).getRequest().setUrl(encounter18.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(encounter19).getRequest().setUrl(encounter19.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard1).getRequest().setUrl(immunization_standard1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard2).getRequest().setUrl(immunization_standard2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard3).getRequest().setUrl(immunization_standard3.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard4).getRequest().setUrl(immunization_standard4.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard5).getRequest().setUrl(immunization_standard5.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard6).getRequest().setUrl(immunization_standard6.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard7).getRequest().setUrl(immunization_standard7.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard8).getRequest().setUrl(immunization_standard8.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard9).getRequest().setUrl(immunization_standard9.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard10).getRequest().setUrl(immunization_standard10.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_standard11).getRequest().setUrl(immunization_standard11.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_others1).getRequest().setUrl(immunization_others1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_others2).getRequest().setUrl(immunization_others2.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_influenza1).getRequest().setUrl(immunization_influenza1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(immunization_passive).getRequest().setUrl(immunization_passive.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(observation_tuberculin1).getRequest().setUrl(observation_tuberculin1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(observation_antibody1).getRequest().setUrl(observation_antibody1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
+        bundle.addEntry().setResource(observation_rubella1).getRequest().setUrl(observation_rubella1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(condition1).getRequest().setUrl(condition1.fhirType()).setMethod(Bundle.HTTPVerb.POST);
         bundle.addEntry().setResource(composition).getRequest().setUrl(composition.fhirType()).setMethod(Bundle.HTTPVerb.POST);
-         */
 
 
         // example how to update something
@@ -428,15 +434,14 @@ public class Impfausweis {
 
         // Parser to encode the resource into a string in json format
         String encoded = ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(bundle);
-        //System.out.println(encoded);
-
+        System.out.println(encoded);
 
 
         // for pushing upon server !
-        Bundle resp = client.transaction().withBundle(bundle).execute();
+        //Bundle resp = client.transaction().withBundle(bundle).execute();
 
         // Log the response
-        System.out.println(ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
+        //System.out.println(ctxR4.newJsonParser().setPrettyPrint(true).encodeResourceToString(resp));
 
     }
 
@@ -589,7 +594,6 @@ public class Impfausweis {
                 .setValue(UUID.randomUUID().toString());
 
         // Set name of the practitioner object
-
         HumanName name = new HumanName();
         name.setUse(HumanName.NameUse.OFFICIAL);
         name.setFamily(familiyName);
@@ -738,6 +742,68 @@ public class Impfausweis {
 
 
     /**
+     * The method createEncounter() creates a new Encounter object. This describes the date of the encounter and the
+     * participating patient and practitioner and the organization that is responsible for the encounter. The encounter
+     * is referenced by one immunization.
+     *
+     * @param patient The patient object that was present at the encounter and got the immunization.
+     * @param practitioner The practitioner object that who was involved in the encounter.
+     * @param organization The organization object that is responsible for the encounter, for example a hospital.
+     * @param date The date when the encounter took place as String.
+     * @return returns an Encounter object.
+     */
+    public static Encounter createEncounterDisease(Patient patient, Practitioner practitioner, Organization organization,
+                                                   String date){
+        // Create an encounter object
+        Encounter encounter = new Encounter();
+
+        // Set Identifier of the encounter object
+        encounter.addIdentifier()
+                .setSystem("http://www.kh-uzl.de/fhir/encounter")
+                .setValue(UUID.randomUUID().toString());
+
+        // Set Status of the encounter object
+        encounter.setStatus(Encounter.EncounterStatus.FINISHED);
+
+        // Set classification of the encounter object
+        encounter.setClass_(new Coding()
+                .setCode("AMB")
+                .setSystem("http://terminology.hl7.org/CodeSystem/v3-ActCode")
+                .setDisplay("ambulatory"));
+
+        // Set specific type of service of the encounter object
+        encounter.setServiceType(new CodeableConcept()
+                .addCoding(new Coding()
+                        .setCode("180")
+                        .setSystem("http://terminology.hl7.org/CodeSystem/service-type")
+                        .setDisplay("Public Health Medicine")));
+
+        // Set reference to the patient that was present at the encounter
+        encounter.setSubject(new Reference()
+                .setIdentifier(patient.getIdentifierFirstRep())
+                .setReference(patient.fhirType() + "/" + patient.getId()));
+
+        // Set reference to the practitioner who was involved in the encounter
+        encounter.addParticipant().setIndividual(new Reference()
+                .setIdentifier(practitioner.getIdentifierFirstRep())
+                .setReference(practitioner.fhirType() + "/" + practitioner.getId()));
+
+        // Set period when the immunization took place
+        encounter.setPeriod(new Period()
+                .setStartElement(new DateTimeType(date))
+                .setEndElement(new DateTimeType(date)));
+
+        // Set reference to the organization that is responsible for the encounter
+        encounter.setServiceProvider(new Reference()
+                .setIdentifier(organization.getIdentifierFirstRep())
+                .setReference(organization.fhirType() + "/" + organization.getId()));
+
+        return encounter;
+    }
+
+
+
+    /**
      * The method createSingleImmunization() creates a new immunization. That immunization references a patient, who has been
      * immunized and an encounter that belongs to this immunization.
      * This method can only be used to create immunizations for Yellow Fever, other vaccinations (like
@@ -793,6 +859,7 @@ public class Impfausweis {
         //Set lotNumber
         immunization.setLotNumber(lotNumber);
 
+        // String for the disease the vaccination is against.
         immunization.addNote(new Annotation().setText(noteDisease));
 
         return immunization;
@@ -1208,7 +1275,6 @@ public class Impfausweis {
                         .setSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status")
                         .setDisplay("Confirmed")));
 
-        // TODO oder hier ICD-10?
         // Set Identification of the condition, problem or diagnosis
         condition.setCode(new CodeableConcept()
                 .addCoding(new Coding()
@@ -1314,130 +1380,182 @@ public class Impfausweis {
 
         // Section for yellow fever
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Gelbfieber"));
+                .setTitle("Gelbfieber")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Internationale Bescheinigung über Impfung oder Wiederimpfung gegen Gelbfieber"))));
 
         for(int i = 0; i < ArrayListYellowFever.size(); i++){
             composition.getSection().get(1).addEntry(new Reference()
+                    .setIdentifier(ArrayListYellowFever.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListYellowFever.get(i).fhirType() + "/" + ArrayListYellowFever.get(i).getId()));
         }
 
 
         // Section for standard vaccinations
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Standardimpfungen"));
+                .setTitle("Standardimpfungen")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Bescheinigung über Satndardimpfungen"))));
 
         for(int i = 0; i < ArrayListStandardVaccinations.size(); i++){
             composition.getSection().get(2).addEntry(new Reference()
+                    .setIdentifier(ArrayListStandardVaccinations.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListStandardVaccinations.get(i).fhirType() + "/" + ArrayListStandardVaccinations.get(i).getId()));
         }
 
 
         // Section for other vaccinations
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Sonstige Schutzimpfungen"));
+                .setTitle("Sonstige Schutzimpfungen")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Sonstige Schutzimpfungen, z.B. gegen Cholera, FSME, Hepatits A, Meningokokken, Pneumokokken, Typhus, Varizellen"))));
 
         for(int i = 0; i < ArrayListOtherVaccinations.size(); i++){
             composition.getSection().get(3).addEntry(new Reference()
+                    .setIdentifier(ArrayListOtherVaccinations.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListOtherVaccinations.get(i).fhirType() + "/" + ArrayListOtherVaccinations.get(i).getId()));
         }
 
 
         // Section for vaccinations against influenza
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Schutzimpfungen gegen Influenza"));
+                .setTitle("Schutzimpfungen gegen Influenza")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Schutzimpfungen gegen Influenza (Virusgrippe)"))));
 
         for(int i = 0; i < ArrayListInfluenza.size(); i++){
             composition.getSection().get(4).addEntry(new Reference()
+                    .setIdentifier(ArrayListInfluenza.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListInfluenza.get(i).fhirType() + "/" + ArrayListInfluenza.get(i).getId()));
         }
 
 
         // Section for vaccinations against tuberculosis
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)"));
+                .setTitle("Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)"))));
 
         for(int i = 0; i < ArrayListTuberculosis.size(); i++){
             composition.getSection().get(5).addEntry(new Reference()
+                    .setIdentifier(ArrayListTuberculosis.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListTuberculosis.get(i).fhirType() + "/" + ArrayListTuberculosis.get(i).getId()));
         }
 
 
         // Section for Tuberculin-tests
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Ergebnis von Tuberkulinproben"));
+                .setTitle("Ergebnis von Tuberkulinproben")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Ergebnis von Tuberkulinproben"))));
 
         for(int i = 0; i < ArrayListTuberculinTests.size(); i++){
             composition.getSection().get(6).addEntry(new Reference()
+                    .setIdentifier(ArrayListTuberculinTests.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListTuberculinTests.get(i).fhirType() + "/" + ArrayListTuberculinTests.get(i).getId()));
         }
 
 
         // Section for antibody assays
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Ergebnisse von Antikörperuntersuchungen"));
+                .setTitle("Ergebnisse von Antikörperuntersuchungen")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Ergebnisse von Antikörperuntersuchungen, z.B. Tatanus, Virushepatitis A u. a."))));
 
         for(int i = 0; i < ArrayListAntibodyAssays.size(); i++){
             composition.getSection().get(7).addEntry(new Reference()
+                    .setIdentifier(ArrayListAntibodyAssays.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListAntibodyAssays.get(i).fhirType() + "/" + ArrayListAntibodyAssays.get(i).getId()));
         }
 
 
         // Section for Hepatitis B
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Virushepatitis B"));
+                .setTitle("Virushepatitis B")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Virushepatitis B: Ergebnis von Antikörper-Untersuchungen (Anti-HBs)"))));
 
         for(int i = 0; i < ArrayListHepatitisB.size(); i++){
             composition.getSection().get(8).addEntry(new Reference()
+                    .setIdentifier(ArrayListHepatitisB.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListHepatitisB.get(i).fhirType() + "/" + ArrayListHepatitisB.get(i).getId()));
         }
 
 
         // Section for Rubella antibody assays
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Röteln-Antikörper-Bestimmungen"));
+                .setTitle("Röteln-Antikörper-Bestimmungen")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Röteln-Antikörper-Bestimmungen"))));
 
         for(int i = 0; i < ArrayListRubella.size(); i++){
             composition.getSection().get(9).addEntry(new Reference()
+                    .setIdentifier(ArrayListRubella.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListRubella.get(i).fhirType() + "/" + ArrayListRubella.get(i).getId()));
         }
 
 
         // Section for Passive immunizations with human immunoglobulins
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Passive Immunisierungen mit humanen Immunoglobulinen"));
+                .setTitle("Passive Immunisierungen mit humanen Immunoglobulinen")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Passive Immunisierungen mit humanen Immunoglobulinen (z.B Standard-Immunoglobulin, Tetanus- oder andere spezielle Immunoglobuline)"))));
 
         for(int i = 0; i < ArrayListPassiveImmunizations.size(); i++){
             composition.getSection().get(10).addEntry(new Reference()
+                    .setIdentifier(ArrayListPassiveImmunizations.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListPassiveImmunizations.get(i).fhirType() + "/" + ArrayListPassiveImmunizations.get(i).getId()));
         }
 
 
         // Section for serum injections
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Serum-Injektion"));
+                .setTitle("Serum-Injektion")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Serum-Injektion: Heterologe Sera (z.B. vom Pferd)"))));
 
         for(int i = 0; i < ArrayListSerumInjection.size(); i++){
             composition.getSection().get(11).addEntry(new Reference()
+                    .setIdentifier(ArrayListSerumInjection.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListSerumInjection.get(i).fhirType() + "/" + ArrayListSerumInjection.get(i).getId()));
         }
 
 
         // Section for medical comments on risk factors concerning vaccinations
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen"));
+                .setTitle("Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen"))));
 
         for(int i = 0; i < ArrayListCondition.size(); i++){
             composition.getSection().get(12).addEntry(new Reference()
+                    .setIdentifier(ArrayListCondition.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListCondition.get(i).fhirType() + "/" + ArrayListCondition.get(i).getId()));
         }
 
 
         // Section for blood group and rhesus factor
         composition.addSection(new Composition.SectionComponent()
-                .setTitle("Blutgruppe und Rh-Faktor"));
+                .setTitle("Blutgruppe und Rh-Faktor")
+                .setText(new Narrative()
+                        .setStatus(Narrative.NarrativeStatus.ADDITIONAL)
+                        .setDiv(new XhtmlNode().setValue("Blutgruppe und Rh-Faktor"))));
 
         for(int i = 0; i < ArrayListBlood.size(); i++){
             composition.getSection().get(13).addEntry(new Reference()
+                    .setIdentifier(ArrayListBlood.get(i).getIdentifierFirstRep())
                     .setReference(ArrayListBlood.get(i).fhirType() + "/" + ArrayListBlood.get(i).getId()));
         }
 
