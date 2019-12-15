@@ -35,20 +35,35 @@ export class CompositionService {
         for (let i = 0; i < obj.section.length; i++) {
 /*------------------------get immunization information from section tag of JSON Composition---------------------------------*/
           if (obj.section[i].title === 'Standardimpfungen') {
+            if(typeof obj.section[i].entry !== 'undefined'){
+            /* Get Immunizations*/
+              obj.standardimpfung = {"entry": []};
+              for (let j = 0; j < obj.section[i].entry.length; j++) {
+                obj.standardimpfung.entry[j] = await this.immunizationService.getImmunization(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+                /*Get encounter of immunization*/
+                obj.standardimpfung.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.standardimpfung.entry[j].encounter.reference)).toPromise();
+                /*Get practitioner of encounter */
+                obj.standardimpfung.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.standardimpfung.entry[j].encounter.participant[0].individual.reference)).toPromise();
+              /*Get Organization of encounter*/
+                obj.standardimpfung.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.standardimpfung.entry[j].encounter.serviceProvider.reference)).toPromise();
+              }
+             }
+
+/*------------------------get YellowFever information from section tag of JSON Composition---------------------------------*/
+          } else if (obj.section[i].title === 'Gelbfieber') {
           /* Get Immunizations*/
-            obj.standardimpfung = {"entry": []};
-            for (let j = 0; j < obj.section[i].entry.length; j++) {
-              obj.standardimpfung.entry[j] = await this.immunizationService.getImmunization(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
-              /*Get encounter of immunization*/
-              obj.standardimpfung.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.standardimpfung.entry[j].encounter.reference)).toPromise();
-              /*Get practitioner of encounter */
-              obj.standardimpfung.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.standardimpfung.entry[j].encounter.participant[0].individual.reference)).toPromise();
-            /*Get Organization of encounter*/
-              obj.standardimpfung.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.standardimpfung.entry[j].encounter.serviceProvider.reference)).toPromise();
-            }
-            console.log(obj.standardimpfung);
-/*------------------------get ??? information from section tag of JSON Composition---------------------------------*/
-          } else if (obj.section[i].title === '') {
+                      obj.yellowfever = {"entry": []};
+                      if(typeof obj.section[i].entry !== 'undefined'){
+                        for (let j = 0; j < obj.section[i].entry.length; j++) {
+                          obj.yellowfever.entry[j] = await this.immunizationService.getImmunization(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+                          /*Get encounter of immunization*/
+                          obj.yellowfever.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.yellowfever.entry[j].encounter.reference)).toPromise();
+                          /*Get practitioner of encounter */
+                          obj.yellowfever.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.yellowfever.entry[j].encounter.participant[0].individual.reference)).toPromise();
+                        /*Get Organization of encounter*/
+                          obj.yellowfever.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.yellowfever.entry[j].encounter.serviceProvider.reference)).toPromise();
+                        }
+                       }
           }
         }
 
