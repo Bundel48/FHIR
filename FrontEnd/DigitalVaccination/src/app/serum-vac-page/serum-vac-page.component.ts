@@ -26,8 +26,18 @@ export class SerumVacPageComponent implements OnInit {
   immunization: Array<ImmunizationData> = [];
   practitioner: any;
   organization: any;
+  condition: any;
   dataSource : VacDataSource = new VacDataSource([]);
   expandedElement: ImmunizationData | null;
+  diabetes: boolean = false;
+  haem: boolean = false;
+  suppress: boolean = false;
+  dialysis: boolean = false;
+  spasm: boolean = false;
+  transplant: boolean = false;
+  allergy: boolean = false;
+  immu: boolean = false;
+
   constructor(
     private vaccinationService: VaccinationService,
     private compositionService: CompositionService,
@@ -78,26 +88,65 @@ export class SerumVacPageComponent implements OnInit {
            }
          ],
     }
+    this.condition={
+      "code": {
+        "coding": [
+          {
+            "code": "46635009",
+            "display": "Diabetes mellitus type 1 (disorder)"
+          }
+        ]
+      },
+    }
 
 
 
   }
   async ngOnInit() {
+  //TODO: RH-Factor
     let compositionData = await this.compositionService.compositionData;
+    if(typeof compositionData.risk.entry !== 'undefined'){
+      for(let i = 0; i < compositionData.risk.entry.length; i++ ){
+        this.condition = compositionData.risk.entry[i];
+        if(this.condition.code.coding[0].code === "46635009"){
+          this.diabetes = true;
+        }else if( this.condition.code.coding[0].code === "70036007"){
+          this.haem = true;
+        }else if( this.condition.code.coding[0].code === "45352006"){
+          this.spasm = true;
 
-    for(let i = 0; i < compositionData.serum.entry.length; i++){
-      this.practitioner = compositionData.serum.entry[i].encounter.participant;
-      this.organization = compositionData.serum.entry[i].encounter.serviceProvider;
+        }else if( this.condition.code.coding[0].code === "236562009"){
+          this.dialysis = true;
 
-      this.immunization[i] = {
-        date: compositionData.serum.entry[i].occurrenceDateTime,
-        lotNumber: compositionData.serum.entry[i].lotNumber,
-        unit:compositionData.serum.entry[i].doseQuantity.unit,
-        dose:compositionData.serum.entry[i].doseQuantity.value,
-        typ:compositionData.serum.entry[i].note[0].text
-      };
+        }else if( this.condition.code.coding[0].code === "213148006"){
+          this.transplant = true;
+        }else if( this.condition.code.coding[0].code === "234490009"){
+          this.suppress = true;
+        }else if( this.condition.code.coding[0].code === "609328004"){
+          this.allergy = true;
+        }else if( this.condition.code.coding[0].code === "275984001"){
+          this.immu = true;
+        }
+      }
 
-      compositionData.serum.entry[i];
+
+    }
+
+    if(typeof compositionData.serum.entry !== 'undefined'){
+      for(let i = 0; i < compositionData.serum.entry.length; i++){
+        this.practitioner = compositionData.serum.entry[i].encounter.participant;
+        this.organization = compositionData.serum.entry[i].encounter.serviceProvider;
+
+        this.immunization[i] = {
+          date: compositionData.serum.entry[i].occurrenceDateTime,
+          lotNumber: compositionData.serum.entry[i].lotNumber,
+          unit:compositionData.serum.entry[i].doseQuantity.unit,
+          dose:compositionData.serum.entry[i].doseQuantity.value,
+          typ:compositionData.serum.entry[i].note[0].text
+        };
+
+        compositionData.serum.entry[i];
+      }
     }
     this.dataSource = new VacDataSource(this.immunization);
     }

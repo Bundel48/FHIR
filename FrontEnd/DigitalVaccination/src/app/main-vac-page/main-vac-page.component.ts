@@ -46,12 +46,12 @@ export class MainVacPageComponent implements OnInit {
     this.practitioner={
       "name": [
            {
-             "family": "Wolf",
+             "family": "",
              "given": [
-               "Lucas"
+               ""
              ],
              "prefix": [
-               "Prof. Dr. med."
+               ""
              ]
            }
          ],
@@ -60,7 +60,7 @@ export class MainVacPageComponent implements OnInit {
              "code": {
                "coding": [
                  {
-                   "display": "Doctor of Medicine"
+                   "display": ""
                  }
                ]
              }
@@ -72,17 +72,17 @@ export class MainVacPageComponent implements OnInit {
          "address": [
            {
              "line": [
-               "Straße mit Nr"
+               ""
              ],
-             "city": "Stadt",
-             "postalCode": "PLZ",
-             "country": "LAND"
+             "city": "",
+             "postalCode": "",
+             "country": ""
            }
          ],
-         "name": "Medizinisches Gesundheitszentrum",
+         "name": "",
          "telecom": [
            {
-             "value": "+494516748374"
+             "value": ""
            }
          ],
     }
@@ -100,28 +100,29 @@ export class MainVacPageComponent implements OnInit {
 */
   async ngOnInit() {
     let compositionData = await this.compositionService.compositionData;
+    if(typeof compositionData.standardimpfung.entry !== 'undefined'){
+      for(let i = 0; i < compositionData.standardimpfung.entry.length; i++){
+        this.practitioner = compositionData.standardimpfung.entry[i].encounter.participant;
+        this.organization = compositionData.standardimpfung.entry[i].encounter.serviceProvider;
+        let stoffe: Array<string> = [];
 
-    for(let i = 0; i < compositionData.standardimpfung.entry.length; i++){
-      this.practitioner = compositionData.standardimpfung.entry[i].encounter.participant;
-      this.organization = compositionData.standardimpfung.entry[i].encounter.serviceProvider;
-      let stoffe: Array<string> = [];
 
-
-      if(typeof compositionData.standardimpfung.entry[i].protocolApplied !== 'undefined'){
-        for(let j = 0; j < compositionData.standardimpfung.entry[i].protocolApplied[0].targetDisease[0].coding.length; j++){
-          stoffe[j] = compositionData.standardimpfung.entry[i].protocolApplied[0].targetDisease[0].coding[j].display;
+        if(typeof compositionData.standardimpfung.entry[i].protocolApplied !== 'undefined'){
+          for(let j = 0; j < compositionData.standardimpfung.entry[i].protocolApplied[0].targetDisease[0].coding.length; j++){
+            stoffe[j] = compositionData.standardimpfung.entry[i].protocolApplied[0].targetDisease[0].coding[j].display;
+          }
         }
+
+        this.immunization[i] = {
+          code: compositionData.standardimpfung.entry[i].vaccineCode.coding[0].code,
+          display: compositionData.standardimpfung.entry[i].vaccineCode.coding[0].display,
+          date: compositionData.standardimpfung.entry[i].occurrenceDateTime,
+          lotNumber: compositionData.standardimpfung.entry[i].lotNumber,
+          wirkstoffe: stoffe
+        };
+
+        compositionData.standardimpfung.entry[i];
       }
-
-      this.immunization[i] = {
-        code: compositionData.standardimpfung.entry[i].vaccineCode.coding[0].code,
-        display: compositionData.standardimpfung.entry[i].vaccineCode.coding[0].display,
-        date: compositionData.standardimpfung.entry[i].occurrenceDateTime,
-        lotNumber: compositionData.standardimpfung.entry[i].lotNumber,
-        wirkstoffe: stoffe
-      };
-
-      compositionData.standardimpfung.entry[i];
     }
     this.dataSource = new VacDataSource(this.immunization);
     }

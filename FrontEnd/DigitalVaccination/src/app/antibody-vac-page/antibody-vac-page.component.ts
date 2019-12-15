@@ -11,6 +11,7 @@ export class AntibodyVacPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  //TODO
   }
 
 }

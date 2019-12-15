@@ -26,6 +26,7 @@ import { HebBVacPageComponent } from './heb-b-vac-page/heb-b-vac-page.component'
 import { HumanVacPageComponent } from './human-vac-page/human-vac-page.component';
 import { SerumVacPageComponent } from './serum-vac-page/serum-vac-page.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -55,7 +56,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

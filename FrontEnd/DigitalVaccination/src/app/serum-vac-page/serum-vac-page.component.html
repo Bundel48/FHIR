@@ -46,23 +46,23 @@
 </div>
 <table>
   <tr>
-    <td>1.</td><td>Bluter (Haemophilie)</td> <td><mat-checkbox></mat-checkbox></td>
-    <td>6.</td><td>Immundefekt/-supression</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>1.</td><td>Bluter (Haemophilie)</td> <td><mat-checkbox [ngModel]="haem" ></mat-checkbox></td>
+    <td>6.</td><td>Immundefekt/-supression</td> <td><mat-checkbox [ngModel]="suppress" ></mat-checkbox></td>
   </tr>
   <tr>
-    <td>2.</td><td>Diabetes</td> <td><mat-checkbox></mat-checkbox></td>
-    <td>7.</td><td>Allergien/Unverträglichkeiten</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>2.</td><td>Diabetes</td> <td><mat-checkbox [ngModel]="diabetes"></mat-checkbox></td>
+    <td>7.</td><td>Allergien/Unverträglichkeiten</td> <td><mat-checkbox [ngModel]="allergy"></mat-checkbox></td>
   </tr>
   <tr>
-    <td>3.</td><td>Dialysebehandlung</td> <td><mat-checkbox></mat-checkbox></td>
-    <td>8.</td><td>Außergewöhntliche Impfreatkionen</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>3.</td><td>Dialysebehandlung</td> <td><mat-checkbox [ngModel]="dialysis"></mat-checkbox></td>
+    <td>8.</td><td>Außergewöhntliche Impfreatkionen</td> <td><mat-checkbox [ngModel]="immu"></mat-checkbox></td>
   </tr>
   <tr>
-    <td>4.</td><td>Krämpfe, Nervenleiden</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>4.</td><td>Krämpfe, Nervenleiden</td> <td><mat-checkbox [ngModel]="spasm" ></mat-checkbox></td>
     <td>9.</td><td>Andere medizinische Risikofaktoren</td> <td><mat-checkbox></mat-checkbox></td>
   </tr>
   <tr>
-    <td>5.</td><td>Transplantation</td> <td><mat-checkbox></mat-checkbox></td>
+    <td>5.</td><td>Transplantation</td> <td><mat-checkbox [ngModel]="transplant"></mat-checkbox></td>
     <td></td><td></td> <td></td>
   </tr>
 

@@ -84,19 +84,20 @@ export class HumanVacPageComponent implements OnInit {
     }
     async ngOnInit() {
       let compositionData = await this.compositionService.compositionData;
+      if(typeof compositionData.human.entry !== 'undefined'){
+        for(let i = 0; i < compositionData.human.entry.length; i++){
+          this.practitioner = compositionData.human.entry[i].encounter.participant;
+          this.organization = compositionData.human.entry[i].encounter.serviceProvider;
 
-      for(let i = 0; i < compositionData.human.entry.length; i++){
-        this.practitioner = compositionData.human.entry[i].encounter.participant;
-        this.organization = compositionData.human.entry[i].encounter.serviceProvider;
+          this.immunization[i] = {
+            date: compositionData.human.entry[i].occurrenceDateTime,
+            lotNumber: compositionData.human.entry[i].lotNumber,
+            unit:compositionData.human.entry[i].doseQuantity.unit,
+            dose:compositionData.human.entry[i].doseQuantity.value
+          };
 
-        this.immunization[i] = {
-          date: compositionData.human.entry[i].occurrenceDateTime,
-          lotNumber: compositionData.human.entry[i].lotNumber,
-          unit:compositionData.human.entry[i].doseQuantity.unit,
-          dose:compositionData.human.entry[i].doseQuantity.value
-        };
-
-        compositionData.human.entry[i];
+          compositionData.human.entry[i];
+        }
       }
       this.dataSource = new VacDataSource(this.immunization);
       }
