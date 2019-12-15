@@ -7,6 +7,16 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
+
+export interface ImmunizationData{
+  code: any;
+  display: any;
+  date: any;
+  lotNumber: any;
+
+}
+
+
 export interface ImmunizationData{
   code: any;
   display: any;

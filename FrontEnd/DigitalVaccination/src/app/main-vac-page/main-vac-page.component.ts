@@ -43,49 +43,6 @@ export class MainVacPageComponent implements OnInit {
     private httpClient: HttpClient
   )
   {
-    /*this.immunization={
-      "vaccineCode": {
-        "coding": [
-          {
-            "code": "IFIP",
-            "display": "Infanrix-IPV"
-          }
-        ]
-      },
-     "occurrenceDateTime": "1997-08-23",
-     "lotNumber": "A20CB210A",
-     "protocolApplied": [
-                 {
-                   "targetDisease": [
-                     {
-                       "coding": [
-                         {
-                           "code": "76902006",
-                           "display": "Tetanus"
-                         },
-                         {
-                           "code": "397430003",
-                           "display": "Diphtheria due to Corynebacterium diphtheriae"
-                         },
-                         {
-                           "code": "27836007",
-                           "display": "Pertussis"
-                         },
-                         {
-                           "code": "709410003",
-                           "display": "Haemophilus influenzae type b infection"
-                         },
-                         {
-                           "code": "398102009",
-                           "display": "Acute poliomyelitis"
-                         }
-                       ]
-                     }
-                   ]
-                 }
-             ]
-    }
-    */
     this.practitioner={
       "name": [
            {
@@ -142,7 +99,6 @@ export class MainVacPageComponent implements OnInit {
   wirkstoffe: Array <string>;
 */
   async ngOnInit() {
-    console.log("HIER");
     let compositionData = await this.compositionService.compositionData;
 
     for(let i = 0; i < compositionData.standardimpfung.entry.length; i++){
@@ -168,35 +124,6 @@ export class MainVacPageComponent implements OnInit {
       compositionData.standardimpfung.entry[i];
     }
     this.dataSource = new VacDataSource(this.immunization);
-
-
-/*
-      this.vaccinationService.getVaccination();
-      //TODO: Im Ueberelement schauen und fuer jede Immunization eigene Get schicken
-      this.httpClient.get('http://funke.imi.uni-luebeck.de/public/fhir/Immunization/146813').subscribe(
-        data => {
-          this.immunization= data;
-        }, error => {
-          console.log('error: ', error);
-        }
-      );
-
-      this.httpClient.get('http://funke.imi.uni-luebeck.de/public/fhir/Practitioner/146791').subscribe(
-              data => {
-                this.practitioner= data;
-              }, error => {
-                console.log('error: ', error);
-              }
-            );
-
-     this.httpClient.get('http://funke.imi.uni-luebeck.de/public/fhir/Organization/146791').subscribe(
-                   data => {
-                     this.organization= data;
-                   }, error => {
-                     console.log('error: ', error);
-                   }
-                 );
-                 */
     }
 }
 

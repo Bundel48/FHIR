@@ -64,6 +64,22 @@ export class CompositionService {
                           obj.yellowfever.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.yellowfever.entry[j].encounter.serviceProvider.reference)).toPromise();
                         }
                        }
+
+/*------------------------get humanSerum information from section tag of JSON Composition---------------------------------*/
+          } else if (obj.section[i].title === 'Passive Immunisierungen mit humanen Immunoglobulinen') {
+          /* Get Immunizations*/
+                      obj.human = {"entry": []};
+                      if(typeof obj.section[i].entry !== 'undefined'){
+                        for (let j = 0; j < obj.section[i].entry.length; j++) {
+                          obj.human.entry[j] = await this.immunizationService.getImmunization(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+                          /*Get encounter of immunization*/
+                          obj.human.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.human.entry[j].encounter.reference)).toPromise();
+                          /*Get practitioner of encounter */
+                          obj.human.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.human.entry[j].encounter.participant[0].individual.reference)).toPromise();
+                        /*Get Organization of encounter*/
+                          obj.human.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.human.entry[j].encounter.serviceProvider.reference)).toPromise();
+                        }
+                       }
           }
         }
 
