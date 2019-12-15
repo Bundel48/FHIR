@@ -1,1 +1,63 @@
-<p>heb-b-vac-page works!</p>
+<div class="infoText">
+  <b>Virushepatitis B </b>: Ergebnis von Antikörper-Untersuchungen (Anti-HBs)
+</div>
+<table mat-table [dataSource]="dataSource" class="customTable">
+
+  <ng-container matColumnDef="Datum">
+    <th mat-header-cell *matHeaderCellDef>Datum </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Test">
+    <th mat-header-cell *matHeaderCellDef> Untersuchung / Test</th>
+    <td mat-cell *matCellDef="let element"> {{element.Handelsname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Ergebnis">
+    <th mat-header-cell *matHeaderCellDef> Ergebnis</th>
+    <td mat-cell *matCellDef="let element"> {{element.Chargennummer}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Arztinformation">
+    <th mat-header-cell *matHeaderCellDef> Unterschrift u. Stempel des Arztes</th>
+    <td mat-cell *matCellDef="let element"> {{element.Wirkstoffe}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>
+
+<div class="infoText">
+  <b>Röteln-Antikörper-Bestimmungen </b>
+</div>
+<table mat-table [dataSource]="dataSource2" class="customTable">
+
+  <ng-container matColumnDef="Datum">
+    <th mat-header-cell *matHeaderCellDef>Datum </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Test">
+    <th mat-header-cell *matHeaderCellDef> Methode(n)</th>
+    <td mat-cell *matCellDef="let element"> {{element.Handelsname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Titer">
+    <th mat-header-cell *matHeaderCellDef> Titer</th>
+    <td mat-cell *matCellDef="let element"> {{element.Chargennummer}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Schutz">
+    <th mat-header-cell *matHeaderCellDef> Schutz vorhanden</th>
+    <td mat-cell *matCellDef="let element"> {{element.Wirkstoffe}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Arztinformation">
+    <th mat-header-cell *matHeaderCellDef> Unterschrift u. Stempel</th>
+    <td mat-cell *matCellDef="let element"> {{element.Wirkstoffe}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay2"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay2;"></tr>
+</table>

@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./heb-b-vac-page.component.css']
 })
 export class HebBVacPageComponent implements OnInit {
-
+  columnsToDisplay = ['Datum', 'Test', 'Ergebnis', 'Arztinformation'];
+  columnsToDisplay2 = ['Datum', 'Test', 'Titer','Schutz', 'Arztinformation'];
   constructor() { }
 
   ngOnInit() {

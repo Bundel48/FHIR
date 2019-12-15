@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bcg-vac-page.component.css']
 })
 export class BcgVacPageComponent implements OnInit {
-
+  columnsToDisplay = ['Datum', 'Impfstoff', 'Chargennummer', 'Arztinformation'];
+  columnsToDisplay2 = ['Datum', 'Probe', 'Reaktion', 'Arztinformation'];
   constructor() { }
 
   ngOnInit() {

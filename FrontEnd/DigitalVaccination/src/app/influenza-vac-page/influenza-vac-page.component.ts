@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./influenza-vac-page.component.css']
 })
 export class InfluenzaVacPageComponent implements OnInit {
-
+  columnsToDisplay = ['Datum', 'Chargennummer', 'Arztinformation'];
   constructor() { }
 
   ngOnInit() {
