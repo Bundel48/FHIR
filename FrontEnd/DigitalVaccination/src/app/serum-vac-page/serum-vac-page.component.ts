@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SerumVacPageComponent implements OnInit {
   columnsToDisplay = ['Datum','Typ', 'Chargennummer', 'Dosis', 'Arztinformation'];
+  dataSource : any;
+
   constructor() { }
 
   ngOnInit() {

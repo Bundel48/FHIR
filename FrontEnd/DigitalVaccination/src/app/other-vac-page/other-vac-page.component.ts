@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OtherVacPageComponent implements OnInit {
   columnsToDisplay = ['Datum', 'Gegen','Chargennummer', 'Arztinformation'];
+  dataSource : any;
   constructor() { }
 
   ngOnInit() {

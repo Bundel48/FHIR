@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class HebBVacPageComponent implements OnInit {
   columnsToDisplay = ['Datum', 'Test', 'Ergebnis', 'Arztinformation'];
   columnsToDisplay2 = ['Datum', 'Test', 'Titer','Schutz', 'Arztinformation'];
+  dataSource : any;
+  dataSource2 : any;
+
   constructor() { }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VaccinationService} from '../vaccination.service';
 import { HttpClient } from '@angular/common/http';
+import {CompositionService} from '../composition.service';
 
 
 @Component({
@@ -9,10 +10,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./overview-page.component.css']
 })
 export class OverviewPageComponent implements OnInit {
-  patient: Object;
+  patient: any;
   constructor(
     private vaccinationService: VaccinationService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private compositionService: CompositionService
   ) {
     this.patient = {
       "extension": [
@@ -46,16 +48,9 @@ export class OverviewPageComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.vaccinationService.getVaccination();
-    this.httpClient.get('http://funke.imi.uni-luebeck.de/public/fhir/Patient/146790').subscribe(
-      data => {
-        this.patient = data;
-      }, error => {
-        console.log('error: ', error);
-      }
-    );
-
+  async ngOnInit() {
+    let compositionData = await this.compositionService.compositionData;
+    this.patient = compositionData.subject;
   }
 
 }

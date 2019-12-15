@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AntibodyVacPageComponent implements OnInit {
   columnsToDisplay = ['Datum', 'Test', 'Ergebnis', 'Arztinformation'];
+  dataSource : any;
   constructor() { }
 
   ngOnInit() {
