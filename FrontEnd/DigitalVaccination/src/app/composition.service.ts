@@ -80,6 +80,21 @@ export class CompositionService {
                           obj.human.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.human.entry[j].encounter.serviceProvider.reference)).toPromise();
                         }
                        }
+/*------------------------get animalSerum information from section tag of JSON Composition---------------------------------*/
+          } else if (obj.section[i].title === 'Serum-Injektion') {
+          /* Get Immunizations*/
+                      obj.serum = {"entry": []};
+                      if(typeof obj.section[i].entry !== 'undefined'){
+                        for (let j = 0; j < obj.section[i].entry.length; j++) {
+                          obj.serum.entry[j] = await this.immunizationService.getImmunization(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+                          /*Get encounter of immunization*/
+                          obj.serum.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.serum.entry[j].encounter.reference)).toPromise();
+                          /*Get practitioner of encounter */
+                          obj.serum.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.serum.entry[j].encounter.participant[0].individual.reference)).toPromise();
+                        /*Get Organization of encounter*/
+                          obj.serum.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.serum.entry[j].encounter.serviceProvider.reference)).toPromise();
+                        }
+                       }
           }
         }
 

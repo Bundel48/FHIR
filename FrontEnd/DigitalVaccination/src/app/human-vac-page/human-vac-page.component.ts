@@ -38,12 +38,12 @@ export class HumanVacPageComponent implements OnInit {
       this.practitioner={
         "name": [
              {
-               "family": "Wolf",
+               "family": "",
                "given": [
-                 "Lucas"
+                 ""
                ],
                "prefix": [
-                 "Prof. Dr. med."
+                 ""
                ]
              }
            ],
@@ -52,7 +52,7 @@ export class HumanVacPageComponent implements OnInit {
                "code": {
                  "coding": [
                    {
-                     "display": "Doctor of Medicine"
+                     "display": ""
                    }
                  ]
                }
@@ -64,17 +64,17 @@ export class HumanVacPageComponent implements OnInit {
            "address": [
              {
                "line": [
-                 "Straße mit Nr"
+                 ""
                ],
-               "city": "Stadt",
-               "postalCode": "PLZ",
-               "country": "LAND"
+               "city": "",
+               "postalCode": "",
+               "country": ""
              }
            ],
-           "name": "Medizinisches Gesundheitszentrum",
+           "name": "",
            "telecom": [
              {
-               "value": "+494516748374"
+               "value": ""
              }
            ],
       }
@@ -96,7 +96,7 @@ export class HumanVacPageComponent implements OnInit {
           dose:compositionData.human.entry[i].doseQuantity.value
         };
 
-        compositionData.standardimpfung.entry[i];
+        compositionData.human.entry[i];
       }
       this.dataSource = new VacDataSource(this.immunization);
       }
