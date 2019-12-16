@@ -12,7 +12,7 @@
 
     <ng-container matColumnDef="Chargennummer">
       <th mat-header-cell *matHeaderCellDef> Typ/Chargen-Nr</th>
-      <td mat-cell *matCellDef="let element"> {{element.lotNumber}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.note}} <br>{{element.lotNumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Dosis">

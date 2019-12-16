@@ -13,6 +13,7 @@ export interface ImmunizationData{
   date: any;
   lotNumber: any;
   dose: any;
+  note: any;
 
 }
 
@@ -93,7 +94,8 @@ export class HumanVacPageComponent implements OnInit {
             date: compositionData.human.entry[i].occurrenceDateTime,
             lotNumber: compositionData.human.entry[i].lotNumber,
             unit:compositionData.human.entry[i].doseQuantity.unit,
-            dose:compositionData.human.entry[i].doseQuantity.value
+            dose:compositionData.human.entry[i].doseQuantity.value,
+            note: compositionData.human.entry[i].note[0].text
           };
 
           compositionData.human.entry[i];

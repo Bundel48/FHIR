@@ -146,15 +146,20 @@ export class CompositionService {
            if(typeof obj.section[i].entry !== 'undefined'){
             //TODO
             }
+/*------------------------get antibody information from section tag of JSON Composition---------------------------------*/
          } else if (obj.section[i].title === 'Ergebnisse von Antikörperuntersuchungen') {
            /* TODO antibody*/
            obj.rh = {"entry": []};
            if(typeof obj.section[i].entry !== 'undefined'){
             //TODO
             }
-
-
-
+/*------------------------get tuberkulin information from section tag of JSON Composition---------------------------------*/
+         } else if (obj.section[i].title === 'Ergebnis von Tuberkulinproben') {
+           /* TODO Tuberkulin*/
+           obj.rh = {"entry": []};
+           if(typeof obj.section[i].entry !== 'undefined'){
+            //TODO
+            }
          }
 
         }
