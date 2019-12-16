@@ -1,0 +1,76 @@
+<div class="infoText">
+  Bescheinigung über Impfungen gegen: <br>
+  Handelsname und Chargennummer des Impfstoffes in die entsprechende Spalte <br>
+  eingetragen bzw. Vignette einkleben <br>
+</div>
+<!--
+<table class="customTable">
+  <thead>
+  <tr>
+    <th>Datum</th>
+    <th colspan="3">Handelsname und Chargennummer des Impfstoffes</th>
+    <th>Wirkstoffe</th>
+    <th>Arztinformationen</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{immunization[0].occurrenceDateTime}}</td>
+    <td>{{immunization[0].vaccineCode.coding[0].display}}</td>
+    <td>{{immunization[0].lotNumber}}</td>
+    <td>{{immunization[0].vaccineCode.coding[0].code}}</td>
+    <td>{{immunization[0].protocolApplied[0].targetDisease[0].coding[0].display}}</td>
+    <td>{{practitioner.name[0].prefix[0]}} {{practitioner.name[0].given[0]}} {{practitioner.name[0].family}}<br>
+      {{organization.name}}<br>
+      {{organization.address[0].line[0]}} <br>
+      {{organization.address[0].postalCode}} {{organization.address[0].city}}, {{organization.address[0].country}}<br>
+      {{organization.telecom[0].value}}
+    </td>
+  </tr>
+
+  </tbody>
+</table>
+-->
+
+<div class="example-container mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="customTable">
+
+  <ng-container matColumnDef="Datum">
+    <th mat-header-cell *matHeaderCellDef>Datum </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Handelsname">
+    <th mat-header-cell *matHeaderCellDef> Handelsname</th>
+    <td mat-cell *matCellDef="let element"> {{element.code}} <br> {{element.display}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Chargennummer">
+    <th mat-header-cell *matHeaderCellDef> Chargennummer</th>
+    <td mat-cell *matCellDef="let element"> {{element.lotNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Wirkstoffe">
+    <th mat-header-cell *matHeaderCellDef> Wirkstoffe </th>
+    <td mat-cell *matCellDef="let element"> <div *ngFor="let wirkstoff of element.wirkstoffe">{{wirkstoff}}</div></td>
+  </ng-container>
+
+  <ng-container matColumnDef="Arztinformation">
+    <th mat-header-cell *matHeaderCellDef> Arztinformationen </th>
+    <td mat-cell *matCellDef="let element"> {{practitioner.name[0].prefix[0]}} {{practitioner.name[0].given[0]}} {{practitioner.name[0].family}} <br> {{organization.name}}<br>
+      {{organization.address[0].line[0]}} <br>
+      {{organization.address[0].postalCode}} {{organization.address[0].city}}, {{organization.address[0].country}}<br>
+      {{organization.telecom[0].value}}</td>
+  </ng-container>
+
+
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>
+</div>
+
+
+
+
+

@@ -1,0 +1,50 @@
+<div class="titleDiv"><b>INTERNATIONALE BESCHEINIGUNG ÜBER IMPFUNG GEGEN <u>GELBFIEBER</u></b></div>
+<table class="customTable">
+  <tr><td>Hiermit wird bescheinigt, dass</td><td>{{patient.name[0].given[0]}}, {{patient.name[0].family}}</td><td> Geburtsdatum</td><td>{{patient.birthDate}}</td> <td> Geschlecht</td><td>{{patient.gender}}</td></tr>
+  <tr><td>dessen/deren Unterschrift folgt</td><td colspan="5">_________________________________________________________</td></tr>
+</table>
+<div class = "infoText">zu dem angegebenen Zeitpunkt gegen Gelbfieber geimpft oder wiedergeimpft worden ist.</div>
+
+
+
+
+
+<div class="example-container mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="customTable">
+
+    <ng-container matColumnDef="Datum">
+      <th mat-header-cell *matHeaderCellDef>Datum </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Unterschrift">
+      <th mat-header-cell *matHeaderCellDef> Unterschrift und berufliche Stellung des die Impfung Ausführenden </th>
+      <td mat-cell *matCellDef="let element"> {{practitioner.qualification[0].code.coding[0].display}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Chargennummer">
+      <th mat-header-cell *matHeaderCellDef> Hersteller und Chargen-Nr. des Impfstoffes </th>
+      <td mat-cell *matCellDef="let element"> {{element.lotNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Impfcenter">
+      <th mat-header-cell *matHeaderCellDef> Dienstsiegel der Impfstelle </th>
+      <td mat-cell *matCellDef="let element"> {{practitioner.name[0].prefix[0]}} {{practitioner.name[0].given[0]}} {{practitioner.name[0].family}} <br> {{organization.name}}<br>
+        {{organization.address[0].line[0]}} <br>
+        {{organization.address[0].postalCode}} {{organization.address[0].city}}, {{organization.address[0].country}}<br>
+        {{organization.telecom[0].value}}</td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
+</div>
+<div class="infoText">
+  Diese Bescheinigung ist nur gültig, wenn der verwendete Impfstoff von der Weltgesundheitsorganisation anerkannt und die Impfstelle von der Gesundheitsverwaltung des Hoheitsgebiets in dem sich die Stelle befindet, zugelassen worden ist. <br>
+  Diese Bescheinigung hat eine Gültigkeit von 10 Jahren, beginnend zehn Tage nach der Impfung oder - bei Wiederimpfung innerhalb dieser zehn Jahre - mit dem Tag der Wiederimpfung. <br>
+  Diese Bescheinigung muss von einem Arzt eigenhändig unterschrieben sein; sein Stempel wird nicht als Ersatz für die Unterschrift anerkannt. <br>
+  Jede Änderung, Radierung oder unvollständige Ausfüllung dieser Bescheinigung kann ihre Ungültigkeit zur Folge haben.
+
+</div>

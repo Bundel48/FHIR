@@ -1,0 +1,66 @@
+<div class="orgaFrame">
+  MEDIZINISCHE DATENINTEGRATION - EHEALTH <br><br>
+  FHIR PROJEKT <br><br>
+  UNIVERSITÄT ZU LÜBECK<br>
+  <img src="assets/logo.png"alt="Logo" height="auto" width="20%"><br>
+  <b>INTERNATIONALE BESCHEINIGUNGEN <br><br>
+  ÜBER IMPFUNGEN <br><br>
+  UND IMPFBUCH <br><br></b>
+  INTERNATIONAL CERTIFICATES <br>
+  OF VACCINATION <br>
+  <br>
+  CERTIFICATS INTERNATIONAUX <br>
+  DE VACCINATION<br>
+  <br>
+  gemäß § 16 Bundes-Seuchengesetz <br><br><br>
+  <table class="customTable">
+    <tbody>
+    <tr>
+      <td>Ausgestellt für / issued to / délivré a</td>
+    </tr>
+    <tr>
+      <td>{{patient.name[0].given[0]}}, {{patient.name[0].family}}</td>
+    </tr>
+    <tr>
+      <td>Name,Vorname / Surname,given name / Nom, prénom </td>
+    </tr>
+    <tr>
+      <td>{{patient.birthDate}}</td>
+      <td>{{patient.extension[0].valueAddress.city}}, {{patient.extension[0].valueAddress.country}} </td>
+    </tr>
+    <tr>
+      <td>Geburtsdatum / Born on / Né(e) le</td>
+      <td> in / á </td>
+    </tr>
+    <tr>
+      <td>{{patient.address[0].line[0]}}, {{patient.address[0].postalCode}} {{patient.address[0].city}}, {{patient.address[0].country}}</td>
+    </tr>
+    <tr>
+      <td>Wohnort und Straße / Adress / Domicile et adresse</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table class="underTable">
+    <tbody>
+      <tr>
+        <td>Reisepaß-Nr. oder</td>
+        <td>Passport No. or</td>
+        <td>Numero du passport ou</td>
+      </tr>
+      <tr>
+        <td style="font-size:60%;">Nr. des Pers.-Ausweises</td>
+        <td style="font-size:60%;">Identity card No.</td>
+        <td style="font-size:60%;">de la carte d'identité</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+<a [routerLink] = "'/overview'">
+</a>
+
+
+

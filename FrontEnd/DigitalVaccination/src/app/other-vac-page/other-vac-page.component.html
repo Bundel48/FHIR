@@ -1,0 +1,33 @@
+<div>
+  Sonstige Schutzimpfungen z.B. gegen Cholera, FSME, Hepatitis A, Meningokokken, Pneumokokken, Typhus, Varizellen <br>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="customTable">
+
+  <ng-container matColumnDef="Datum">
+    <th mat-header-cell *matHeaderCellDef>Datum </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Gegen">
+    <th mat-header-cell *matHeaderCellDef> Impfung gegen</th>
+    <td mat-cell *matCellDef="let element"> <div *ngFor="let wirkstoff of element.wirkstoffe">{{wirkstoff}}</div></td>
+  </ng-container>
+
+  <ng-container matColumnDef="Chargennummer">
+    <th mat-header-cell *matHeaderCellDef> Handelsname und Chargennummer des Impfstoffes (Vignestte)</th>
+    <td mat-cell *matCellDef="let element">{{element.code}}, {{element.display}}, {{element.lotNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Arztinformation">
+    <th mat-header-cell *matHeaderCellDef> Arztinformationen </th>
+    <td mat-cell *matCellDef="let element"> {{practitioner.name[0].prefix[0]}} {{practitioner.name[0].given[0]}} {{practitioner.name[0].family}} <br> {{organization.name}}<br>
+      {{organization.address[0].line[0]}} <br>
+      {{organization.address[0].postalCode}} {{organization.address[0].city}}, {{organization.address[0].country}}<br>
+      {{organization.telecom[0].value}}</td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>

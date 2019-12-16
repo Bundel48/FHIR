@@ -1,0 +1,32 @@
+#vaccination_frame{
+  background-color:#f9d05a;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.outer_frame{
+width:80%;
+height:80%;
+margin-left:auto;
+margin-right:auto;
+margin-top:auto;
+margin-bottom:auto;
+}
+
+.pageSelect{
+  background-color:black;
+  color:#f9d05a;
+  width:50px;
+}
+.arrows{
+margin-left:auto;
+margin-right:auto;
+text-align:center;
+}
+.main_frame{
+  width:90%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+  padding-top:15px;
+}

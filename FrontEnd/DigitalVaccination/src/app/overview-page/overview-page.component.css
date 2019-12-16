@@ -1,0 +1,43 @@
+.orgaFrame{
+width:100%;
+margin-left:auto;
+margin-right:auto;
+text-align:center;
+padding-top:5px;
+}
+
+table.customTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #000000;
+  border-style: solid;
+  color: #000000;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+}
+
+table.customTable td, table.customTable th {
+  border-width: 2px;
+  border-color: #000000;
+  border-style: none;
+  padding: 5px;
+}
+tr:nth-child(2n+1){
+border-style:none;
+font-size:60%;
+text-align:left;
+}
+tr:nth-child(2n){
+border-bottom-style:dotted;
+
+}
+.underTable{
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+  padding: 5px;
+  text-align:left;
+}
