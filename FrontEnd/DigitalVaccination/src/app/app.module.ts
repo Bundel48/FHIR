@@ -27,6 +27,7 @@ import { HumanVacPageComponent } from './human-vac-page/human-vac-page.component
 import { SerumVacPageComponent } from './serum-vac-page/serum-vac-page.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { TubVacPageComponent } from './tub-vac-page/tub-vac-page.component';
 
 
 
@@ -44,6 +45,7 @@ import { FormsModule } from '@angular/forms';
     HebBVacPageComponent,
     HumanVacPageComponent,
     SerumVacPageComponent,
+    TubVacPageComponent,
   ],
   imports: [
     BrowserModule,

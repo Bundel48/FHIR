@@ -6,6 +6,7 @@ import { OrganizationService} from './organization.service';
 import { ImmunizationService } from './immunization.service';
 import { ConditionService } from './condition.service';
 import { EncounterService } from './encounter.service';
+import { ObservationService } from './observation.service';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -21,7 +22,8 @@ export class CompositionService {
     private practitionerService: PractitionerService,
     private organizationService: OrganizationService,
     private encounterService: EncounterService,
-    private conditionService: ConditionService
+    private conditionService: ConditionService,
+    private observationService: ObservationService
   ) {
     this.compositionData = this.getComposition(146836).toPromise();
   }
@@ -138,28 +140,102 @@ export class CompositionService {
               }
              }
 
-
 /*------------------------get rh-factor information from section tag of JSON Composition---------------------------------*/
          } else if (obj.section[i].title === 'Blutgruppe und Rh-Faktor') {
            /* TODOr*/
            obj.rh = {"entry": []};
            if(typeof obj.section[i].entry !== 'undefined'){
-            //TODO
+            for (let j = 0; j < obj.section[i].entry.length; j++) {
+              obj.rh.entry[j] = await this.observationService.getObservation(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+             /*Get encounter of observation*/
+              obj.rh.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.rh.entry[j].encounter.reference)).toPromise();
+              /*Get practitioner of encounter */
+              obj.rh.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.rh.entry[j].encounter.participant[0].individual.reference)).toPromise();
+            /*Get Organization of encounter*/
+              obj.rh.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.rh.entry[j].encounter.serviceProvider.reference)).toPromise();
             }
+          }
 /*------------------------get antibody information from section tag of JSON Composition---------------------------------*/
          } else if (obj.section[i].title === 'Ergebnisse von Antikörperuntersuchungen') {
            /* TODO antibody*/
-           obj.rh = {"entry": []};
+           obj.antibody = {"entry": []};
+          if(typeof obj.section[i].entry !== 'undefined'){
+            for (let j = 0; j < obj.section[i].entry.length; j++) {
+              obj.antibody.entry[j] = await this.observationService.getObservation(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+             /*Get encounter of observation*/
+              obj.antibody.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.antibody.entry[j].encounter.reference)).toPromise();
+              /*Get practitioner of encounter */
+              obj.antibody.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.antibody.entry[j].encounter.participant[0].individual.reference)).toPromise();
+            /*Get Organization of encounter*/
+              obj.antibody.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.antibody.entry[j].encounter.serviceProvider.reference)).toPromise();
+            }
+           }
+
+
+/*------------------------get TBC vaccination information from section tag of JSON Composition---------------------------------*/
+         } else if (obj.section[i].title === 'Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)') {
+         /* Get Immunizations*/
+           obj.tubvac = {"entry": []};
            if(typeof obj.section[i].entry !== 'undefined'){
-            //TODO
+             for (let j = 0; j < obj.section[i].entry.length; j++) {
+               obj.tubvac.entry[j] = await this.immunizationService.getImmunization(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+               /*Get encounter of immunization*/
+               obj.tubvac.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.tubvac.entry[j].encounter.reference)).toPromise();
+               /*Get practitioner of encounter */
+               obj.tubvac.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.tubvac.entry[j].encounter.participant[0].individual.reference)).toPromise();
+             /*Get Organization of encounter*/
+               obj.tubvac.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.tubvac.entry[j].encounter.serviceProvider.reference)).toPromise();
+             }
             }
 /*------------------------get tuberkulin information from section tag of JSON Composition---------------------------------*/
          } else if (obj.section[i].title === 'Ergebnis von Tuberkulinproben') {
-           /* TODO Tuberkulin*/
-           obj.rh = {"entry": []};
+
+           obj.tub = {"entry": []};
            if(typeof obj.section[i].entry !== 'undefined'){
-            //TODO
+             for (let j = 0; j < obj.section[i].entry.length; j++) {
+               obj.tub.entry[j] = await this.observationService.getObservation(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+              /*Get encounter of observation*/
+               obj.tub.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.tub.entry[j].encounter.reference)).toPromise();
+               /*Get practitioner of encounter */
+               obj.tub.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.tub.entry[j].encounter.participant[0].individual.reference)).toPromise();
+             /*Get Organization of encounter*/
+               obj.tub.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.tub.entry[j].encounter.serviceProvider.reference)).toPromise();
+             }
             }
+/*------------------------get Hepatitis Test from section tag of JSON Composition---------------------------------*/
+         } else if (obj.section[i].title === 'Virushepatitis B') {
+
+           obj.hep = {"entry": []};
+           if(typeof obj.section[i].entry !== 'undefined'){
+
+             for (let j = 0; j < obj.section[i].entry.length; j++) {
+               obj.hep.entry[j] = await this.observationService.getObservation(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+              /*Get encounter of observation*/
+               obj.hep.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.hep.entry[j].encounter.reference)).toPromise();
+               /*Get practitioner of encounter */
+               obj.hep.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.hep.entry[j].encounter.participant[0].individual.reference)).toPromise();
+             /*Get Organization of encounter*/
+               obj.hep.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.hep.entry[j].encounter.serviceProvider.reference)).toPromise();
+             }
+            }
+/*------------------------get r-antibody Test from section tag of JSON Composition---------------------------------*/
+         } else if (obj.section[i].title === 'Röteln-Antikörper-Bestimmungen') {
+
+           obj.rbody = {"entry": []};
+           if(typeof obj.section[i].entry !== 'undefined'){
+             for (let j = 0; j < obj.section[i].entry.length; j++) {
+               obj.rbody.entry[j] = await this.observationService.getObservation(this.getIdFromReference(obj.section[i].entry[j].reference)).toPromise();
+              /*Get encounter of observation*/
+               obj.rbody.entry[j].encounter = await this.encounterService.getEncounter(this.getIdFromReference(obj.rbody.entry[j].encounter.reference)).toPromise();
+               /*Get pracrbodytitioner of encounter */
+               obj.rbody.entry[j].encounter.participant = await this.practitionerService.getPractitioner(this.getIdFromReference(obj.rbody.entry[j].encounter.participant[0].individual.reference)).toPromise();
+             /*Get Organization of encounter*/
+               obj.rbody.entry[j].encounter.serviceProvider = await this.organizationService.getOrganization(this.getIdFromReference(obj.rbody.entry[j].encounter.serviceProvider.reference)).toPromise();
+             }
+            }
+
+
+
          }
 
         }

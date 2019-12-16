@@ -1,7 +1,6 @@
 <div class="infoText">
-Ergebnis von <b>Tuberkulinproben</b>
+  Bescheinigung über <b>Tuberkulose-Schutzimpfungen(BCG)</b>
 </div>
-<div class="example-container mat-elevation-z8">
 <table mat-table [dataSource]="dataSource" class="customTable">
 
   <ng-container matColumnDef="Datum">
@@ -9,28 +8,25 @@ Ergebnis von <b>Tuberkulinproben</b>
     <td mat-cell *matCellDef="let element"> {{element.date}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="Probe">
-    <th mat-header-cell *matHeaderCellDef> Probe* und ggf. Konzentration</th>
-    <td mat-cell *matCellDef="let element"> {{element.display}} <br> {{element.code}} </td>
+  <ng-container matColumnDef="Impfstoff">
+    <th mat-header-cell *matHeaderCellDef> Name des Impfstoffes</th>
+    <td mat-cell *matCellDef="let element"> {{element.code}} <br> {{element.display}}</td>
   </ng-container>
 
-  <ng-container matColumnDef="Reaktion">
-    <th mat-header-cell *matHeaderCellDef> Reaktion**</th>
-    <td mat-cell *matCellDef="let element"> {{element.reaction}} </td>
+  <ng-container matColumnDef="Chargennummer">
+    <th mat-header-cell *matHeaderCellDef> Chargen-Nr.</th>
+    <td mat-cell *matCellDef="let element">{{element.lotNumber}}</td>
   </ng-container>
 
   <ng-container matColumnDef="Arztinformation">
-    <th mat-header-cell *matHeaderCellDef> Unterschrift und Stempel des Arztes</th>
+    <th mat-header-cell *matHeaderCellDef> Unterschrift u. Stempel des Arztes</th>
     <td mat-cell *matCellDef="let element"> {{practitioner.name[0].prefix[0]}} {{practitioner.name[0].given[0]}} {{practitioner.name[0].family}} <br> {{organization.name}}<br>
       {{organization.address[0].line[0]}} <br>
       {{organization.address[0].postalCode}} {{organization.address[0].city}}, {{organization.address[0].country}}<br>
       {{organization.telecom[0].value}}</td>
   </ng-container>
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky:true"></tr>
+
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
 </table>
-</div>
-<div class="infoText">
-  * S = Stempeltest, I = Intrakutantest <br>
-  ** Befund wörtlich eintragen (positiv bzw. negativ)
-</div>

@@ -11,6 +11,7 @@ import {BcgVacPageComponent} from "./bcg-vac-page/bcg-vac-page.component";
 import {OtherVacPageComponent} from "./other-vac-page/other-vac-page.component";
 import {TableTestComponent} from "./table-test/table-test.component";
 import {GelbfieberComponent} from "./gelbfieber/gelbfieber.component";
+import {TubVacPageComponent} from "./tub-vac-page/tub-vac-page.component";
 
 const routes: Routes =[
                       {path: '',  redirectTo: '/1', pathMatch: 'full' },
@@ -22,8 +23,9 @@ const routes: Routes =[
                       {path: '6' , component: AntibodyVacPageComponent},
                       {path: '7' , component: HebBVacPageComponent},
                       {path: '8' , component: InfluenzaVacPageComponent},
-                      {path: '9' , component: BcgVacPageComponent},
-                      {path: '10' , component: OtherVacPageComponent},
+                      {path: '9' , component: TubVacPageComponent},
+                      {path: '10' , component: BcgVacPageComponent},
+                      {path: '11' , component: OtherVacPageComponent},
                       ];
 
 

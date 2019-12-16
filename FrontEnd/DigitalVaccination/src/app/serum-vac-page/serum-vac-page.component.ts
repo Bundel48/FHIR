@@ -16,6 +16,23 @@ export interface ImmunizationData{
   typ: any;
 
 }
+
+export interface ObservationData{
+  date:any;
+  code: any;
+  display: any;
+  reaction: any;
+  pnameprefix: any;
+  pnamegiven: any;
+  pnamefamily:any;
+  oname: any;
+  otel: any;
+  ostreet: any;
+  oplz:any;
+  ocity:any;
+  ocountry: any;
+ }
+
 @Component({
   selector: 'app-serum-vac-page',
   templateUrl: './serum-vac-page.component.html',
@@ -23,12 +40,18 @@ export interface ImmunizationData{
 })
 export class SerumVacPageComponent implements OnInit {
   columnsToDisplay = ['Datum','Typ', 'Chargennummer', 'Dosis', 'Arztinformation'];
+  columnsToDisplayRH1 = ['AB0','RH'];
+  columnsToDisplayRH2 = ['RH','Antibody'];
+  columnsToDisplayRH3 = ['Arztinformation'];
+
   immunization: Array<ImmunizationData> = [];
+  observation: Array<ObservationData> = [];
   practitioner: any;
   organization: any;
   condition: any;
   dataSource : VacDataSource = new VacDataSource([]);
-  expandedElement: ImmunizationData | null;
+  dataSourceObservation: ObsDataSource = new ObsDataSource([]);
+  expandedElement: ImmunizationData | null;ImmunizationData
   diabetes: boolean = false;
   haem: boolean = false;
   suppress: boolean = false;
@@ -103,7 +126,6 @@ export class SerumVacPageComponent implements OnInit {
 
   }
   async ngOnInit() {
-  //TODO: RH-Factor
     let compositionData = await this.compositionService.compositionData;
     if(typeof compositionData.risk.entry !== 'undefined'){
       for(let i = 0; i < compositionData.risk.entry.length; i++ ){
@@ -131,6 +153,29 @@ export class SerumVacPageComponent implements OnInit {
 
 
     }
+
+    if(typeof compositionData.rh.entry !== 'undefined'){
+          for(let i = 0; i < compositionData.serum.entry.length; i++){
+            this.observation[i] = {
+              date: compositionData.rh.entry[i].effectiveDateTime,
+              display: compositionData.rh.entry[i].code.coding[0].display,
+              reaction: compositionData.rh.entry[i].interpretation[0].coding[0].display,
+              code: compositionData.rh.entry[i].category[0].coding[0].display,
+              pnameprefix: compositionData.rh.entry[i].encounter.participant.name[0].prefix[0],
+              pnamegiven: compositionData.rh.entry[i].encounter.participant.name[0].given[0],
+              pnamefamily: compositionData.rh.entry[i].encounter.participant.name[0].family,
+              oname: compositionData.rh.entry[i].encounter.serviceProvider.name,
+              oplz: compositionData.rh.entry[i].encounter.serviceProvider.address[0].postalCode,
+              ocity: compositionData.rh.entry[i].encounter.serviceProvider.address[0].city,
+              ocountry: compositionData.rh.entry[i].encounter.serviceProvider.address[0].country,
+              ostreet: compositionData.rh.entry[i].encounter.serviceProvider.address[0].line[0],
+              otel:  compositionData.rh.entry[i].encounter.serviceProvider.telecom[0].value
+            };
+
+          }
+        }
+        this.dataSourceObservation = new ObsDataSource(this.observation);
+
 
     if(typeof compositionData.serum.entry !== 'undefined'){
       for(let i = 0; i < compositionData.serum.entry.length; i++){
@@ -167,4 +212,20 @@ export class VacDataSource extends DataSource<ImmunizationData> {
   }
 
   disconnect() {}
+}
+
+export class ObsDataSource extends DataSource<ObservationData> {
+ /** Stream of data that is provided to the table. */
+ data : BehaviorSubject<Array<ObservationData>>;
+ constructor(lines: Array<ObservationData>) {
+   super();
+   this.data = new BehaviorSubject<Array<ObservationData>>(lines);
+ }
+
+ /** Connect function called by the table to retrieve one stream containing the data to render. */
+ connect(): Observable<ObservationData[]> {
+   return this.data;
+ }
+
+ disconnect() {}
 }

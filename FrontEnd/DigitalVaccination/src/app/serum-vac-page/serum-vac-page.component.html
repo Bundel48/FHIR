@@ -74,17 +74,47 @@
 </div>
 <div class="infoText">
   <b>Blutgruppe und Rh-Faktor</b>
-  <table class="customTable">
+
+    <table mat-table [dataSource]="dataSourceObservation" class="customTable">
+
+      <ng-container matColumnDef="AB0">
+        <th mat-header-cell *matHeaderCellDef>AB0</th>
+        <td mat-cell *matCellDef="let element">{{element.display}}</td>
+      </ng-container>
+      <ng-container matColumnDef="RH">
+        <th mat-header-cell *matHeaderCellDef> Rh-pos(D+) / Rh-neg(D-)</th>
+        <td mat-cell *matCellDef="let element">{{element.code}}</td>
+      </ng-container>
+
     <tr><td>AB0</td><td>Rh-pos(D+) / Rh-neg(D-)</td></tr>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayRH1"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplayRH1;"></tr>
   </table>
   <div class="infoText">
     Rh-positiv bzw Rh-negativ wörtlich eintragen
   </div>
-  <table class="customTable">
-    <tr><td>Rh-Formel</td><td>Antikörper</td></tr>
+    <table mat-table [dataSource]="dataSourceObservation" class="customTable">
+      <ng-container matColumnDef="RH">
+        <th mat-header-cell *matHeaderCellDef>Rh-Formel</th>
+        <td mat-cell *matCellDef="let element">{{element.display}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Antibody">
+        <th mat-header-cell *matHeaderCellDef> Antikörper</th>
+        <td mat-cell *matCellDef="let element">{{element.code}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayRH2"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplayRH2;"></tr>
   </table>
-  <div class="infoText">
-    Datum/Unterschrift und Stempel des Arztes:<br>
-  </div>
-</div>
+    <table mat-table [dataSource]="dataSourceObservation" class="customTable">
+      <ng-container matColumnDef="Arztinformation">
+        <th mat-header-cell *matHeaderCellDef>Datum/Unterschrift und Stempel des Arztes:</th>
+
+        <td mat-cell *matCellDef="let element">{{element.pnameprefix}} {{element.pnamefiven}} {{element.pnamefamily}} <br>
+          {{element.oname}} {{element.ostreet}} {{element.oplz}} {{element.ocity}} {{element.ocountry}} <br>
+          {{element.otel}}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayRH3"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplayRH3;"></tr>
+    </table>
 
