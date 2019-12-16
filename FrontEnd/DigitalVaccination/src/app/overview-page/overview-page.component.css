@@ -26,7 +26,7 @@ table.customTable td, table.customTable th {
 }
 tr:nth-child(2n+1){
 border-style:none;
-font-size:60%;
+font-size:80%;
 text-align:left;
 }
 tr:nth-child(2n){
