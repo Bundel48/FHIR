@@ -48,6 +48,14 @@ export class GelbfieberComponent implements OnInit {
     this.patient = {
           "gender": "___",
           "birthDate": "_____________",
+          "name": [
+                   {
+                    "family": "_____",
+                    "given": [
+                      "________"
+                    ]
+                   }
+                ],
         }
 
 
