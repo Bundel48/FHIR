@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+    <id value="vaccinationCard"/>
+    <version value="4.0.1"/>
+    <name value="Vaccination Card"/>
+    <status value="draft"/>
+    <experimental value="false"/>
+    <date value="2020-01-14"/>
+    <publisher value="Natascha Koch"/>
+    <contact>
+        <telecom>
+            <system value="email"/>
+            <value value="natascha.koch@student.uni-luebeck.de"/>
+        </telecom>
+    </contact>
+    <description value="The VaccationCard profile constrains Composition to specify a vaccination card."/>
+    <fhirVersion value="4.1.0"/>
+    <!-- setting up the slicing -->
+    <element>
+        <path value="Composition.section"/>
+        <slicing>
+            <discriminator>
+                <type value="value"/>
+                <path value ="title"/>
+            </discriminator>
+            <ordered value="false"/>
+            <rules value="open"/>
+        </slicing>
+        <!-- net cardinality rules exact 13 entries -->
+        <min value="13"/>
+        <max value="13"/>
+    </element>
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!--first slice: Impfausweisinhaber -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Impfausweisinhaber"/>
+        <min value ="1"/>
+        <max value="1"/>
+    </element>
+    <!--Title is necessary-->
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Impfausweisinhaber"/>
+        <min value ="1"/>
+        <max value="1"/>
+    </element>
+    <!-- Must have exactly one entry with one patient-->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="1"/>
+        <max value="1" />
+    </element>
+
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/patients"/>
+    </element>
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- second slice: Standardimpfungen -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Standardimpfungen"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <!--Title is necessary-->
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Standardimpfungen"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
+    </element>
+
+    <!-- _______________________________________________________________________________________________________________ -->
+
+
+
+
+
+
+
+    <!-- setting up the slicing for immunization -->
+    <element>
+        <path value="Immunization"/>
+        <slicing>
+            <discriminator>
+                <type value="value"/>
+                <path value="id"/>
+            </discriminator>
+        </slicing>
+    </element>
+    <element>
+        <path value="Immunization"/>
+        <name value="Immunization"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+
+    <element>
+        <path value="Immunization.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
+    </element>
+    <element>
+        <path value="Immunization.vaccineCode"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Immunization.vaccineCode.coding.system"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Immunization.vaccineCode.coding.code"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Immunization.vaccineCode.coding.display"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Immunization.encounter"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Immunization.encounter.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/encounter"/>
+    </element>
+    <element>
+        <path value="Immunization.occurenceDateTime"/>
+        <min value="1"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Immunization.lotNumber"/>
+        <min value="1"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Immunization.protocolApplied.targetDisease"/>
+        <fixedCodeableConcept>
+            <coding>
+                <system value="http://snomed.info/sct" />
+            </coding>
+        </fixedCodeableConcept>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+
+
+
+
+
+
+    <!-- setting up the slicing for encounter -->
+    <element>
+        <path value="Encounter"/>
+        <slicing>
+            <discriminator>
+                <type value="value"/>
+                <path value="id"/>
+            </discriminator>
+        </slicing>
+    </element>
+    <element>
+        <path value="Encounter"/>
+        <name value="Encounter"/>
+        <min value="1"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Encounter.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/encounter"/>
+    </element>
+    <element>
+        <path value="Encounter.participant.individual"/>
+        <min value="1"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Encounter.participant.individual.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/practitioner"/>
+    </element>
+    <element>
+        <path value="Encounter.serviceProvider"/>
+        <min value="1"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Encounter.serviceProvider.identifier"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/organization"/>
+    </element>
+
+
+
+
+
+    <!-- setting up the slicing for practicioner -->
+    <element>
+        <path value="Practitioner"/>
+        <slicing>
+            <discriminator>
+                <type value="value"/>
+                <path value="id"/>
+            </discriminator>
+        </slicing>
+    </element>
+    <element>
+        <path value="Practitioner"/>
+        <name value="Practitioner"/>
+        <min value="1"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Practitioner.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/practitioner"/>
+    </element>
+    <element>
+        <path value="Practitioner.name.use"/>
+        <min value="1"/>
+        <fixedCode value="official"/>
+    </element>
+    <element>
+        <path value="Practitioner.name.family"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Practitioner.name.given"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Practitioner.name.prefix"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Practitioner.qualification"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Practitioner.qualification.code.coding.system"/>
+        <min value="1"/>
+        <fixedCode value="http://terminology.hl7.org/CodeSystem/v2-0360/2.7"/>
+    </element>
+    <element>
+        <path value="Practitioner.qualification.code.coding.code"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Practitioner.qualification.code.coding.display"/>
+        <min value="1"/>
+    </element>
+
+
+    <!-- setting up the slicing for oraganization -->
+    <element>
+        <path value="Organization"/>
+        <slicing>
+            <discriminator>
+                <type value="value"/>
+                <path value="id"/>
+            </discriminator>
+        </slicing>
+    </element>
+    <element>
+        <path value="Organization"/>
+        <name value="Organization"/>
+        <min value="1"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Organization.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/organization"/>
+    </element>
+    <element>
+        <path value="Organization.telecom.system"/>
+        <min value="1"/>
+        <fixedCode value="phone"/>
+    </element>
+    <element>
+        <path value="Organization.telecom.value"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Organization.address.line"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Organization.address.city"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Organization.address.postalCode"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Organization.address.country"/>
+        <min value="1"/>
+        <fixedCode value="DE"/>
+    </element>
+
+
+</StructureDefinition>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+<StructureDefinition xmlns="http://hl7.org/fhir">
+    <id value="profile_immunization"/>
+    <differential>
+
+    </differential>
+
+</StructureDefinition>
+
