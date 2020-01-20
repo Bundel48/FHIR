@@ -59,7 +59,7 @@
         <fixedCode value="http://www.kh-uzl.de/fhir/patients"/>
     </element>
     <!-- _______________________________________________________________________________________________________________ -->
-    <!-- second slice: Standardimpfungen -->
+    <!-- slice: Standardimpfungen -->
     <element>
         <path value="Composition.section"/>
         <name value="Standardimpfungen"/>
@@ -79,21 +79,325 @@
         <min value="0"/>
         <max value="*"/>
     </element>
-
+    <!--- this entry must be an immunization -->
     <element>
         <path value="Composition.section.entry.identifier"/>
-        <min value="1"/>
+        <min value="0"/>
         <max value="1" />
         <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
     </element>
 
     <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: Gelbfieber -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Gelbfieber"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Gelbfieber"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an immunization -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
+    </element>
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: Other Vaccination -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Sonstige Schutzimpfungen"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Sonstige Schutzimpfungen"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an immunization -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
+    </element>
+
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: Influenza -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Schutzimpfungen gegen Influenza"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Schutzimpfungen gegen Influenza"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an immunization -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
+    </element>
+
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: Immunoglobulin -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Passive Immunisierungen mit humanen Immunoglobulinen"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Passive Immunisierungen mit humanen Immunoglobulinen"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an immunization -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
+    </element>
+
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: Serum-Injektion -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Serum-Injektion"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Serum-Injektion"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an immunization -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
+    </element>
 
 
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: risk Information -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an condition -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/condition"/>
+    </element>
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: rh-factor information  -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Blutgruppe und Rh-Faktor"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Blutgruppe und Rh-Faktor"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an observation -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/observation"/>
+    </element>
+
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: BCG -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an immunization -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/immunization"/>
+    </element>
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: Tuberculin  -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Ergebnis von Tuberkulinproben"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Ergebnis von Tuberkulinproben"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an observation -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/observation"/>
+    </element>
 
 
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: Virushepatitis B  -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Virushepatitis B"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Virushepatitis B"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an observation -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/observation"/>
+    </element>
+
+    <!-- _______________________________________________________________________________________________________________ -->
+    <!-- slice: r-antibody test  -->
+    <element>
+        <path value="Composition.section"/>
+        <name value="Röteln-Antikörper-Bestimmungen"/>
+        <min value="0"/>
+        <max value="1"/>
+    </element>
+    <element>
+        <path value="Composition.section"/>
+        <fixedCode value="Röteln-Antikörper-Bestimmungen"/>
+        <min value ="0"/>
+        <max value="1"/>
+    </element>
+    <!-- May have multiple entries -->
+    <element>
+        <path value="Composition.section.entry"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--- this entry must be an observation -->
+    <element>
+        <path value="Composition.section.entry.identifier"/>
+        <min value="0"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/observation"/>
+    </element>
 
 
+<!-- TODO: Condition -->
+<!-- TODO: Observation -->
+<!-- TODO: Einzelne Seiten durchgehen -->
 
     <!-- setting up the slicing for immunization -->
     <element>
