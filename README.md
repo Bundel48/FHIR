@@ -26,7 +26,7 @@ To generate the instance you have to use
 ## Representation of the document
 For the representation we decided to use a web application using
 the Angular framework.
-To realize this we build an **angular 8** application.
+To realize this we build an ** Angular CLI version 8.3.20** application.
 For further information please refer to the readme of the corresponding
 folder. You can find the implementation in the folder
-**FrontEnd.DigitalVaccination**.
+**FrontEnd/DigitalVaccination**.
