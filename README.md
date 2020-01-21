@@ -15,10 +15,16 @@ and for representation we use Angular.
 More information about the submodules can be found in the readme-documents
 of the respective folder.
 
+* [README file of instance](IntellijProject/MIOProjektImpfausweis/README.md)
+ 
+* [README file of representation](FrontEnd/DigitalVaccination/README.md) 
+
 ## Creating the instance
 The code for creating the instance of the document can be found in
 IntellijProject/MIOProjektImpfausweis.
-For further information have a look at the respective readme-document.
+For further information have a look at the respective
+[README-document](IntellijProject/MIOProjektImpfausweis/README.md).
+
 To generate the instance you have to use 
 **Java version 1.11** and
 **hapi-fhir version 4.1.0 (r4 structures of HL7 FHIR)**
@@ -28,5 +34,5 @@ For the representation we decided to use a web application using
 the Angular framework.
 To realize this we build an ** Angular CLI version 8.3.20** application.
 For further information please refer to the readme of the corresponding
-folder. You can find the implementation in the folder
-**FrontEnd/DigitalVaccination**.
+folder. You can find the implementation in the folder.
+[FrontEnd/DigitalVaccination](FrontEnd/DigitalVaccination/README.md) 

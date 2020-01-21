@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
 
-## Structure
+## Structure (program)
 Each page of the vaccination card is created using a separate
 **angular component**.
 This component must be included according to the angular conventions
@@ -20,7 +20,12 @@ reached via the corresponding buttons.
 ## Data parsing
 The data of our document are enclosed in a composition.
 More information about the composition of the data can be found
-in the readme file of the instance creation. 
+in the [README file](IntellijProject/MIOProjektImpfausweis/README.md) of the instance creation. 
+
+
+To ensure a valid instance we
+created a hl7 fhir profile for our vaccination card.
+
 To parse the data, the JSON representation is loaded from the
 relevant FHIR server. Since the amount of data is small,
 we have decided to load the references of the FHIR structures directly
@@ -28,6 +33,8 @@ into the representation of the composition.
 This has the advantage that the composition only needs to be viewed once.
 The parsing of this document is realized in the file
 `composition.service.ts`.
+Every component of the document loads this composition data to get their part of
+the informations.
 
 ## Development server
 
