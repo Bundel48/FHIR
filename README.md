@@ -15,9 +15,9 @@ and for representation we use Angular.
 More information about the submodules can be found in the readme-documents
 of the respective folder.
 
-* [README file of instance](https://github.com/Bundel48/FHIR/tree/master/IntellijProject/MIOProjektImpfausweis)
+* [Folder for instance generation](https://github.com/Bundel48/FHIR/tree/master/IntellijProject/MIOProjektImpfausweis)
  
-* [README file of representation](https://github.com/Bundel48/FHIR/tree/master/FrontEnd/DigitalVaccination) 
+* [Foldere for representation](https://github.com/Bundel48/FHIR/tree/master/FrontEnd/DigitalVaccination) 
 
 ## Creating the instance
 The code for creating the instance of the document can be found in
