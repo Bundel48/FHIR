@@ -15,15 +15,15 @@ and for representation we use Angular.
 More information about the submodules can be found in the readme-documents
 of the respective folder.
 
-* [README file of instance](IntellijProject/MIOProjektImpfausweis/README.md)
+* [README file of instance](https://github.com/Bundel48/FHIR/tree/master/IntellijProject/MIOProjektImpfausweis)
  
-* [README file of representation](FrontEnd/DigitalVaccination/README.md) 
+* [README file of representation](https://github.com/Bundel48/FHIR/tree/master/FrontEnd/DigitalVaccination) 
 
 ## Creating the instance
 The code for creating the instance of the document can be found in
 IntellijProject/MIOProjektImpfausweis.
 For further information have a look at the respective
-[README-document](IntellijProject/MIOProjektImpfausweis/README.md).
+[README-document](https://github.com/Bundel48/FHIR/tree/master/IntellijProject/MIOProjektImpfausweis).
 
 To generate the instance you have to use 
 **Java version 1.11** and
@@ -35,4 +35,4 @@ the Angular framework.
 To realize this we build an ** Angular CLI version 8.3.20** application.
 For further information please refer to the readme of the corresponding
 folder. You can find the implementation in the folder.
-[FrontEnd/DigitalVaccination](FrontEnd/DigitalVaccination/README.md) 
+[FrontEnd/DigitalVaccination](https://github.com/Bundel48/FHIR/tree/master/FrontEnd/DigitalVaccination) 

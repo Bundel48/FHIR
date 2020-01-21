@@ -20,7 +20,7 @@ reached via the corresponding buttons.
 ## Data parsing
 The data of our document are enclosed in a composition.
 More information about the composition of the data can be found
-in the [README file](IntellijProject/MIOProjektImpfausweis/README.md) of the instance creation. 
+in the [README file](https://github.com/Bundel48/FHIR/tree/master/IntellijProject/MIOProjektImpfausweis) of the instance creation. 
 
 
 To ensure a valid instance we
