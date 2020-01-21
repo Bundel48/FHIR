@@ -394,9 +394,173 @@
         <fixedCode value="http://www.kh-uzl.de/fhir/observation"/>
     </element>
 
+    
+    <!-- setting up the slicing for Condition -->
+    <element>
+        <path value="Condition"/>
+        <slicing>
+            <discriminator>
+                <type value="value"/>
+                <fixedcode resourceType="Condition"/>
+                <path value="id"/>
+            </discriminator>
+        </slicing>
+    </element>
+    <element>
+        <path value="Condition"/>
+        <name value="Condition"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+    <!--Must have an identifier-->
+    <element>
+        <path value="Condition.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/condition"/>
+    </element>
 
-<!-- TODO: Condition -->
-<!-- TODO: Observation -->
+    <element>
+        <path value="Condition.code"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCodeableConcept>
+            <coding>
+                <system value="http://snomed.info/sct"/>
+            </coding>
+        </fixedCodeableConcept>
+    </element>
+    <element>
+        <path value="Condition.code.display"/>
+        <min value="1"/>
+        <max value="1" />
+    </element>
+    <element>
+        <path value="Condition.code.display"/>
+        <min value="1"/>
+        <max value="1" />
+    </element>
+
+
+    <!-- setting up the slicing for Observation -->
+    <element>
+        <path value="Observation"/>
+        <slicing>
+            <discriminator>
+                <type value="value"/>
+                <fixedcode resourceType="Observation"/>
+                <path value="id"/>
+            </discriminator>
+        </slicing>
+    </element>
+    <element>
+        <path value="Observation"/>
+        <name value="Observation"/>
+        <min value="0"/>
+        <max value="*"/>
+    </element>
+<!--Must have an identifier-->
+    <element>
+        <path value="Observation.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/observation"/>
+    </element>
+
+    <element>
+        <path value="Observation.category.coding.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://terminology.hl7.org/CodeSystem/observation-category"/>
+    </element>
+    <element>
+        <path value="Observation.category.coding.code"/>
+        <min value="1"/>
+        <max value="1" />
+    </element>
+
+    <element>
+        <path value="Observation.category.coding.display"/>
+        <min value="1"/>
+        <max value="1" />
+    </element>
+
+    <element>
+        <path value="Observation.category.code"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCodeableConcept>
+            <coding>
+                <system value="http://loinc.org"/>
+            </coding>
+        </fixedCodeableConcept>
+    </element>
+
+    <element>
+        <path value="Observation.category.code.code"/>
+        <min value="1"/>
+        <max value="1" />
+    </element>
+    <element>
+        <path value="Observation.category.code.display"/>
+        <min value="1"/>
+        <max value="1" />
+    </element>
+
+    <element>
+        <path value="Observation.encounter"/>
+        <min value="1"/>
+    </element>
+    <element>
+        <path value="Observation.encounter.identifier.system"/>
+        <min value="1"/>
+        <max value="1" />
+        <fixedCode value="http://www.kh-uzl.de/fhir/encounter"/>
+    </element>
+    <element>
+        <path value="Observation.effectiveDateTime"/>
+        <min value="1"/>
+        <max value="1"/>
+    </element>
+
+    <element>
+        <path value="Observation.performer"/>
+        <min value="1"/>
+        <fixedCodeableConcept>
+                <system value="http://www.kh-uzl.de/fhir/practitioner"/>
+        </fixedCodeableConcept>
+    </element>
+    <element>
+        <path value="Observation.interpretation"/>
+        <min value="1"/>
+        <coding>
+            <fixedCodeableConcept>
+                    <system value="http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"/>
+            </fixedCodeableConcept>
+        </coding>
+    </element>
+    <element>
+        <path value="Observation.interpretation.coding.code"/>
+        <min value="1"/>
+    </element>
+
+    <element>
+        <path value="Observation.interpretation.coding.display"/>
+        <min value="1"/>
+    </element>
+
+    <element>
+        <path value="Observation.note"/>
+        <min value="1"/>
+    </element>
+<!-- muss nicht in jeder Observation da sein auf jeden Fall aber bei Tuberkulin, Röteln-->
+    <element>
+        <path value="Observation.note.text"/>
+        <min value="0"/>
+        <min value="1"/>
+    </element>
+
+
 <!-- TODO: Einzelne Seiten durchgehen -->
 
     <!-- setting up the slicing for immunization -->
