@@ -394,7 +394,7 @@
         <fixedCode value="http://www.kh-uzl.de/fhir/observation"/>
     </element>
 
-    
+
     <!-- setting up the slicing for Condition -->
     <element>
         <path value="Condition"/>
