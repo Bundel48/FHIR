@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <url value="http://example.org/fhir/StructureDefinition/Vac_Composition" />
+  <name value="Vac_Composition" />
+  <status value="draft" />
+  <publisher value="Natascha Koch" />
+  <contact>
+    <name value="Natascha Koch" />
+    <telecom>
+      <system value="email" />
+      <value value="natascha.koch@student.uni-luebeck.de" />
+      <use value="work" />
+    </telecom>
+  </contact>
+  <description value="The section tag of the composition refers to the different pages of the impass card. The title of the section is the identification for the different pages." />
+  <fhirVersion value="4.0.0" />
+  <mapping>
+    <identity value="workflow" />
+    <uri value="http://hl7.org/fhir/workflow" />
+    <name value="Workflow Pattern" />
+  </mapping>
+  <mapping>
+    <identity value="rim" />
+    <uri value="http://hl7.org/v3" />
+    <name value="RIM Mapping" />
+  </mapping>
+  <mapping>
+    <identity value="cda" />
+    <uri value="http://hl7.org/v3/cda" />
+    <name value="CDA (R2)" />
+  </mapping>
+  <mapping>
+    <identity value="fhirdocumentreference" />
+    <uri value="http://hl7.org/fhir/documentreference" />
+    <name value="FHIR DocumentReference" />
+  </mapping>
+  <mapping>
+    <identity value="w5" />
+    <uri value="http://hl7.org/fhir/fivews" />
+    <name value="FiveWs Pattern Mapping" />
+  </mapping>
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Composition" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Composition" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Composition.identifier.system">
+      <path value="Composition.identifier.system" />
+      <fixedUri value="http://www.kh-uzl.de/fhir/composition" />
+    </element>
+    <element id="Composition.status">
+      <path value="Composition.status" />
+      <fixedCode value="final" />
+    </element>
+    <element id="Composition.type.coding.system">
+      <path value="Composition.type.coding.system" />
+      <fixedUri value="http://loinc.org" />
+    </element>
+    <element id="Composition.subject.reference">
+      <path value="Composition.subject.reference" />
+      <min value="1" />
+      <type>
+        <code value="string" />
+        <profile value="Vac_Patient.StructureDefinition.xml" />
+      </type>
+    </element>
+    <element id="Composition.subject.identifier.system">
+      <path value="Composition.subject.identifier.system" />
+      <fixedUri value="http://www.kh-uzl.de/fhir/patients" />
+    </element>
+    <element id="Composition.section">
+      <path value="Composition.section" />
+      <definition value="The root of the sections that make up the composition. The different pages of the vaccination card have to be represented in sections, marked by a fixed title" />
+      <min value="1" />
+      <max value="13" />
+    </element>
+    <element id="Composition.section.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Impfausweisinhaber" />
+    </element>
+    <element id="Composition.section.entry">
+      <path value="Composition.section.entry" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section.entry.reference">
+      <path value="Composition.section.entry.reference" />
+      <min value="1" />
+    </element>
+    <element id="Composition.section.entry.identifier">
+      <path value="Composition.section.entry.identifier" />
+      <min value="1" />
+    </element>
+    <element id="Composition.section.entry.identifier.system">
+      <path value="Composition.section.entry.identifier.system" />
+      <min value="1" />
+      <fixedUri value="http://www.kh-uzl.de/fhir/patients" />
+    </element>
+  </differential>
+</StructureDefinition>
