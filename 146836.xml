@@ -1,0 +1,270 @@
+<Composition xmlns="http://hl7.org/fhir">
+   <id value="146836"/>
+   <meta>
+      <versionId value="2"/>
+      <lastUpdated value="2019-12-14T18:14:52.000+01:00"/>
+      <source value="#FXjJh33mOO1HgW7Q"/>
+   </meta>
+   <identifier>
+      <system value="http://www.kh-uzl.de/fhir/composition"/>
+      <value value="920c0e08-380e-417b-a5b8-e4843bc8914a"/>
+   </identifier>
+   <status value="final"/>
+   <type>
+      <coding>
+         <system value="http://loinc.org"/>
+         <code value="11369-6"/>
+         <display value="History of Immunization Narrative"/>
+      </coding>
+   </type>
+   <subject>
+      <reference value="Patient/146790"/>
+      <identifier>
+         <system value="http://www.kh-uzl.de/fhir/patients"/>
+         <value value="67af279a-d69d-43d7-99a1-c4393d9d5274"/>
+      </identifier>
+   </subject>
+   <date value="2019-12-14"/>
+   <author>
+      <reference value="Practitioner/146791"/>
+      <identifier>
+         <system value="http://www.kh-uzl.de/fhir/practitioner"/>
+         <value value="78e75c48-9263-4bf4-b79f-0d1e19c3354a"/>
+      </identifier>
+   </author>
+   <title value="Internationale Bescheinigungen über Impfungen und Impfbuch"/>
+   <section>
+      <title value="Impfausweisinhaber"/>
+      <entry>
+         <reference value="Patient/146790"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/patients"/>
+            <value value="67af279a-d69d-43d7-99a1-c4393d9d5274"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Gelbfieber"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Internationale Bescheinigung über Impfung oder Wiederimpfung gegen Gelbfieber</div>
+      </text>
+   </section>
+   <section>
+      <title value="Standardimpfungen"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Bescheinigung über Satndardimpfungen</div>
+      </text>
+      <entry>
+         <reference value="Immunization/146813"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="2d28c1ad-1276-4d28-9fea-cbd59d046be4"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146814"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="99d31b6c-7390-4461-b05f-41e13f9cfa54"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146815"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="7e376aca-97b1-4ae9-b8e6-413622611d27"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146816"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="68c42ae3-6ac3-44ae-81f0-3872c9319d73"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146817"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="32c0c011-987b-436f-906a-72f8f741cd10"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146818"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="6a8e5728-995a-47ca-ba4f-97840c592e78"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146819"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="839d15bc-5fd3-480f-b023-aa8bd302f3f4"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146820"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="36c66505-cb41-4802-8b6f-6a4a2c7ba399"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146821"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="92e52d05-b5ee-4083-9c19-f98a246cf0ce"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146822"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="595442bc-34e8-4e06-8011-f4f01588f92a"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146823"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="0659cc36-2940-477c-9d11-74309a40cb98"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Sonstige Schutzimpfungen"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Sonstige Schutzimpfungen, z.B. gegen Cholera, FSME, Hepatits A, Meningokokken, Pneumokokken, Typhus, Varizellen</div>
+      </text>
+      <entry>
+         <reference value="Immunization/146824"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="48fa09f8-6dc4-41c8-9ef9-26f77a4434d8"/>
+         </identifier>
+      </entry>
+      <entry>
+         <reference value="Immunization/146825"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="137078e2-3ef2-40f5-8bfd-54913bd22ead"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Schutzimpfungen gegen Influenza"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Schutzimpfungen gegen Influenza (Virusgrippe)</div>
+      </text>
+      <entry>
+         <reference value="Immunization/146826"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="769f2162-e967-46f3-8e3f-c34a9e50fc9f"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)</div>
+      </text>
+   </section>
+   <section>
+      <title value="Ergebnis von Tuberkulinproben"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Ergebnis von Tuberkulinproben</div>
+      </text>
+      <entry>
+         <reference value="Observation/146829"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/observation"/>
+            <value value="96c94036-adf8-405b-9e1c-450a9452dd49"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Ergebnisse von Antikörperuntersuchungen"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Ergebnisse von Antikörperuntersuchungen, z.B. Tatanus, Virushepatitis A u. a.</div>
+      </text>
+   </section>
+   <section>
+      <title value="Virushepatitis B"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Virushepatitis B: Ergebnis von Antikörper-Untersuchungen (Anti-HBs)</div>
+      </text>
+      <entry>
+         <reference value="Observation/146831"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/observation"/>
+            <value value="c5e65715-5ed3-49c8-969f-b752c6c613aa"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Röteln-Antikörper-Bestimmungen"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Röteln-Antikörper-Bestimmungen</div>
+      </text>
+      <entry>
+         <reference value="Observation/146833"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/observation"/>
+            <value value="22f777a2-7385-4b84-ae35-f0644e20dff7"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Passive Immunisierungen mit humanen Immunoglobulinen"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Passive Immunisierungen mit humanen Immunoglobulinen (z.B Standard-Immunoglobulin, Tetanus- oder andere spezielle Immunoglobuline)</div>
+      </text>
+      <entry>
+         <reference value="Immunization/146827"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/immunization"/>
+            <value value="9ad52429-c94d-4dc0-a49a-fcd30ddf9aa3"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Serum-Injektion"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Serum-Injektion: Heterologe Sera (z.B. vom Pferd)</div>
+      </text>
+   </section>
+   <section>
+      <title value="Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen</div>
+      </text>
+      <entry>
+         <reference value="Condition/146835"/>
+         <identifier>
+            <system value="http://www.kh-uzl.de/fhir/condition"/>
+            <value value="b5d7c1fe-d740-45a9-ab97-3607c84c1810"/>
+         </identifier>
+      </entry>
+   </section>
+   <section>
+      <title value="Blutgruppe und Rh-Faktor"/>
+      <text>
+         <status value="additional"/>
+         <div xmlns="http://www.w3.org/1999/xhtml">Blutgruppe und Rh-Faktor</div>
+      </text>
+   </section>
+</Composition>

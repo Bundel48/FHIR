@@ -57,6 +57,10 @@
       <path value="Composition.type.coding.system" />
       <fixedUri value="http://loinc.org" />
     </element>
+    <element id="Composition.subject">
+      <path value="Composition.subject" />
+      <mustSupport value="true" />
+    </element>
     <element id="Composition.subject.reference">
       <path value="Composition.subject.reference" />
       <min value="1" />
@@ -78,12 +82,12 @@
     <element id="Composition.section.title">
       <path value="Composition.section.title" />
       <min value="1" />
-      <fixedString value="Impfausweisinhaber" />
+      <patternString value="[&quot;Impfausweisinhaber&quot;,&quot;Standardimpfungen&quot;, &quot;Gelbfieber&quot;,&quot;Sonstige Schutzimpfungen&quot;,&quot;Schutzimpfungen gegen Influenza&quot;,&quot;Passive Immunisierungen mit humanen Immunoglobulinen&quot;,&quot;Serum-Injektion&quot;, &quot;Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen&quot;, &quot;Blutgruppe und Rh-Faktor&quot;,&quot;Ergebnisse von Antikörperuntersuchungen&quot;, &quot;Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)&quot;,&quot;Ergebnis von Tuberkulinproben&quot;, &quot;Virushepatitis B&quot;, &quot;Röteln-Antikörper-Bestimmungen&quot;]" />
+      <mustSupport value="true" />
     </element>
     <element id="Composition.section.entry">
       <path value="Composition.section.entry" />
       <min value="1" />
-      <max value="1" />
     </element>
     <element id="Composition.section.entry.reference">
       <path value="Composition.section.entry.reference" />
@@ -96,7 +100,6 @@
     <element id="Composition.section.entry.identifier.system">
       <path value="Composition.section.entry.identifier.system" />
       <min value="1" />
-      <fixedUri value="http://www.kh-uzl.de/fhir/patients" />
     </element>
   </differential>
 </StructureDefinition>
