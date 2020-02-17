@@ -40,6 +40,34 @@
   <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Condition" />
   <derivation value="constraint" />
   <differential>
+    <element id="Condition.implicitRules">
+      <path value="Condition.implicitRules" />
+      <max value="0" />
+    </element>
+    <element id="Condition.language">
+      <path value="Condition.language" />
+      <max value="0" />
+    </element>
+    <element id="Condition.contained">
+      <path value="Condition.contained" />
+      <max value="0" />
+    </element>
+    <element id="Condition.clinicalStatus">
+      <path value="Condition.clinicalStatus" />
+      <max value="0" />
+    </element>
+    <element id="Condition.verificationStatus">
+      <path value="Condition.verificationStatus" />
+      <max value="0" />
+    </element>
+    <element id="Condition.category">
+      <path value="Condition.category" />
+      <max value="0" />
+    </element>
+    <element id="Condition.severity">
+      <path value="Condition.severity" />
+      <max value="0" />
+    </element>
     <element id="Condition.code">
       <path value="Condition.code" />
       <code>
@@ -55,6 +83,10 @@
       <path value="Condition.code.coding.display" />
       <min value="1" />
     </element>
+    <element id="Condition.bodySite">
+      <path value="Condition.bodySite" />
+      <max value="0" />
+    </element>
     <element id="Condition.subject">
       <path value="Condition.subject" />
       <type>
@@ -68,6 +100,26 @@
         <code value="Reference" />
         <profile value="http://example.org/fhir/StructureDefinition/MyEncounter" />
       </type>
+    </element>
+    <element id="Condition.onset[x]">
+      <path value="Condition.onset[x]" />
+      <max value="0" />
+    </element>
+    <element id="Condition.abatement[x]">
+      <path value="Condition.abatement[x]" />
+      <max value="0" />
+    </element>
+    <element id="Condition.asserter">
+      <path value="Condition.asserter" />
+      <max value="0" />
+    </element>
+    <element id="Condition.stage">
+      <path value="Condition.stage" />
+      <max value="0" />
+    </element>
+    <element id="Condition.evidence">
+      <path value="Condition.evidence" />
+      <max value="0" />
     </element>
   </differential>
 </StructureDefinition>

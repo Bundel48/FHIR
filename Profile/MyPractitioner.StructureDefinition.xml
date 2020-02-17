@@ -30,10 +30,26 @@
   <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Practitioner" />
   <derivation value="constraint" />
   <differential>
+    <element id="Practitioner.implicitRules">
+      <path value="Practitioner.implicitRules" />
+      <max value="0" />
+    </element>
+    <element id="Practitioner.language">
+      <path value="Practitioner.language" />
+      <max value="0" />
+    </element>
+    <element id="Practitioner.contained">
+      <path value="Practitioner.contained" />
+      <max value="0" />
+    </element>
     <element id="Practitioner.identifier.system">
       <path value="Practitioner.identifier.system" />
       <min value="1" />
       <fixedUri value="http://www.kh-uzl.de/fhir/practitioner" />
+    </element>
+    <element id="Practitioner.active">
+      <path value="Practitioner.active" />
+      <max value="0" />
     </element>
     <element id="Practitioner.name">
       <path value="Practitioner.name" />
@@ -49,6 +65,26 @@
       <min value="1" />
       <max value="1" />
     </element>
+    <element id="Practitioner.telecom">
+      <path value="Practitioner.telecom" />
+      <max value="0" />
+    </element>
+    <element id="Practitioner.address">
+      <path value="Practitioner.address" />
+      <max value="0" />
+    </element>
+    <element id="Practitioner.gender">
+      <path value="Practitioner.gender" />
+      <max value="0" />
+    </element>
+    <element id="Practitioner.birthDate">
+      <path value="Practitioner.birthDate" />
+      <max value="0" />
+    </element>
+    <element id="Practitioner.photo">
+      <path value="Practitioner.photo" />
+      <max value="0" />
+    </element>
     <element id="Practitioner.qualification">
       <path value="Practitioner.qualification" />
       <code>
@@ -57,6 +93,10 @@
       </code>
       <min value="1" />
       <max value="1" />
+    </element>
+    <element id="Practitioner.communication">
+      <path value="Practitioner.communication" />
+      <max value="0" />
     </element>
   </differential>
 </StructureDefinition>

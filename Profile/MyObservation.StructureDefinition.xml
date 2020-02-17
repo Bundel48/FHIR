@@ -40,9 +40,29 @@
   <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Observation" />
   <derivation value="constraint" />
   <differential>
+    <element id="Observation.implicitRules">
+      <path value="Observation.implicitRules" />
+      <max value="0" />
+    </element>
+    <element id="Observation.language">
+      <path value="Observation.language" />
+      <max value="0" />
+    </element>
+    <element id="Observation.contained">
+      <path value="Observation.contained" />
+      <max value="0" />
+    </element>
     <element id="Observation.identifier.system">
       <path value="Observation.identifier.system" />
       <fixedUri value="http://www.kh-uzl.de/fhir/observation" />
+    </element>
+    <element id="Observation.basedOn">
+      <path value="Observation.basedOn" />
+      <max value="0" />
+    </element>
+    <element id="Observation.partOf">
+      <path value="Observation.partOf" />
+      <max value="0" />
     </element>
     <element id="Observation.category">
       <path value="Observation.category" />
@@ -79,6 +99,10 @@
         <profile value="http://example.org/fhir/StructureDefinition/MyPatient" />
       </type>
     </element>
+    <element id="Observation.focus">
+      <path value="Observation.focus" />
+      <max value="0" />
+    </element>
     <element id="Observation.encounter">
       <path value="Observation.encounter" />
       <min value="1" />
@@ -87,12 +111,56 @@
         <profile value="http://example.org/fhir/StructureDefinition/MyEncounter" />
       </type>
     </element>
+    <element id="Observation.issued">
+      <path value="Observation.issued" />
+      <max value="0" />
+    </element>
     <element id="Observation.performer">
       <path value="Observation.performer" />
       <type>
         <code value="Reference" />
         <profile value="http://example.org/fhir/StructureDefinition/MyPractitioner" />
       </type>
+    </element>
+    <element id="Observation.value[x]">
+      <path value="Observation.value[x]" />
+      <max value="0" />
+    </element>
+    <element id="Observation.dataAbsentReason">
+      <path value="Observation.dataAbsentReason" />
+      <max value="0" />
+    </element>
+    <element id="Observation.bodySite">
+      <path value="Observation.bodySite" />
+      <max value="0" />
+    </element>
+    <element id="Observation.method">
+      <path value="Observation.method" />
+      <max value="0" />
+    </element>
+    <element id="Observation.specimen">
+      <path value="Observation.specimen" />
+      <max value="0" />
+    </element>
+    <element id="Observation.device">
+      <path value="Observation.device" />
+      <max value="0" />
+    </element>
+    <element id="Observation.referenceRange">
+      <path value="Observation.referenceRange" />
+      <max value="0" />
+    </element>
+    <element id="Observation.hasMember">
+      <path value="Observation.hasMember" />
+      <max value="0" />
+    </element>
+    <element id="Observation.derivedFrom">
+      <path value="Observation.derivedFrom" />
+      <max value="0" />
+    </element>
+    <element id="Observation.component">
+      <path value="Observation.component" />
+      <max value="0" />
     </element>
   </differential>
 </StructureDefinition>

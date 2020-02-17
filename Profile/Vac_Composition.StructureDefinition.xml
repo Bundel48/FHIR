@@ -45,6 +45,18 @@
   <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Composition" />
   <derivation value="constraint" />
   <differential>
+    <element id="Composition.implicitRules">
+      <path value="Composition.implicitRules" />
+      <max value="0" />
+    </element>
+    <element id="Composition.language">
+      <path value="Composition.language" />
+      <max value="0" />
+    </element>
+    <element id="Composition.contained">
+      <path value="Composition.contained" />
+      <max value="0" />
+    </element>
     <element id="Composition.identifier.system">
       <path value="Composition.identifier.system" />
       <fixedUri value="http://www.kh-uzl.de/fhir/composition" />
@@ -57,6 +69,10 @@
       <path value="Composition.type.coding.system" />
       <fixedUri value="http://loinc.org" />
     </element>
+    <element id="Composition.category">
+      <path value="Composition.category" />
+      <max value="0" />
+    </element>
     <element id="Composition.subject">
       <path value="Composition.subject" />
       <mustSupport value="true" />
@@ -66,15 +82,54 @@
       <min value="1" />
       <type>
         <code value="string" />
-        <profile value="Vac_Patient.StructureDefinition.xml" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyPatient" />
       </type>
+    </element>
+    <element id="Composition.subject.reference.name.period">
+      <path value="Composition.subject.reference.name.period" />
+      <max value="0" />
+    </element>
+    <element id="Composition.subject.type">
+      <path value="Composition.subject.type" />
+      <max value="0" />
     </element>
     <element id="Composition.subject.identifier.system">
       <path value="Composition.subject.identifier.system" />
       <fixedUri value="http://www.kh-uzl.de/fhir/patients" />
     </element>
+    <element id="Composition.encounter">
+      <path value="Composition.encounter" />
+      <max value="0" />
+    </element>
+    <element id="Composition.confidentiality">
+      <path value="Composition.confidentiality" />
+      <max value="0" />
+    </element>
+    <element id="Composition.attester">
+      <path value="Composition.attester" />
+      <max value="0" />
+    </element>
+    <element id="Composition.custodian">
+      <path value="Composition.custodian" />
+      <max value="0" />
+    </element>
+    <element id="Composition.relatesTo">
+      <path value="Composition.relatesTo" />
+      <max value="0" />
+    </element>
+    <element id="Composition.event">
+      <path value="Composition.event" />
+      <max value="0" />
+    </element>
     <element id="Composition.section">
       <path value="Composition.section" />
+      <slicing>
+        <discriminator>
+          <type value="pattern" />
+          <path value="title" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
       <definition value="The root of the sections that make up the composition. The different pages of the vaccination card have to be represented in sections, marked by a fixed title" />
       <min value="1" />
       <max value="13" />
@@ -100,6 +155,546 @@
     <element id="Composition.section.entry.identifier.system">
       <path value="Composition.section.entry.identifier.system" />
       <min value="1" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber">
+      <path value="Composition.section" />
+      <sliceName value="Impfausweisinhaber" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.id">
+      <path value="Composition.section.id" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Impfausweisinhaber" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.text">
+      <path value="Composition.section.text" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.entry.reference">
+      <path value="Composition.section.entry.reference" />
+      <min value="1" />
+      <type>
+        <code value="string" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyPatient" />
+      </type>
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.entry.reference.name">
+      <path value="Composition.section.entry.reference.name" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:Impfausweisinhaber.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Gelbfieber">
+      <path value="Composition.section" />
+      <sliceName value="Gelbfieber" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:Gelbfieber.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Gelbfieber" />
+    </element>
+    <element id="Composition.section:Gelbfieber.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Gelbfieber.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Gelbfieber.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Gelbfieber.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Gelbfieber.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Gelbfieber.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyImmunization" />
+      </type>
+    </element>
+    <element id="Composition.section:Gelbfieber.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen">
+      <path value="Composition.section" />
+      <sliceName value="SonstigeSchutzimpfungen" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Sonstige Schutzimpfungen" />
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyImmunization" />
+      </type>
+    </element>
+    <element id="Composition.section:SonstigeSchutzimpfungen.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen">
+      <path value="Composition.section" />
+      <sliceName value="InfluenzaImpfungen" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Schutzimpfungen gegen Influenza" />
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyImmunization" />
+      </type>
+    </element>
+    <element id="Composition.section:InfluenzaImpfungen.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline">
+      <path value="Composition.section" />
+      <sliceName value="humaneImmunoglobuline" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Passive Immunisierungen mit humanen Immunoglobulinen" />
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyImmunization" />
+      </type>
+    </element>
+    <element id="Composition.section:humaneImmunoglobuline.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SerumInjektion">
+      <path value="Composition.section" />
+      <sliceName value="SerumInjektion" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:SerumInjektion.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Serum-Injektion" />
+    </element>
+    <element id="Composition.section:SerumInjektion.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SerumInjektion.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SerumInjektion.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SerumInjektion.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SerumInjektion.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:SerumInjektion.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Risikofaktoren">
+      <path value="Composition.section" />
+      <sliceName value="Risikofaktoren" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:Risikofaktoren.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Ärztliche Vermerke über medizinische Risikofaktoren bei Impfungen" />
+    </element>
+    <element id="Composition.section:Risikofaktoren.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Risikofaktoren.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Risikofaktoren.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Risikofaktoren.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Risikofaktoren.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Risikofaktoren.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Risikofaktoren.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyCondition" />
+      </type>
+    </element>
+    <element id="Composition.section:Blutgruppe">
+      <path value="Composition.section" />
+      <sliceName value="Blutgruppe" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:Blutgruppe.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Blutgruppe und Rh-Faktor" />
+    </element>
+    <element id="Composition.section:Blutgruppe.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Blutgruppe.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Blutgruppe.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Blutgruppe.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Blutgruppe.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Blutgruppe.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Blutgruppe.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyObservation" />
+      </type>
+    </element>
+    <element id="Composition.section:Antikoerper">
+      <path value="Composition.section" />
+      <sliceName value="Antikoerper" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:Antikoerper.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+    </element>
+    <element id="Composition.section:Antikoerper.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Antikoerper.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Antikoerper.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Antikoerper.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Antikoerper.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Antikoerper.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Antikoerper.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyObservation" />
+      </type>
+    </element>
+    <element id="Composition.section:BCG">
+      <path value="Composition.section" />
+      <sliceName value="BCG" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:BCG.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Bescheinigung über Tuberkulose-Schutzimpfungen (BCG)" />
+    </element>
+    <element id="Composition.section:BCG.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:BCG.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:BCG.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:BCG.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:BCG.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:BCG.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:BCG.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyImmunization" />
+      </type>
+    </element>
+    <element id="Composition.section:Tuberkulinprobe">
+      <path value="Composition.section" />
+      <sliceName value="Tuberkulinprobe" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:Tuberkulinprobe.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Ergebnis von Tuberkulinproben" />
+    </element>
+    <element id="Composition.section:Tuberkulinprobe.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Tuberkulinprobe.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Tuberkulinprobe.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Tuberkulinprobe.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Tuberkulinprobe.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Tuberkulinprobe.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:Tuberkulinprobe.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyObservation" />
+      </type>
+    </element>
+    <element id="Composition.section:HebB">
+      <path value="Composition.section" />
+      <sliceName value="HebB" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:HebB.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Virushepatitis B" />
+    </element>
+    <element id="Composition.section:HebB.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:HebB.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:HebB.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:HebB.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:HebB.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:HebB.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:HebB.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyObservation" />
+      </type>
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper">
+      <path value="Composition.section" />
+      <sliceName value="RoetelnAntikoerper" />
+      <max value="1" />
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper.title">
+      <path value="Composition.section.title" />
+      <min value="1" />
+      <fixedString value="Röteln-Antikörper-Bestimmungen" />
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper.code">
+      <path value="Composition.section.code" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper.author">
+      <path value="Composition.section.author" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper.focus">
+      <path value="Composition.section.focus" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper.mode">
+      <path value="Composition.section.mode" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper.orderedBy">
+      <path value="Composition.section.orderedBy" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper.emptyReason">
+      <path value="Composition.section.emptyReason" />
+      <max value="0" />
+    </element>
+    <element id="Composition.section:RoetelnAntikoerper.entry">
+      <path value="Composition.section.entry" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyObservation" />
+      </type>
     </element>
   </differential>
 </StructureDefinition>

@@ -35,9 +35,25 @@
   <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Immunization" />
   <derivation value="constraint" />
   <differential>
+    <element id="Immunization.implicitRules">
+      <path value="Immunization.implicitRules" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.language">
+      <path value="Immunization.language" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.contained">
+      <path value="Immunization.contained" />
+      <max value="0" />
+    </element>
     <element id="Immunization.identifier.system">
       <path value="Immunization.identifier.system" />
       <fixedUri value="http://www.kh-uzl.de/fhir/immunization" />
+    </element>
+    <element id="Immunization.statusReason">
+      <path value="Immunization.statusReason" />
+      <max value="0" />
     </element>
     <element id="Immunization.vaccineCode.coding.code">
       <path value="Immunization.vaccineCode.coding.code" />
@@ -57,10 +73,86 @@
     <element id="Immunization.encounter">
       <path value="Immunization.encounter" />
       <min value="1" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyEncounter" />
+      </type>
+    </element>
+    <element id="Immunization.recorded">
+      <path value="Immunization.recorded" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.primarySource">
+      <path value="Immunization.primarySource" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.reportOrigin">
+      <path value="Immunization.reportOrigin" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.location">
+      <path value="Immunization.location" />
+      <max value="0" />
     </element>
     <element id="Immunization.lotNumber">
       <path value="Immunization.lotNumber" />
       <min value="1" />
+    </element>
+    <element id="Immunization.expirationDate">
+      <path value="Immunization.expirationDate" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.site">
+      <path value="Immunization.site" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.route">
+      <path value="Immunization.route" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.doseQuantity">
+      <path value="Immunization.doseQuantity" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.performer">
+      <path value="Immunization.performer" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.note">
+      <path value="Immunization.note" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.reasonCode">
+      <path value="Immunization.reasonCode" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.reasonReference">
+      <path value="Immunization.reasonReference" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.isSubpotent">
+      <path value="Immunization.isSubpotent" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.subpotentReason">
+      <path value="Immunization.subpotentReason" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.education">
+      <path value="Immunization.education" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.programEligibility">
+      <path value="Immunization.programEligibility" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.fundingSource">
+      <path value="Immunization.fundingSource" />
+      <max value="0" />
+    </element>
+    <element id="Immunization.reaction">
+      <path value="Immunization.reaction" />
+      <max value="0" />
     </element>
   </differential>
 </StructureDefinition>

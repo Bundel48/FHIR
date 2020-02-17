@@ -30,9 +30,25 @@
   <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Encounter" />
   <derivation value="constraint" />
   <differential>
+    <element id="Encounter.implicitRules">
+      <path value="Encounter.implicitRules" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.language">
+      <path value="Encounter.language" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.contained">
+      <path value="Encounter.contained" />
+      <max value="0" />
+    </element>
     <element id="Encounter.identifier.system">
       <path value="Encounter.identifier.system" />
       <fixedUri value="http://www.kh-uzl.de/fhir/encounter" />
+    </element>
+    <element id="Encounter.statusHistory">
+      <path value="Encounter.statusHistory" />
+      <max value="0" />
     </element>
     <element id="Encounter.class.system">
       <path value="Encounter.class.system" />
@@ -46,6 +62,22 @@
       <path value="Encounter.class.display" />
       <min value="1" />
     </element>
+    <element id="Encounter.classHistory">
+      <path value="Encounter.classHistory" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.type">
+      <path value="Encounter.type" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.serviceType">
+      <path value="Encounter.serviceType" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.priority">
+      <path value="Encounter.priority" />
+      <max value="0" />
+    </element>
     <element id="Encounter.subject">
       <path value="Encounter.subject" />
       <min value="1" />
@@ -53,6 +85,14 @@
         <code value="Reference" />
         <profile value="http://example.org/fhir/StructureDefinition/MyPatient" />
       </type>
+    </element>
+    <element id="Encounter.episodeOfCare">
+      <path value="Encounter.episodeOfCare" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.basedOn">
+      <path value="Encounter.basedOn" />
+      <max value="0" />
     </element>
     <element id="Encounter.participant">
       <path value="Encounter.participant" />
@@ -62,6 +102,54 @@
     <element id="Encounter.participant.individual.reference">
       <path value="Encounter.participant.individual.reference" />
       <fixedString value="http://www.kh-uzl.de/fhir/practitioner" />
+    </element>
+    <element id="Encounter.appointment">
+      <path value="Encounter.appointment" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.period">
+      <path value="Encounter.period" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.length">
+      <path value="Encounter.length" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonCode">
+      <path value="Encounter.reasonCode" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.reasonReference">
+      <path value="Encounter.reasonReference" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.diagnosis">
+      <path value="Encounter.diagnosis" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.account">
+      <path value="Encounter.account" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.hospitalization">
+      <path value="Encounter.hospitalization" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.location">
+      <path value="Encounter.location" />
+      <max value="0" />
+    </element>
+    <element id="Encounter.serviceProvider">
+      <path value="Encounter.serviceProvider" />
+      <min value="1" />
+      <type>
+        <code value="Reference" />
+        <profile value="http://example.org/fhir/StructureDefinition/MyOrganization" />
+      </type>
+    </element>
+    <element id="Encounter.partOf">
+      <path value="Encounter.partOf" />
+      <max value="0" />
     </element>
   </differential>
 </StructureDefinition>
